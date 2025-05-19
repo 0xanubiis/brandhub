@@ -13,6 +13,7 @@ import { WhyUs } from './pages/WhyUs';
 import { CollectionPage } from './pages/CollectionPage';
 import { AuthProvider } from './context/AuthContext';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'; // Import PayPalScriptProvider
+import './index.css';
 
 export default function App() {
   return (

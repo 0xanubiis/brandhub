@@ -30,14 +30,14 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div
-      className="group cursor-pointer relative overflow-hidden rounded-xl bg-gray-100 transition-transform duration-300 hover:scale-105"
+      className="group cursor-pointer relative overflow-hidden rounded-xl bg-gray-100 transform transition-transform duration-300 hover:scale-105"
       onClick={() => navigate(`/products/${product.id}`)}
     >
       <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
         <img
           src={product.images[0]}
           alt={product.name}
-          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-500"
         />
 
         {/* Discount Badge */}
@@ -49,7 +49,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-90 group-hover:opacity-75 transition-opacity rounded-xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-300 rounded-xl"></div>
 
         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
           <div className="space-y-2">
