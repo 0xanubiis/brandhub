@@ -1,25 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { X } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { PayPalButtons } from '@paypal/react-paypal-js';
 
 interface CheckoutFormProps {
   onClose: () => void;
-  total: number;
+  cartItems: CartItem[];
   onSuccess: () => void;
-  onSendShippingInfo: (shippingInfo: FormData, storeIds: string[]) => void; // Callback to send shipping info to relevant stores
-  cartItems: CartItem[]; // Cart items to determine the stores
-}
-
-interface FormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  address: string;
-  city: string;
-  state: string;
-  postalCode: string;
+  total: number;
 }
 
 interface CartItem {
@@ -27,63 +15,43 @@ interface CartItem {
   name: string;
   quantity: number;
   price: number;
-  storeId: string; // Store ID associated with the product
+  discount?: number | null;
 }
 
-const initialFormData: FormData = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  phoneNumber: '',
-  address: '',
-  city: '',
-  state: '',
-  postalCode: '',
-};
-
-export function CheckoutForm({
-  onClose,
-  total,
-  onSuccess,
-  onSendShippingInfo,
-  cartItems,
-}: CheckoutFormProps) {
-  const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [isPayPalVisible, setIsPayPalVisible] = useState(false);
+export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutFormProps) {
   const [isPayPalProcessing, setIsPayPalProcessing] = useState(false);
+  const [isShippingInfoComplete, setIsShippingInfoComplete] = useState(false);
+  const [shippingInfo, setShippingInfo] = useState({
+    name: '',
+    address: '',
+    city: '',
+    postalCode: '',
+    country: '',
+  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleShippingInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setShippingInfo((prev) => ({ ...prev, [name]: value }));
   };
 
-  const validateForm = () => {
-    const requiredFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'address', 'city', 'state', 'postalCode'];
-    for (const field of requiredFields) {
-      if (!formData[field as keyof FormData]) {
-        toast.error(`Please fill in your ${field}`);
-        return false;
-      }
+  const validateShippingInfo = () => {
+    const { name, address, city, postalCode, country } = shippingInfo;
+    if (!name || !address || !city || !postalCode || !country) {
+      toast.error('Please complete all shipping information fields.');
+      return false;
     }
     return true;
   };
 
-  const handleShippingSubmit = (e: React.FormEvent) => {
+  const handleShippingInfoSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
-
-    // Show PayPal payment section
-    setIsPayPalVisible(true);
+    if (validateShippingInfo()) {
+      setIsShippingInfoComplete(true);
+      toast.success('Shipping information saved!');
+    }
   };
 
   const handlePayPalSuccess = async () => {
-    // Extract unique store IDs from the cart items
-    const storeIds = Array.from(new Set(cartItems.map((item) => item.storeId)));
-
-    // Send shipping info to relevant stores
-    onSendShippingInfo(formData, storeIds);
-
-    // Notify the user of success
     toast.success('Payment successful!');
     onSuccess();
   };
@@ -93,150 +61,157 @@ export function CheckoutForm({
       <div className="bg-white rounded-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-gray-900">
-            {isPayPalVisible ? 'Pay with PayPal' : 'Shipping Information'}
+            {isShippingInfoComplete ? 'Pay with PayPal' : 'Shipping Information'}
           </h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X size={20} />
           </button>
         </div>
 
-        {!isPayPalVisible ? (
-          // Shipping Information Form
-          <form onSubmit={handleShippingSubmit} className="space-y-6">
+        {!isShippingInfoComplete ? (
+          <form onSubmit={handleShippingInfoSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                Full Name
+              </label>
               <input
+                id="name"
+                name="name"
                 type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+                value={shippingInfo.name}
+                onChange={handleShippingInfoChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+              <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                Address
+              </label>
               <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-              <input
-                type="text"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
-              <input
-                type="text"
+                id="address"
                 name="address"
-                value={formData.address}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+                type="text"
+                value={shippingInfo.address}
+                onChange={handleShippingInfoChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
                 required
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
+                <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                  City
+                </label>
                 <input
-                  type="text"
+                  id="city"
                   name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+                  type="text"
+                  value={shippingInfo.city}
+                  onChange={handleShippingInfoChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
+                <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">
+                  Postal Code
+                </label>
                 <input
+                  id="postalCode"
+                  name="postalCode"
                   type="text"
-                  name="state"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+                  value={shippingInfo.postalCode}
+                  onChange={handleShippingInfoChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
                   required
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Postal Code</label>
+              <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                Country
+              </label>
               <input
+                id="country"
+                name="country"
                 type="text"
-                name="postalCode"
-                value={formData.postalCode}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+                value={shippingInfo.country}
+                onChange={handleShippingInfoChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
                 required
               />
             </div>
-
             <button
               type="submit"
               className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-900 transition-colors"
             >
-              Proceed to Payment
+              Continue
             </button>
           </form>
         ) : (
-          // PayPal Payment Section
-          <div className="mt-6">
-            {isPayPalProcessing && <div className="spinner">Processing...</div>}
-            <PayPalButtons
-              createOrder={(_data, actions) => {
-                setIsPayPalProcessing(true);
-                return actions.order.create({
-                  intent: 'CAPTURE',
-                  purchase_units: [
-                    {
-                      amount: {
-                        currency_code: 'USD',
-                        value: total.toFixed(2),
+          <div>
+            <div className="mb-6">
+              <h3 className="text-lg font-medium text-gray-900">Order Summary</h3>
+              <ul className="space-y-2">
+                {cartItems.map((item) => (
+                  <li key={item.id} className="flex justify-between">
+                    <span>
+                      {item.name} x {item.quantity}
+                    </span>
+                    <span>
+                      $
+                      {(
+                        item.quantity *
+                        (item.discount
+                          ? item.price * (1 - item.discount / 100)
+                          : item.price)
+                      ).toFixed(2)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex justify-between mt-4 font-bold">
+                <span>Total:</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              {isPayPalProcessing && <div className="spinner">Processing...</div>}
+              <PayPalButtons
+                createOrder={(_data, actions) => {
+                  setIsPayPalProcessing(true);
+                  return actions.order.create({
+                    intent: 'CAPTURE',
+                    purchase_units: [
+                      {
+                        amount: {
+                          currency_code: 'USD',
+                          value: total.toFixed(2),
+                        },
                       },
-                    },
-                  ],
-                });
-              }}
-              onApprove={(_data, actions) => {
-                if (!actions.order) {
-                  toast.error('PayPal order actions are unavailable.');
+                    ],
+                  });
+                }}
+                onApprove={(_data, actions) => {
+                  if (!actions.order) {
+                    toast.error('PayPal order actions are unavailable.');
+                    setIsPayPalProcessing(false);
+                    return Promise.reject(new Error('PayPal order actions are unavailable.'));
+                  }
+                  return actions.order.capture().then(() => {
+                    setIsPayPalProcessing(false);
+                    handlePayPalSuccess();
+                  });
+                }}
+                onError={(err) => {
+                  console.error('PayPal error:', err);
+                  toast.error('PayPal payment failed. Please try again.');
                   setIsPayPalProcessing(false);
-                  return Promise.reject(new Error('PayPal order actions are unavailable.'));
-                }
-                return actions.order.capture().then(() => {
-                  setIsPayPalProcessing(false);
-                  handlePayPalSuccess();
-                });
-              }}
-              onError={(err) => {
-                console.error('PayPal error:', err);
-                toast.error('PayPal payment failed. Please try again.');
-                setIsPayPalProcessing(false);
-              }}
-            />
+                }}
+              />
+            </div>
           </div>
         )}
       </div>

@@ -38,6 +38,7 @@ interface Order {
     name: string;
     quantity: number;
     price: number;
+    discount?: number | null; // Added discount field
     size?: string;
     adminId: string;
   }[];
@@ -155,6 +156,7 @@ export function AdminOrders() {
                 <th className="px-6 py-4 font-medium">Contact</th>
                 <th className="px-6 py-4 font-medium">Shipping Address</th>
                 <th className="px-6 py-4 font-medium">Products</th>
+                <th className="px-6 py-4 font-medium">Discount</th>
                 <th className="px-6 py-4 font-medium">Payment</th>
                 <th className="px-6 py-4 font-medium">Status</th>
                 <th className="px-6 py-4 font-medium">Actions</th>
@@ -215,6 +217,17 @@ export function AdminOrders() {
                       </div>
                     </div>
                   </td>
+                  <td className="px-6 py-4">
+                    <div>
+                      {order.items.map((item, index) => (
+                        <p key={index}>
+                          {item.discount
+                            ? `${item.discount}% OFF`
+                            : 'No Discount'}
+                        </p>
+                      ))}
+                    </div>
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div>
                       <p>Method: {order.customerDetails.paymentMethod}</p>
@@ -242,7 +255,7 @@ export function AdminOrders() {
               ))}
               {orders.length === 0 && (
                 <tr>
-                  <td colSpan={9} className="px-6 py-4 text-center text-gray-500">
+                  <td colSpan={10} className="px-6 py-4 text-center text-gray-500">
                     No orders yet
                   </td>
                 </tr>

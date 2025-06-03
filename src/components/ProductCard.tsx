@@ -3,7 +3,6 @@ import { Product } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { Store } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -19,21 +18,16 @@ export function ProductCard({ product }: ProductCardProps) {
     toast.success('Added to cart!');
   };
 
-  const handleStoreClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    navigate(`/store/${encodeURIComponent(product.storeName)}`);
-  };
-
   const discountedPrice = product.discount
     ? product.price * (1 - product.discount / 100)
     : product.price;
 
   return (
     <div
-      className="group cursor-pointer relative overflow-hidden rounded-xl bg-gray-100 transform transition-transform duration-300 hover:scale-105"
+      className="group cursor-pointer relative overflow-hidden rounded-xl bg-gray-100 transform transition-transform duration-300 hover:scale-105 hover:shadow-lg"
       onClick={() => navigate(`/products/${product.id}`)}
     >
-      <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
+      <div className="relative aspect-[4/5] overflow-hidden">
         <img
           src={product.images[0]}
           alt={product.name}
@@ -49,34 +43,27 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-300 rounded-xl"></div>
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-75 transition-opacity duration-300 rounded-xl"></div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-          <div className="space-y-2">
-            <h3 className="text-2xl font-bold">{product.name}</h3>
-            <div className="flex items-center justify-between">
-              <div className="text-right">
-                {product.discount ? (
-                  <>
-                    <p className="text-lg line-through text-gray-400">${product.price.toFixed(2)}</p>
-                    <p className="text-xl font-bold text-white">${discountedPrice.toFixed(2)}</p>
-                  </>
-                ) : (
-                  <p className="text-xl font-bold">${product.price.toFixed(2)}</p>
-                )}
-              </div>
+        {/* Product Info */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <h3 className="text-xl font-bold">{product.name}</h3>
+          <div className="flex items-center justify-between mt-2">
+            <div>
+              {product.discount ? (
+                <>
+                  <p className="text-sm line-through text-gray-400">${product.price.toFixed(2)}</p>
+                  <p className="text-lg font-bold">${discountedPrice.toFixed(2)}</p>
+                </>
+              ) : (
+                <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
+              )}
             </div>
-
-            <button
-              onClick={handleStoreClick}
-              className="flex items-center gap-2 text-gray-300 hover:text-white group/store mt-2"
-            >
-              <Store className="h-4 w-4 group-hover/store:scale-110 transition-transform" />
-              <span className="text-sm group-hover/store:underline">{product.storeName}</span>
-            </button>
           </div>
         </div>
 
+        {/* Add to Cart Button */}
         <div className="absolute top-4 right-4 transform translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
           <button
             onClick={handleAddToCart}
@@ -85,14 +72,6 @@ export function ProductCard({ product }: ProductCardProps) {
             Add to Cart
           </button>
         </div>
-
-        {product.freeShipping && (
-          <div className="absolute top-4 left-4">
-            <span className="bg-black text-white text-xs px-3 py-1 rounded-full">
-              Free Shipping
-            </span>
-          </div>
-        )}
       </div>
     </div>
   );
