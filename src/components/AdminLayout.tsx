@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingBag, Package, BarChart2, LogOut, LayoutGrid } from 'lucide-react';
-import { supabase } from '../config/supabase'; // Import Supabase client
+import { supabase } from '../config/supabase';
 import { toast } from 'react-hot-toast';
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -11,11 +11,11 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
 
   const handleLogout = async () => {
     try {
-      const { error } = await supabase.auth.signOut(); // Supabase logout
+      const { error } = await supabase.auth.signOut();
       if (error) throw error;
 
       toast.success('Logged out successfully');
-      navigate('/admin/login'); // Redirect to login page
+      navigate('/admin/login');
     } catch (error) {
       console.error('Error logging out:', error);
       toast.error('Error logging out');
@@ -23,19 +23,19 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 w-64 bg-[#29292B] border-r border-gray-700">
-        <div 
+      <div className="fixed inset-y-0 left-0 w-64 bg-[#29292B] border-r border-gray-700 hidden sm:block">
+        <div
           className="flex items-center gap-2 px-6 py-4 border-b border-gray-700 cursor-pointer"
           onClick={() => navigate('/')}
         >
           <ShoppingBag className="h-6 w-6 text-white" />
           <span className="text-xl font-bold text-white">Brand Hub</span>
         </div>
-        
+
         <nav className="p-4 space-y-2">
-          <a 
+          <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
@@ -50,7 +50,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             <BarChart2 className="h-5 w-5" />
             <span>Dashboard</span>
           </a>
-          <a 
+          <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
@@ -65,7 +65,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             <LayoutGrid className="h-5 w-5" />
             <span>Products</span>
           </a>
-          <a 
+          <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
@@ -81,7 +81,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             <span>Orders</span>
           </a>
         </nav>
-        
+
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <button
             onClick={() => setShowLogoutConfirm(true)}
@@ -94,7 +94,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* Main Content */}
-      <div className="ml-64">
+      <div className="flex-1 sm:ml-64 p-4">
         {children}
       </div>
 
@@ -103,7 +103,10 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-md w-full p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-4">Confirm Logout</h2>
-            <p className="text-gray-600 mb-6">Are you sure you want to log out? You'll need to sign in again to access the admin panel.</p>
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to log out? You'll need to sign in again to access the admin
+              panel.
+            </p>
             <div className="flex gap-4">
               <button
                 onClick={() => setShowLogoutConfirm(false)}

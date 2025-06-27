@@ -23,7 +23,7 @@ export function HeroSection({ searchQuery, onSearchChange, onShopNowClick }: Her
             Discover our latest arrivals featuring breathable fabrics and modern designs.
           </p>
           
-          {/* Search Bar with Enhanced Glass Effect */}
+          {/* Search Bar */}
           <div className="mt-8 max-w-md mx-auto">
             <div className="relative">
               <input
@@ -37,7 +37,7 @@ export function HeroSection({ searchQuery, onSearchChange, onShopNowClick }: Her
             </div>
           </div>
 
-          {/* CTA Button with Glass Effect */}
+          {/* CTA Button */}
           <div className="mt-8 max-w-md mx-auto sm:flex sm:justify-center">
             <button
               onClick={onShopNowClick}
@@ -49,7 +49,7 @@ export function HeroSection({ searchQuery, onSearchChange, onShopNowClick }: Her
         </div>
       </div>
 
-      {/* Animated glass shapes */}
+      {/* Animated Glass Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
           className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full backdrop-blur-xl animate-float border border-white/20"

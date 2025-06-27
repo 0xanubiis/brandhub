@@ -11,11 +11,7 @@ export function AdminProducts() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const [isUploadFormOpen, setIsUploadFormOpen] = useState(false);
-  // Removed unused 'products' state variable
   const [storeName, setStoreName] = useState('');
-  // Removed unused 'searchQuery' state variable
-  // Removed unused 'selectedCategory' state variable
-  // Removed unused 'isLoading' state variable
 
   useEffect(() => {
     if (!currentUser) {
@@ -24,23 +20,21 @@ export function AdminProducts() {
     }
 
     const loadData = async () => {
-      // Removed 'setIsLoading(true)' as 'isLoading' is unused
       try {
         const name = await getStoreName();
         setStoreName(name || '');
-        await getAdminProducts(); // Fetch products without storing them
+        await getAdminProducts();
       } catch (error) {
         console.error('Error loading data:', error);
         toast.error('Error loading data');
       }
-      // Removed 'setIsLoading(false)' as 'isLoading' is unused
     };
 
     loadData();
 
     const handleProductsUpdated = () => loadData();
     window.addEventListener('productsUpdated', handleProductsUpdated);
-    
+
     return () => {
       window.removeEventListener('productsUpdated', handleProductsUpdated);
     };
@@ -57,8 +51,8 @@ export function AdminProducts() {
   };
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-8">
+    <div className="p-4 sm:p-8">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Products Management</h1>
           <p className="text-gray-600">Manage your store products</p>
@@ -66,7 +60,7 @@ export function AdminProducts() {
         {storeName ? (
           <button
             onClick={() => setIsUploadFormOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-md hover:bg-gray-900"
+            className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-md hover:bg-gray-900 transition-colors"
           >
             <Upload className="h-5 w-5" />
             Upload New Product
@@ -80,7 +74,7 @@ export function AdminProducts() {
       {isUploadFormOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <ProductUploadForm 
+            <ProductUploadForm
               onSuccess={() => {
                 setIsUploadFormOpen(false);
                 window.dispatchEvent(new Event('productsUpdated'));
@@ -92,10 +86,7 @@ export function AdminProducts() {
       )}
 
       {/* Products Table */}
-      <ProductsTable 
-        adminView={true}
-        onDelete={handleDeleteProduct}
-      />
+      <ProductsTable adminView={true} onDelete={handleDeleteProduct} />
     </div>
   );
 }

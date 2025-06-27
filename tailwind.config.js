@@ -1,15 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'], // Ensures Tailwind scans all relevant files
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Space Grotesk', 'sans-serif'],
+        sans: ['Space Grotesk', 'sans-serif'], // Custom font for modern design
       },
       animation: {
-        float: 'float 6s ease-in-out infinite',
-        fadeUp: 'fadeUp 0.5s ease-out forwards',
-        slideIn: 'slideIn 0.3s ease-out forwards',
+        float: 'float 6s ease-in-out infinite', // Floating animation for interactive elements
+        fadeUp: 'fadeUp 0.5s ease-out forwards', // Fade-up animation for smooth transitions
+        slideIn: 'slideIn 0.3s ease-out forwards', // Slide-in animation for dynamic UI
       },
       keyframes: {
         float: {
@@ -26,18 +26,18 @@ export default {
         },
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))', // Radial gradient for modern backgrounds
       },
       backdropBlur: {
-        xs: '2px',
+        xs: '2px', // Extra small blur for subtle effects
       },
       screens: {
-        'xs': '375px',
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
-        '2xl': '1536px',
+        xs: '375px', // Custom breakpoint for small devices
+        sm: '640px', // Small devices
+        md: '768px', // Medium devices
+        lg: '1024px', // Large devices
+        xl: '1280px', // Extra-large devices
+        '2xl': '1536px', // Ultra-large devices
       },
     },
   },

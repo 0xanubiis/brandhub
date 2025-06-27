@@ -24,7 +24,6 @@ const CartContext = createContext<{
   dispatch: React.Dispatch<CartAction>;
 } | undefined>(undefined);
 
-// Load cart from localStorage
 const loadCartFromStorage = (): CartState => {
   try {
     const savedCart = localStorage.getItem('cart');
@@ -37,7 +36,6 @@ const loadCartFromStorage = (): CartState => {
   return { items: [], total: 0 };
 };
 
-// Save cart to localStorage
 const saveCartToStorage = (cart: CartState) => {
   try {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -52,7 +50,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case 'ADD_TO_CART': {
       const existingItem = state.items.find(item => item.id === action.payload.id);
-      
+
       if (existingItem) {
         newState = {
           ...state,
@@ -61,13 +59,13 @@ function cartReducer(state: CartState, action: CartAction): CartState {
               ? { ...item, quantity: item.quantity + action.payload.quantity, size: action.payload.size || item.size }
               : item
           ),
-          total: state.total + (action.payload.price * action.payload.quantity)
+          total: state.total + action.payload.price * action.payload.quantity,
         };
       } else {
         newState = {
           ...state,
           items: [...state.items, { ...action.payload }],
-          total: state.total + (action.payload.price * action.payload.quantity)
+          total: state.total + action.payload.price * action.payload.quantity,
         };
       }
       break;
@@ -77,7 +75,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       newState = {
         ...state,
         items: state.items.filter(item => item.id !== action.payload),
-        total: state.total - (itemToRemove ? itemToRemove.price * itemToRemove.quantity : 0)
+        total: state.total - (itemToRemove ? itemToRemove.price * itemToRemove.quantity : 0),
       };
       break;
     }
@@ -85,7 +83,6 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       const item = state.items.find(item => item.id === action.payload.id);
       if (!item) return state;
 
-      // Prevent negative quantities
       if (action.payload.quantity < 0) return state;
 
       const quantityDiff = action.payload.quantity - item.quantity;
@@ -96,7 +93,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
             ? { ...item, quantity: action.payload.quantity }
             : item
         ),
-        total: state.total + (item.price * quantityDiff)
+        total: state.total + item.price * quantityDiff,
       };
       break;
     }
@@ -107,14 +104,14 @@ function cartReducer(state: CartState, action: CartAction): CartState {
           item.id === action.payload.id
             ? { ...item, size: action.payload.size }
             : item
-        )
+        ),
       };
       break;
     }
     case 'CLEAR_CART':
       newState = {
         items: [],
-        total: 0
+        total: 0,
       };
       break;
     case 'LOAD_CART':
@@ -123,7 +120,6 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       return state;
   }
 
-  // Save cart after every change
   saveCartToStorage(newState);
   return newState;
 }
@@ -131,17 +127,16 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, {
     items: [],
-    total: 0
+    total: 0,
   });
 
-  // Load cart on mount
   useEffect(() => {
     dispatch({ type: 'LOAD_CART' });
   }, []);
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>
-      {children}
+      <div className="min-h-screen bg-gray-50">{children}</div>
     </CartContext.Provider>
   );
 }

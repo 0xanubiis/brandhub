@@ -10,8 +10,12 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const location = useLocation();
 
   if (!currentUser) {
-    return <Navigate to="/admin/login" state={{ from: location }} replace />;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Navigate to="/admin/login" state={{ from: location }} replace />
+      </div>
+    );
   }
 
-  return <>{children}</>;
+  return <div className="min-h-screen bg-gray-50">{children}</div>;
 }

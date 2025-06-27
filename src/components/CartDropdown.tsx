@@ -42,7 +42,7 @@ export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: ()
       {/* Cart Panel */}
       {isOpen && (
         <div
-          className="fixed top-0 right-0 h-full w-96 bg-white/90 backdrop-blur-xl shadow-[0_0_24px_rgba(0,0,0,0.1)] transform transition-transform duration-300 ease-in-out z-50 translate-x-0"
+          className="fixed top-0 right-0 h-full w-full sm:w-96 bg-white/90 backdrop-blur-xl shadow-[0_0_24px_rgba(0,0,0,0.1)] transform transition-transform duration-300 ease-in-out z-50 translate-x-0"
         >
           <div className="h-full flex flex-col">
             {/* Header */}

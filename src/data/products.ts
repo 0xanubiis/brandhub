@@ -3,6 +3,7 @@ import { toast } from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface Product {
+  dateAdded: string | number | Date;
   id: string;
   name: string;
   price: number;

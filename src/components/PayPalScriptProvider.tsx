@@ -16,19 +16,23 @@ const calculateTotal = () => {
 };
 
 const App = () => (
-  <PayPalScriptProvider
-    options={{
-      clientId: 'BAABwcP0Y_Fjwz59xvaFHbLXnZr93-r9l7W4A0DDW_WG8WW1yNoTUWVoE081NWwQRxHtsrUCZnqIER0Rxs', // Replace with your actual PayPal client ID
-      currency: 'USD', // Ensure the currency matches your requirements
-    }}
-  >
-    <CheckoutForm
-      onClose={() => console.log('Checkout closed')}
-      onSuccess={() => console.log('Payment successful')}
-      cartItems={cartItems} // Pass actual cart items here
-      total={calculateTotal()} // Dynamically calculate the total amount
-    />
-  </PayPalScriptProvider>
+  <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <PayPalScriptProvider
+      options={{
+        clientId: 'BAABwcP0Y_Fjwz59xvaFHbLXnZr93-r9l7W4A0DDW_WG8WW1yNoTUWVoE081NWwQRxHtsrUCZnqIER0Rxs', // Replace with your actual PayPal client ID
+        currency: 'USD', // Ensure the currency matches your requirements
+      }}
+    >
+      <div className="max-w-2xl w-full bg-white rounded-lg shadow-md p-6">
+        <CheckoutForm
+          onClose={() => console.log('Checkout closed')}
+          onSuccess={() => console.log('Payment successful')}
+          cartItems={cartItems} // Pass actual cart items here
+          total={calculateTotal()} // Dynamically calculate the total amount
+        />
+      </div>
+    </PayPalScriptProvider>
+  </div>
 );
 
 export default App;

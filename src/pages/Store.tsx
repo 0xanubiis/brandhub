@@ -165,6 +165,7 @@ export function Store() {
         </div>
       )}
 
+      {/* Hero Section */}
       <div id="hero" className="pt-16 relative">
         <div 
           className="min-h-[600px] relative"
@@ -209,6 +210,7 @@ export function Store() {
         </div>
       </div>
 
+      {/* Products Section */}
       <div id="products" className="bg-[#29292B] py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">

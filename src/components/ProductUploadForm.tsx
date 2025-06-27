@@ -2,12 +2,12 @@ import React, { useState, useRef } from 'react';
 import { Upload, X, Plus, Loader2, Percent } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { createProduct, CreateProductPayload as BaseCreateProductPayload } from '../api/products';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface CreateProductPayload extends BaseCreateProductPayload {
   discount?: number | null;
 }
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 interface ProductUploadFormProps {
   onSuccess?: () => void;
@@ -25,7 +25,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
     sizes: [],
     freeShipping: false,
     discount: null,
-    images: []
+    images: [],
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -56,20 +56,25 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value, type } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'number' ? (value === '' ? 0 : parseFloat(value)) : 
-              type === 'checkbox' ? (e.target as HTMLInputElement).checked : 
-              value
+      [name]:
+        type === 'number'
+          ? value === ''
+            ? 0
+            : parseFloat(value)
+          : type === 'checkbox'
+          ? (e.target as HTMLInputElement).checked
+          : value,
     }));
   };
 
   const handleSizeToggle = (size: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       sizes: prev.sizes.includes(size)
-        ? prev.sizes.filter(s => s !== size)
-        : [...prev.sizes, size]
+        ? prev.sizes.filter((s) => s !== size)
+        : [...prev.sizes, size],
     }));
   };
 
@@ -86,7 +91,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
   const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
     if (files.length > 0) {
       await handleMultipleImageUpload(files);
@@ -102,12 +107,12 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
 
   const handleMultipleImageUpload = async (files: File[]) => {
     try {
-      const validFiles = files.filter(file => {
+      const validFiles = files.filter((file) => {
         if (!file.type.startsWith('image/')) {
           toast.error(`${file.name} is not an image file`);
           return false;
         }
-        
+
         if (file.size > 5 * 1024 * 1024) {
           toast.error(`${file.name} is too large (max 5MB)`);
           return false;
@@ -120,9 +125,9 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
         return;
       }
 
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        images: [...prev.images, ...validFiles]
+        images: [...prev.images, ...validFiles],
       }));
 
       toast.success(`${validFiles.length} image(s) ready for upload`);
@@ -132,9 +137,9 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
   };
 
   const removeImage = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      images: prev.images.filter((_, i) => i !== index)
+      images: prev.images.filter((_, i) => i !== index),
     }));
   };
 
@@ -143,42 +148,42 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
       toast.error('Product name is required');
       return false;
     }
-    
+
     if (!formData.price || formData.price <= 0) {
       toast.error('Please enter a valid price');
       return false;
     }
-    
+
     if (!formData.category) {
       toast.error('Please select a category');
       return false;
     }
-    
+
     if (formData.images.length === 0) {
       toast.error('Please upload at least one product image');
       return false;
     }
-    
+
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
-      const imageFiles = formData.images.filter(img => img instanceof File) as File[];
-      
+      const imageFiles = formData.images.filter((img) => img instanceof File) as File[];
+
       await createProduct({
         ...formData,
-        images: imageFiles
+        images: imageFiles,
       });
-      
+
       toast.success('Product added successfully');
       setFormData({
         name: '',
@@ -188,9 +193,9 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
         sizes: [],
         freeShipping: false,
         discount: null,
-        images: []
+        images: [],
       });
-      
+
       if (onSuccess) {
         onSuccess();
       }
@@ -213,10 +218,9 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Product Name */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Product Name*
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Product Name*</label>
           <input
             type="text"
             name="name"
@@ -227,10 +231,9 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
           />
         </div>
 
+        {/* Description */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Description
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
           <textarea
             name="description"
             value={formData.description}
@@ -240,10 +243,9 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
           />
         </div>
 
+        {/* Price */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Price*
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Price*</label>
           <input
             type="number"
             name="price"
@@ -257,10 +259,9 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
           />
         </div>
 
+        {/* Category */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Category*
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Category*</label>
           <select
             name="category"
             value={formData.category}
@@ -277,21 +278,20 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
           </select>
         </div>
 
+        {/* Sizes */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Available Sizes
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Available Sizes</label>
           <div className="flex flex-wrap gap-2">
             {sizes.map((size) => (
               <button
                 key={size}
                 type="button"
                 onClick={() => handleSizeToggle(size)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors
-                  ${formData.sizes.includes(size)
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  formData.sizes.includes(size)
                     ? 'bg-black text-white'
                     : 'border border-gray-300 text-gray-700 hover:border-gray-400'
-                  }`}
+                }`}
               >
                 {size}
               </button>
@@ -299,18 +299,19 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
           </div>
         </div>
 
+        {/* Discount */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Discount
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Discount</label>
           <div className="relative">
             <select
               name="discount"
               value={formData.discount || ''}
-              onChange={(e) => setFormData(prev => ({
-                ...prev,
-                discount: e.target.value ? parseInt(e.target.value) : null
-              }))}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  discount: e.target.value ? parseInt(e.target.value) : null,
+                }))
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black appearance-none pr-10"
             >
               <option value="">No discount</option>
@@ -324,15 +325,15 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
           </div>
           {formData.discount && (
             <p className="mt-1 text-sm text-gray-500">
-              Original price: ${formData.price.toFixed(2)} → Discounted price: ${(formData.price * (1 - formData.discount / 100)).toFixed(2)}
+              Original price: ${formData.price.toFixed(2)} → Discounted price: $
+              {(formData.price * (1 - formData.discount / 100)).toFixed(2)}
             </p>
           )}
         </div>
 
+        {/* Images */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Product Images*
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Product Images*</label>
           <div
             className={`mt-1 flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 transition-colors cursor-pointer ${
               isDragging ? 'border-black bg-gray-50' : 'border-gray-300 hover:border-black'
@@ -346,9 +347,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
             <p className="mt-2 text-sm text-gray-600">
               Drag and drop your images here, or click to select
             </p>
-            <p className="text-xs text-gray-500 mt-1">
-              Max file size: 5MB. Formats: JPEG, PNG, WebP
-            </p>
+            <p className="text-xs text-gray-500 mt-1">Max file size: 5MB. Formats: JPEG, PNG, WebP</p>
             <input
               ref={fileInputRef}
               type="file"
@@ -387,6 +386,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
           )}
         </div>
 
+        {/* Submit Buttons */}
         <div className="flex gap-4">
           {onCancel && (
             <button
