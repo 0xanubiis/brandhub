@@ -158,9 +158,16 @@ export function AdminOrders() {
                 <tr key={order.id} className="border-b border-gray-100">
                   <td className="px-6 py-4">{order.id}</td>
                   <td className="px-6 py-4">
-                    <p>{new Date(order.date).toLocaleDateString()}</p>
+                    <p>{new Date(order.date).toLocaleDateString('en-US', {
+                      day: '2-digit',
+                      month: 'long',
+                      year: 'numeric',
+                    })}</p>
                     <p className="text-gray-500 text-xs">
-                      {new Date(order.date).toLocaleTimeString()}
+                      {new Date(order.date).toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
                     </p>
                   </td>
                   <td className="px-6 py-4">

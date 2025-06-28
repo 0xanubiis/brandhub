@@ -30,7 +30,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/about" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/AboutUs" className="text-gray-400 hover:text-white transition-colors">
                   About Us
                 </a>
               </li>
@@ -40,8 +40,8 @@ export function Footer() {
           {/* Contact Section */}
           <div>
             <h3 className="text-lg font-bold mb-4">Contact Us</h3>
-            <p className="text-gray-400">Email: support@brandhub.com</p>
-            <p className="text-gray-400">Phone: +1 (800) 123-4567</p>
+            <p className="text-gray-400">Email: In progress</p>
+            <p className="text-gray-400">Phone: In progress</p>
           </div>
 
           {/* Social Media Section */}
@@ -49,15 +49,7 @@ export function Footer() {
             <h3 className="text-lg font-bold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Facebook
-              </a>
-              <a
-                href="https://twitter.com"
+                href="https://twitter.com/0xanubiis"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -65,7 +57,7 @@ export function Footer() {
                 Twitter
               </a>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/blnk.dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"

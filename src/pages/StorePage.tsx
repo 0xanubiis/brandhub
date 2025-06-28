@@ -139,7 +139,7 @@ export function StorePage() {
               <p className="text-gray-500">No products found for this store.</p>
             </div>
           ) : (
-            <div>
+            <div className="mb-16"> {/* Added margin-bottom here */}
               <h2 className="text-xl font-semibold mb-6">All Products</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {products.map((product) => (

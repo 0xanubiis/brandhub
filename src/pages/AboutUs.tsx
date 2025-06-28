@@ -2,7 +2,7 @@ import { Footer } from '../components/Footer';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-export function WhyUs() {
+export function AboutUs() {
   const navigate = useNavigate();
 
   return (

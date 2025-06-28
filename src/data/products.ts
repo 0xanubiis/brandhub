@@ -408,53 +408,29 @@ export const updateProduct = async (id: string, product: Partial<Product>): Prom
 
 // Delete a product and its images
 export const deleteProduct = async (id: string): Promise<void> => {
-  const session = await supabase.auth.getSession();
-  const currentUser = session.data.session?.user;
-  if (!currentUser) throw new Error('Not authenticated');
-
   try {
-    // Get the product to get image URLs
-    const { data: product, error: getError } = await supabase
-      .from('products')
-      .select('images')
-      .eq('id', id)
-      .eq('admin_id', currentUser.id)
-      .single();
+    // Delete product from the database
+    const { error: dbError } = await supabase.from('products').delete().eq('id', id);
 
-    if (getError) throw getError;
+    if (dbError) {
+      throw new Error('Failed to delete product from database');
+    }
 
-    // Delete the product from the database first
-    const { error: deleteError } = await supabase
-      .from('products')
-      .delete()
-      .eq('id', id)
-      .eq('admin_id', currentUser.id);
-
-    if (deleteError) throw deleteError;
-
-    // After successful product deletion, delete associated images from storage
+    // Delete associated images from storage
+    const { data: product } = await supabase.from('products').select('images').eq('id', id).single();
     if (product && product.images && product.images.length > 0) {
-      const imagePaths = (product.images as string[]).map((imageUrl: string) => {
-        // Extract the file path from the URL
+      const imagePaths = product.images.map((imageUrl: string) => {
         const url = new URL(imageUrl);
-        const pathParts = url.pathname.split('/');
-        // Get the last two parts of the path (e.g., 'product-images/filename.jpg')
-        return pathParts.slice(-2).join('/');
+        return url.pathname.split('/').slice(-2).join('/');
       });
 
-      // Delete all images associated with the product
-      const { error: storageError } = await supabase.storage
-        .from('products')
-        .remove(imagePaths);
-
+      const { error: storageError } = await supabase.storage.from('products').remove(imagePaths);
       if (storageError) {
         console.error('Error deleting product images:', storageError);
-        // Don't throw here since the product is already deleted
         toast.error('Product deleted but some images could not be removed');
       }
     }
 
-    window.dispatchEvent(new Event('productsUpdated'));
     toast.success('Product and associated images deleted successfully');
   } catch (error) {
     console.error('Error deleting product:', error);

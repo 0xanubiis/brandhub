@@ -7,6 +7,7 @@ import { ShoppingCart, User, Settings } from 'lucide-react';
 import { CartDropdown } from '../components/CartDropdown';
 import { ProductCard } from '../components/ProductCard';
 import { useAuth } from '../context/AuthContext';
+import { Footer } from '../components/Footer';
 
 export function ProductDetailsPage() {
   const { id } = useParams();
@@ -116,6 +117,9 @@ export function ProductDetailsPage() {
                 <>
                   <p className="text-lg line-through text-gray-400">${product.price.toFixed(2)}</p>
                   <p className="text-3xl font-bold text-black">${discountedPrice.toFixed(2)}</p>
+                  <span className="bg-yellow-500 text-white text-xs px-3 py-1 rounded-full font-medium inline-block mt-2">
+                    {product.discount}% OFF
+                  </span>
                 </>
               ) : (
                 <p className="text-3xl font-bold text-black">${product.price.toFixed(2)}</p>
@@ -156,6 +160,9 @@ export function ProductDetailsPage() {
 
       {/* Cart Dropdown */}
       {isCartOpen && <CartDropdown isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />}
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Edit2, Trash2, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
-import { Product } from '../data/products';
+import { Product, deleteProduct } from '../data/products'; // Import deleteProduct function
 import { getProductsWithPagination } from '../api/products';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -11,7 +11,7 @@ interface ProductsTableProps {
   adminView?: boolean;
 }
 
-export function ProductsTable({ onEdit, onDelete, adminView = false }: ProductsTableProps) {
+export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps) {
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,6 +38,22 @@ export function ProductsTable({ onEdit, onDelete, adminView = false }: ProductsT
       toast.error('Failed to load products');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteProduct = async (product: Product) => {
+    try {
+      // Delete the product from the store and database
+      await deleteProduct(product.id);
+
+      // Remove the product from the table
+      setProducts((prevProducts) => prevProducts.filter((p) => p.id !== product.id));
+
+      // Show success notification
+      toast.success('Product deleted successfully');
+    } catch (error: any) {
+      console.error('Error deleting product:', error);
+      toast.error('Failed to delete product');
     }
   };
 
@@ -128,7 +144,13 @@ export function ProductsTable({ onEdit, onDelete, adminView = false }: ProductsT
                   <td className="px-6 py-4">
                     {product.discount ? `${product.discount}%` : 'No Discount'}
                   </td>
-                  <td className="px-6 py-4">{new Date(product.createdAt).toLocaleDateString()}</td>
+                  <td className="px-6 py-4">
+                    {new Date(product.createdAt).toLocaleDateString('en-US', {
+                      day: '2-digit',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
                       <button
@@ -147,9 +169,9 @@ export function ProductsTable({ onEdit, onDelete, adminView = false }: ProductsT
                           <Edit2 className="h-4 w-4" />
                         </button>
                       )}
-                      {adminView && onDelete && (
+                      {adminView && (
                         <button
-                          onClick={() => onDelete(product)}
+                          onClick={() => handleDeleteProduct(product)}
                           className="p-1 text-red-500 hover:text-red-700 rounded-full hover:bg-red-50"
                           title="Delete Product"
                         >

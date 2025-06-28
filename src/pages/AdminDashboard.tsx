@@ -252,35 +252,27 @@ export function AdminDashboard() {
         </div>
       </div>
 
-      {/* Orders by Status Section */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Orders by Status</h3>
-        <ul className="space-y-2">
-          {Object.entries(stats.ordersByStatus).map(([status, count]) => (
-            <li key={status} className="flex justify-between">
-              <span className="capitalize">{status}</span>
-              <span>{count}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Pending Orders Section */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Pending Orders</h3>
-        <p className="text-gray-600">
-          You currently have <span className="font-bold">{stats.ordersByStatus.pending}</span> pending orders.
-        </p>
-      </div>
-
       {/* Top Selling Products Section */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
         <h3 className="text-lg font-medium text-gray-900 mb-4">Top Selling Products</h3>
         <ul className="space-y-2">
           {stats.topProducts.map((product, index) => (
             <li key={index} className="flex justify-between">
               <span>{product.name}</span>
               <span>${product.sales.toFixed(2)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Orders by Status Section */}
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Orders by Status</h3>
+        <ul className="space-y-2">
+          {Object.entries(stats.ordersByStatus).map(([status, count]) => (
+            <li key={status} className="flex justify-between">
+              <span className="capitalize">{status}</span>
+              <span>{count}</span>
             </li>
           ))}
         </ul>
