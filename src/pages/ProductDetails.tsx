@@ -3,15 +3,17 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { Product, getProducts } from '../data/products';
 import { useCart } from '../context/CartContext';
-// Removed unused imports from 'lucide-react'
-// import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
+import { ProductCard } from '../components/ProductCard';
 
 export function ProductDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { dispatch } = useCart();
   const [product, setProduct] = useState<Product | null>(null);
-  const [quantity, setQuantity] = useState(1); // State for quantity
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -22,6 +24,12 @@ export function ProductDetailsPage() {
         const foundProduct = products.find((p) => p.id === id);
         if (foundProduct) {
           setProduct(foundProduct);
+
+          // Fetch related products (e.g., same category, excluding the current product)
+          const related = products.filter(
+            (p) => p.category === foundProduct.category && p.id !== foundProduct.id
+          );
+          setRelatedProducts(related.slice(0, 4)); // Limit to 4 related products
         } else {
           navigate('/products');
           toast.error('Product not found');
@@ -65,6 +73,9 @@ export function ProductDetailsPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Header */}
+      <Header />
+
       <div className="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Product Images */}
@@ -122,7 +133,20 @@ export function ProductDetailsPage() {
             </button>
           </div>
         </div>
+
+        {/* More Products Section */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">More Products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {relatedProducts.map((relatedProduct) => (
+              <ProductCard key={relatedProduct.id} product={relatedProduct} />
+            ))}
+          </div>
+        </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

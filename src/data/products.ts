@@ -409,22 +409,26 @@ export const updateProduct = async (id: string, product: Partial<Product>): Prom
 // Delete a product and its images
 export const deleteProduct = async (id: string): Promise<void> => {
   try {
-    // Delete product from the database
+    // Delete the product from the database
     const { error: dbError } = await supabase.from('products').delete().eq('id', id);
 
     if (dbError) {
       throw new Error('Failed to delete product from database');
     }
 
-    // Delete associated images from storage
+    // Fetch associated images for the product
     const { data: product } = await supabase.from('products').select('images').eq('id', id).single();
+
     if (product && product.images && product.images.length > 0) {
+      // Extract image paths from URLs
       const imagePaths = product.images.map((imageUrl: string) => {
         const url = new URL(imageUrl);
         return url.pathname.split('/').slice(-2).join('/');
       });
 
+      // Delete images from storage
       const { error: storageError } = await supabase.storage.from('products').remove(imagePaths);
+
       if (storageError) {
         console.error('Error deleting product images:', storageError);
         toast.error('Product deleted but some images could not be removed');

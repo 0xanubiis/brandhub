@@ -49,7 +49,13 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
 
   const handleDeleteProduct = async (product: Product) => {
     try {
-      await deleteProduct(product.id); // Permanently delete the product
+      // Call the deleteProduct function to remove the product permanently
+      await deleteProduct(product.id);
+
+      // Update the UI by removing the deleted product from the table
+      setProducts((prevProducts) => prevProducts.filter((p) => p.id !== product.id));
+
+      // Show success notification
       toast.success('Product deleted successfully');
     } catch (error: any) {
       console.error('Error deleting product:', error);

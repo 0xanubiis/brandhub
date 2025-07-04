@@ -198,13 +198,13 @@ export function AdminDashboard() {
             </div>
           ) : (
             <div className="flex items-center justify-between">
-              <p className="text-gray-600">{storeName || 'No store name set'}</p>
+              <p className="text-gray-600 pr-1">{storeName || 'No store name set'}</p>
               <button
                 onClick={() => {
                   setIsEditing(true);
                   setNewStoreName(storeName);
                 }}
-                className="px-4 py-2 pr-1 bg-black text-white rounded-md hover:bg-gray-900"
+                className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-900"
               >
                 Edit
               </button>
