@@ -3,6 +3,7 @@ import { X, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { CheckoutForm } from './CheckoutForm';
 import { toast } from 'react-hot-toast';
+import { Trash2 } from 'lucide-react';
 
 export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { state, dispatch } = useCart();
@@ -15,6 +16,11 @@ export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: ()
     }
 
     setShowCheckoutForm(true);
+  };
+
+  const handleRemoveItem = (itemId: string) => {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: itemId });
+    toast.success('Item removed from cart');
   };
 
   // Calculate the total dynamically
@@ -41,9 +47,7 @@ export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
       {/* Cart Panel */}
       {isOpen && (
-        <div
-          className="fixed top-0 right-0 h-full w-full sm:w-96 bg-white/90 backdrop-blur-xl shadow-[0_0_24px_rgba(0,0,0,0.1)] transform transition-transform duration-300 ease-in-out z-50 translate-x-0"
-        >
+        <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-white/90 backdrop-blur-xl shadow-[0_0_24px_rgba(0,0,0,0.1)] transform transition-transform duration-300 ease-in-out z-50 translate-x-0">
           <div className="h-full flex flex-col">
             {/* Header */}
             <div className="p-4 border-b border-gray-200 bg-[#29292B] backdrop-blur-xl text-white">
@@ -75,12 +79,12 @@ export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                         className="h-16 w-16 object-cover rounded-lg shadow-md"
                       />
                       <div className="flex-1">
-                        <h4 className="text-sm font-medium text-gray-900">{item.name}</h4>
+                        <h4 className="text-sm font-medium text-gray-900">
+                          {item.name} <span className="text-gray-500">(x{item.quantity})</span>
+                        </h4>
                         {item.discount ? (
                           <div>
-                            <p className="text-sm text-gray-500 line-through">
-                              ${item.price.toFixed(2)}
-                            </p>
+                            <p className="text-sm text-gray-500 line-through">${item.price.toFixed(2)}</p>
                             <p className="text-sm text-red-600">
                               ${(item.price * (1 - item.discount / 100)).toFixed(2)}
                               <span className="ml-2 text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full">
@@ -92,6 +96,14 @@ export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                           <p className="text-sm text-gray-600">${item.price.toFixed(2)}</p>
                         )}
                       </div>
+                      {/* Trash Icon */}
+                      <button
+                        onClick={() => handleRemoveItem(item.id)}
+                        className="p-2 text-red-500 hover:text-red-700 rounded-full hover:bg-red-50"
+                        title="Remove Item"
+                      >
+                        <Trash2 className="h-5 w-5" />
+                      </button>
                     </div>
                   ))}
                 </div>

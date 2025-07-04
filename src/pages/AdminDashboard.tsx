@@ -204,7 +204,7 @@ export function AdminDashboard() {
                   setIsEditing(true);
                   setNewStoreName(storeName);
                 }}
-                className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-900"
+                className="px-4 py-2 pr-1 bg-black text-white rounded-md hover:bg-gray-900"
               >
                 Edit
               </button>

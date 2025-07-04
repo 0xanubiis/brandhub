@@ -223,3 +223,23 @@ export const getProductsWithPagination = async (
     throw error;
   }
 };
+export async function getProducts(): Promise<Product[]> {
+  // Mock implementation or actual API call
+  return [
+    {
+      id: '1',
+      name: 'Sample Product',
+      category: 'Category',
+      description: 'Description',
+      price: 100,
+      discount: 10,
+      freeShipping: true,
+      images: ['image1.jpg', 'image2.jpg'],
+      dateAdded: new Date().toISOString(),
+      storeName: 'Sample Store',
+      adminId: 'admin123',
+      createdAt: new Date().toISOString(),
+      sizes: ['S', 'M', 'L'],
+    },
+  ];
+}

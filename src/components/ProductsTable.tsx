@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Edit2, Trash2, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
-import { Product, deleteProduct } from '../data/products'; // Import deleteProduct function
+import { Product, deleteProduct, subscribeToProducts } from '../data/products'; // Import subscription function
 import { getProductsWithPagination } from '../api/products';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 interface ProductsTableProps {
   onEdit?: (product: Product) => void;
-  onDelete?: (product: Product) => void;
   adminView?: boolean;
 }
 
@@ -22,6 +21,13 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
 
   useEffect(() => {
     loadProducts();
+
+    // Subscribe to product changes
+    const unsubscribe = subscribeToProducts((updatedProducts) => {
+      setProducts(updatedProducts);
+    });
+
+    return () => unsubscribe(); // Cleanup subscription on unmount
   }, [page]);
 
   const loadProducts = async () => {
@@ -43,13 +49,7 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
 
   const handleDeleteProduct = async (product: Product) => {
     try {
-      // Delete the product from the store and database
-      await deleteProduct(product.id);
-
-      // Remove the product from the table
-      setProducts((prevProducts) => prevProducts.filter((p) => p.id !== product.id));
-
-      // Show success notification
+      await deleteProduct(product.id); // Permanently delete the product
       toast.success('Product deleted successfully');
     } catch (error: any) {
       console.error('Error deleting product:', error);
@@ -104,9 +104,6 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
                   </td>
                   <td className="px-6 py-4">
                     <div className="h-4 bg-gray-200 rounded w-24 animate-pulse"></div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="h-4 bg-gray-200 rounded w-20 animate-pulse"></div>
                   </td>
                 </tr>
               ))

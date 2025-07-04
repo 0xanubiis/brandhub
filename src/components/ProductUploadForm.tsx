@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Upload, X, Plus, Loader2, Percent } from 'lucide-react';
+import { Upload, X, Loader2, Percent } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { createProduct, CreateProductPayload as BaseCreateProductPayload } from '../api/products';
 import { useAuth } from '../context/AuthContext';
@@ -375,13 +375,6 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
                   </button>
                 </div>
               ))}
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="h-24 w-24 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md hover:border-gray-400"
-              >
-                <Plus className="h-6 w-6 text-gray-400" />
-              </button>
             </div>
           )}
         </div>

@@ -160,7 +160,7 @@ export function Store() {
           <div className="p-4 space-y-4">
             <button onClick={() => scrollToSection('hero')} className="block text-[#29292B] hover:text-gray-600 py-2">Home</button>
             <button onClick={() => navigate('/products')} className="block text-[#29292B] hover:text-gray-600 py-2">Products</button>
-            <button onClick={() => navigate('/why-us')} className="block text-[#29292B] hover:text-gray-600 py-2">Why Us</button>
+            <button onClick={() => navigate('/AboutUs')} className="block text-[#29292B] hover:text-gray-600 py-2">About Us</button>
           </div>
         </div>
       )}
@@ -284,7 +284,7 @@ export function Store() {
               {categories.map((category) => (
                 <div
                   key={category}
-                  className="bg-black text-white h-[250px] rounded-xl flex items-center justify-center text-xl font-bold cursor-pointer hover:scale-105 transition-transform"
+                  className="bg-black text-white h-[250px] rounded-xl flex items-center justify-center text-xl font-bold cursor-pointer hover:scale-105 transition-transform pb-2"
                   onClick={() => navigate(`/collection/${category.toLowerCase()}`)}
                 >
                   {category}
