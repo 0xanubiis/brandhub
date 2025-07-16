@@ -47,6 +47,17 @@ export function StorePage() {
     };
 
     loadStoreProducts();
+
+    // Listen for product updates (including deletions)
+    const handleProductsUpdate = () => {
+      loadStoreProducts();
+    };
+
+    window.addEventListener('productsUpdated', handleProductsUpdate);
+
+    return () => {
+      window.removeEventListener('productsUpdated', handleProductsUpdate);
+    };
   }, [storeName]);
 
   if (!storeExists) {

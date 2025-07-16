@@ -198,7 +198,7 @@ export function AdminDashboard() {
             </div>
           ) : (
             <div className="flex items-center justify-between">
-              <p className="text-gray-600 pr-1">{storeName || 'No store name set'}</p>
+              <p className="text-gray-600 pr-2">{storeName || 'No store name set'}</p>
               <button
                 onClick={() => {
                   setIsEditing(true);

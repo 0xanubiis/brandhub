@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { PayPalButtons } from '@paypal/react-paypal-js';
+import { addOrder } from '../data/orders';
 
 interface CheckoutFormProps {
   onClose: () => void;
@@ -16,6 +17,9 @@ interface CartItem {
   quantity: number;
   price: number;
   discount?: number | null;
+  size?: string;
+  adminId?: string;
+  storeName?: string;
 }
 
 export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutFormProps) {
@@ -52,8 +56,43 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
   };
 
   const handlePayPalSuccess = async () => {
-    toast.success('Payment successful!');
-    onSuccess();
+    try {
+      // Create order in database
+      const orderData = {
+        customer: shippingInfo.name,
+        total: total,
+        status: 'Pending' as const,
+        date: new Date().toISOString(),
+        customer_details: {
+          firstName: shippingInfo.name.split(' ')[0] || '',
+          lastName: shippingInfo.name.split(' ').slice(1).join(' ') || '',
+          email: '', // Could be added to shipping form
+          phoneNumber: '', // Could be added to shipping form
+          address: shippingInfo.address,
+          city: shippingInfo.city,
+          state: '', // Could be added to shipping form
+          zipCode: shippingInfo.postalCode,
+          country: shippingInfo.country,
+          paymentMethod: 'PayPal'
+        },
+        items: cartItems.map(item => ({
+          name: item.name,
+          quantity: item.quantity,
+          price: item.discount ? item.price * (1 - item.discount / 100) : item.price,
+          admin_id: item.adminId || item.id, // Use adminId if available, fallback to id
+          store_name: item.storeName || '', // Use storeName if available
+          size: item.size
+        }))
+      };
+
+      await addOrder(orderData);
+      toast.success('Payment successful! Order created.');
+      onSuccess();
+    } catch (error) {
+      console.error('Error creating order:', error);
+      toast.error('Payment successful but order creation failed. Please contact support.');
+      onSuccess(); // Still clear cart even if order creation fails
+    }
   };
 
   return (
@@ -158,15 +197,27 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                   <li key={item.id} className="flex justify-between">
                     <span>
                       {item.name} x {item.quantity}
+                      {item.size && <span className="text-gray-500 ml-2">• Size: {item.size}</span>}
                     </span>
                     <span>
-                      $
-                      {(
-                        item.quantity *
-                        (item.discount
-                          ? item.price * (1 - item.discount / 100)
-                          : item.price)
-                      ).toFixed(2)}
+                      {item.discount ? (
+                        <div className="text-right">
+                          <p className="text-xs line-through text-gray-400">${(item.price * item.quantity).toFixed(2)}</p>
+                          <p className="text-sm font-bold text-gray-900">
+                            ${(
+                              item.quantity *
+                              (item.price * (1 - item.discount / 100))
+                            ).toFixed(2)}
+                          </p>
+                        </div>
+                      ) : (
+                        `$${(
+                          item.quantity *
+                          (item.discount
+                            ? item.price * (1 - item.discount / 100)
+                            : item.price)
+                        ).toFixed(2)}`
+                      )}
                     </span>
                   </li>
                 ))}
@@ -178,7 +229,12 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
             </div>
 
             <div className="mt-6">
-              {isPayPalProcessing && <div className="spinner">Processing...</div>}
+              {isPayPalProcessing && (
+                <div className="flex items-center justify-center py-4">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+                  <span className="ml-2 text-gray-600">Processing payment...</span>
+                </div>
+              )}
               <PayPalButtons
                 createOrder={(_data, actions) => {
                   setIsPayPalProcessing(true);
@@ -190,6 +246,7 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                           currency_code: 'USD',
                           value: total.toFixed(2),
                         },
+                        description: `Order from BrandHub - ${cartItems.length} item(s)`,
                       },
                     ],
                   });
@@ -200,7 +257,8 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                     setIsPayPalProcessing(false);
                     return Promise.reject(new Error('PayPal order actions are unavailable.'));
                   }
-                  return actions.order.capture().then(() => {
+                  return actions.order.capture().then((details) => {
+                    console.log('Payment completed successfully:', details);
                     setIsPayPalProcessing(false);
                     handlePayPalSuccess();
                   });
@@ -209,6 +267,17 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                   console.error('PayPal error:', err);
                   toast.error('PayPal payment failed. Please try again.');
                   setIsPayPalProcessing(false);
+                }}
+                onCancel={() => {
+                  console.log('PayPal payment cancelled');
+                  toast.error('Payment was cancelled.');
+                  setIsPayPalProcessing(false);
+                }}
+                style={{
+                  layout: 'vertical',
+                  color: 'black',
+                  shape: 'rect',
+                  label: 'pay'
                 }}
               />
             </div>

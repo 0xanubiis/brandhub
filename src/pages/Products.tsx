@@ -33,6 +33,17 @@ export function Products() {
     };
 
     loadProducts();
+
+    // Listen for product updates (including deletions)
+    const handleProductsUpdate = () => {
+      loadProducts();
+    };
+
+    window.addEventListener('productsUpdated', handleProductsUpdate);
+
+    return () => {
+      window.removeEventListener('productsUpdated', handleProductsUpdate);
+    };
   }, []);
 
   const categories = ['All', ...new Set(products.map(product => product.category))];

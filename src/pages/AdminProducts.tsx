@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Upload } from 'lucide-react';
-import { getAdminProducts, Product, deleteProduct, getStoreName } from '../data/products';
+import { getAdminProducts, Product, getStoreName } from '../data/products';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
@@ -40,15 +40,7 @@ export function AdminProducts() {
     };
   }, [currentUser, navigate]);
 
-  const handleDeleteProduct = async (product: Product) => {
-    try {
-      await deleteProduct(product.id);
-      toast.success('Product deleted successfully');
-      window.dispatchEvent(new Event('productsUpdated'));
-    } catch (error) {
-      toast.error('Error deleting product');
-    }
-  };
+
 
   return (
     <div className="p-4 sm:p-8">
@@ -86,7 +78,9 @@ export function AdminProducts() {
       )}
 
       {/* Products Table */}
-      <ProductsTable adminView={true} onDelete={handleDeleteProduct} />
+      <ProductsTable 
+        adminView={true} 
+      />
     </div>
   );
 }

@@ -126,39 +126,39 @@ export function AdminOrders() {
   };
 
   return (
-    <div className="p-4 sm:p-8">
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
+    <div className="p-4 sm:p-6">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Orders Management</h1>
-          <p className="text-gray-600">View and manage your store orders</p>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent">Orders Management</h1>
+          <p className="text-gray-600 text-sm mt-1">View and manage your store orders</p>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-900">Your Orders</h2>
+      <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-md border border-gray-200 overflow-hidden">
+        <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-gray-900 to-black text-white">
+          <h2 className="text-lg font-semibold">Your Orders</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="text-left text-sm text-gray-500 border-b border-gray-200">
-                <th className="px-6 py-4 font-medium">Order ID</th>
-                <th className="px-6 py-4 font-medium">Date</th>
-                <th className="px-6 py-4 font-medium">Customer</th>
-                <th className="px-6 py-4 font-medium">Contact</th>
-                <th className="px-6 py-4 font-medium">Address</th>
-                <th className="px-6 py-4 font-medium">Products</th>
-                <th className="px-6 py-4 font-medium">Payment</th>
-                <th className="px-6 py-4 font-medium">Status</th>
-                <th className="px-6 py-4 font-medium">Actions</th>
+              <tr className="text-left bg-gradient-to-r from-gray-800 to-gray-900 text-white">
+                <th className="px-4 py-3 font-medium text-sm">Order ID</th>
+                <th className="px-4 py-3 font-medium text-sm">Date</th>
+                <th className="px-4 py-3 font-medium text-sm">Customer</th>
+                <th className="px-4 py-3 font-medium text-sm">Contact</th>
+                <th className="px-4 py-3 font-medium text-sm">Address</th>
+                <th className="px-4 py-3 font-medium text-sm">Products</th>
+                <th className="px-4 py-3 font-medium text-sm">Payment</th>
+                <th className="px-4 py-3 font-medium text-sm">Status</th>
+                <th className="px-4 py-3 font-medium text-sm">Actions</th>
               </tr>
             </thead>
             <tbody className="text-sm">
               {orders.map((order) => (
-                <tr key={order.id} className="border-b border-gray-100">
-                  <td className="px-6 py-4">{order.id}</td>
-                  <td className="px-6 py-4">
-                    <p>{new Date(order.date).toLocaleDateString('en-US', {
+                <tr key={order.id} className="border-b border-gray-200 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 transition-all duration-300">
+                  <td className="px-4 py-3 font-mono text-xs text-gray-700">{order.id.slice(0, 8)}...</td>
+                  <td className="px-4 py-3">
+                    <p className="font-medium text-gray-900 text-xs">{new Date(order.date).toLocaleDateString('en-US', {
                       day: '2-digit',
                       month: 'long',
                       year: 'numeric',
@@ -170,33 +170,41 @@ export function AdminOrders() {
                       })}
                     </p>
                   </td>
-                  <td className="px-6 py-4">
-                    <p>{order.customerDetails.firstName} {order.customerDetails.lastName}</p>
+                  <td className="px-4 py-3">
+                    <p className="font-medium text-gray-900 text-xs">{order.customerDetails.firstName} {order.customerDetails.lastName}</p>
                   </td>
-                  <td className="px-6 py-4">
-                    <p>{order.customerDetails.email}</p>
-                    <p>{order.customerDetails.phoneNumber}</p>
+                  <td className="px-4 py-3">
+                    <p className="text-gray-700 text-xs">{order.customerDetails.email}</p>
+                    <p className="text-gray-600 text-xs">{order.customerDetails.phoneNumber}</p>
                   </td>
-                  <td className="px-6 py-4">
-                    <p>{order.customerDetails.address}</p>
-                    <p>{order.customerDetails.city}, {order.customerDetails.state}</p>
+                  <td className="px-4 py-3">
+                    <p className="text-gray-700 text-xs">{order.customerDetails.address}</p>
+                    <p className="text-gray-600 text-xs">{order.customerDetails.city}, {order.customerDetails.state}</p>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-4 py-3">
                     {order.items.map((item, index) => (
-                      <p key={index}>{item.name} x {item.quantity}</p>
+                      <p key={index} className="mb-0.5 text-xs">
+                        <span className="font-medium text-gray-900">{item.name}</span>
+                        <span className="text-gray-600"> x {item.quantity}</span>
+                        {item.size && <span className="text-gray-500 ml-1">• Size: {item.size}</span>}
+                      </p>
                     ))}
                   </td>
-                  <td className="px-6 py-4">{order.customerDetails.paymentMethod}</td>
-                  <td className="px-6 py-4">
-                    <span className={`px-2 py-1 rounded-full ${getStatusColor(order.status)}`}>
+                  <td className="px-4 py-3">
+                    <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                      {order.customerDetails.paymentMethod}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
                       {order.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-4 py-3">
                     <select
                       value={order.status}
                       onChange={(e) => handleStatusChange(order.id, e.target.value as OrderStatus)}
-                      className="px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black text-sm"
+                      className="px-2 py-1 border border-gray-300 rounded-md focus:ring-1 focus:ring-gray-900 focus:border-gray-900 text-xs bg-white shadow-sm transition-all duration-300"
                     >
                       {ORDER_STATUSES.map((status) => (
                         <option key={status} value={status}>

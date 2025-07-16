@@ -409,6 +409,17 @@ export const updateProduct = async (id: string, product: Partial<Product>): Prom
 // Delete a product and its images
 export const deleteProduct = async (id: string): Promise<void> => {
   try {
+    // First, fetch the product to get its images before deletion
+    const { data: product, error: fetchError } = await supabase
+      .from('products')
+      .select('images')
+      .eq('id', id)
+      .single();
+
+    if (fetchError) {
+      throw new Error('Failed to fetch product for deletion');
+    }
+
     // Delete the product from the database
     const { error: dbError } = await supabase.from('products').delete().eq('id', id);
 
@@ -416,26 +427,32 @@ export const deleteProduct = async (id: string): Promise<void> => {
       throw new Error('Failed to delete product from database');
     }
 
-    // Fetch associated images for the product
-    const { data: product } = await supabase.from('products').select('images').eq('id', id).single();
-
+    // Delete associated images from storage if they exist
     if (product && product.images && product.images.length > 0) {
       // Extract image paths from URLs
       const imagePaths = product.images.map((imageUrl: string) => {
-        const url = new URL(imageUrl);
-        return url.pathname.split('/').slice(-2).join('/');
-      });
+        try {
+          const url = new URL(imageUrl);
+          return url.pathname.split('/').slice(-2).join('/');
+        } catch (error) {
+          console.warn('Invalid image URL:', imageUrl);
+          return null;
+        }
+      }).filter(Boolean);
 
-      // Delete images from storage
-      const { error: storageError } = await supabase.storage.from('products').remove(imagePaths);
+      if (imagePaths.length > 0) {
+        // Delete images from storage
+        const { error: storageError } = await supabase.storage.from('products').remove(imagePaths);
 
-      if (storageError) {
-        console.error('Error deleting product images:', storageError);
-        toast.error('Product deleted but some images could not be removed');
+        if (storageError) {
+          console.error('Error deleting product images:', storageError);
+          // Don't throw error here as the product is already deleted
+        }
       }
     }
 
-    toast.success('Product and associated images deleted successfully');
+    // Dispatch event to notify other components about the deletion
+    window.dispatchEvent(new Event('productsUpdated'));
   } catch (error) {
     console.error('Error deleting product:', error);
     throw new Error('Failed to delete product');

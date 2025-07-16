@@ -48,6 +48,15 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
   };
 
   const handleDeleteProduct = async (product: Product) => {
+    // Show confirmation dialog
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete "${product.name}"? This action cannot be undone and will remove the product from all pages including the store.`
+    );
+
+    if (!isConfirmed) {
+      return;
+    }
+
     try {
       // Call the deleteProduct function to remove the product permanently
       await deleteProduct(product.id);
@@ -56,7 +65,7 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
       setProducts((prevProducts) => prevProducts.filter((p) => p.id !== product.id));
 
       // Show success notification
-      toast.success('Product deleted successfully');
+      toast.success(`"${product.name}" has been deleted successfully`);
     } catch (error: any) {
       console.error('Error deleting product:', error);
       toast.error('Failed to delete product');
@@ -74,19 +83,19 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+    <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-md border border-gray-200 overflow-hidden">
       {/* Products Table */}
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="text-left text-sm text-gray-500 border-b border-gray-200">
-              <th className="px-6 py-4 font-medium">Image</th>
-              <th className="px-6 py-4 font-medium">Name</th>
-              <th className="px-6 py-4 font-medium">Category</th>
-              <th className="px-6 py-4 font-medium">Price</th>
-              <th className="px-6 py-4 font-medium">Discount</th>
-              <th className="px-6 py-4 font-medium">Date Added</th>
-              <th className="px-6 py-4 font-medium">Actions</th>
+            <tr className="text-left bg-gradient-to-r from-gray-900 to-black text-white">
+              <th className="px-4 py-3 font-medium text-sm">Image</th>
+              <th className="px-4 py-3 font-medium text-sm">Name</th>
+              <th className="px-4 py-3 font-medium text-sm">Category</th>
+              <th className="px-4 py-3 font-medium text-sm">Price</th>
+              <th className="px-4 py-3 font-medium text-sm">Discount</th>
+              <th className="px-4 py-3 font-medium text-sm">Date Added</th>
+              <th className="px-4 py-3 font-medium text-sm">Actions</th>
             </tr>
           </thead>
           <tbody className="text-sm">
@@ -127,58 +136,64 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
               </tr>
             ) : (
               products.map((product) => (
-                <tr key={product.id} className="border-b border-gray-100 hover:bg-gray-50">
-                  <td className="px-6 py-4">
+                <tr key={product.id} className="border-b border-gray-200 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 transition-all duration-300">
+                  <td className="px-4 py-3">
                     {product.images && product.images[0] ? (
                       <img
                         src={product.images[0]}
                         alt={product.name}
-                        className="w-12 h-12 object-cover rounded"
+                        className="w-10 h-10 object-cover rounded-md shadow-sm"
                       />
                     ) : (
-                      <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                      <div className="w-10 h-10 bg-gradient-to-br from-gray-200 to-gray-300 rounded-md flex items-center justify-center text-gray-500 text-xs">
                         No image
                       </div>
                     )}
                   </td>
-                  <td className="px-6 py-4 font-medium">{product.name}</td>
-                  <td className="px-6 py-4">{product.category}</td>
-                  <td className="px-6 py-4">${product.price.toFixed(2)}</td>
-                  <td className="px-6 py-4">
-                    {product.discount ? `${product.discount}%` : 'No Discount'}
+                  <td className="px-4 py-3 font-medium text-gray-900">{product.name}</td>
+                  <td className="px-4 py-3 text-gray-700">{product.category}</td>
+                  <td className="px-4 py-3 font-bold text-gray-900">${product.price.toFixed(2)}</td>
+                  <td className="px-4 py-3">
+                    {product.discount ? (
+                      <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        {product.discount}%
+                      </span>
+                    ) : (
+                      <span className="text-gray-500 text-xs">No Discount</span>
+                    )}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-4 py-3 text-gray-700 text-xs">
                     {new Date(product.createdAt).toLocaleDateString('en-US', {
                       day: '2-digit',
                       month: 'long',
                       year: 'numeric',
                     })}
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex gap-2">
+                  <td className="px-4 py-3">
+                    <div className="flex gap-1">
                       <button
                         onClick={() => handleViewProduct(product)}
-                        className="p-1 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100"
+                        className="p-1.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-md transition-all duration-300 hover:scale-105 shadow-sm"
                         title="View Product"
                       >
-                        <Eye className="h-4 w-4" />
+                        <Eye className="h-3 w-3" />
                       </button>
                       {adminView && onEdit && (
                         <button
                           onClick={() => onEdit(product)}
-                          className="p-1 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100"
+                          className="p-1.5 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white rounded-md transition-all duration-300 hover:scale-105 shadow-sm"
                           title="Edit Product"
                         >
-                          <Edit2 className="h-4 w-4" />
+                          <Edit2 className="h-3 w-3" />
                         </button>
                       )}
                       {adminView && (
                         <button
                           onClick={() => handleDeleteProduct(product)}
-                          className="p-1 text-red-500 hover:text-red-700 rounded-full hover:bg-red-50"
+                          className="p-1.5 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-md transition-all duration-300 hover:scale-105 shadow-sm"
                           title="Delete Product"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-3 w-3" />
                         </button>
                       )}
                     </div>
@@ -192,15 +207,15 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="px-6 py-4 flex items-center justify-between border-t border-gray-200">
-          <div className="text-sm text-gray-500">
+        <div className="px-4 py-3 flex items-center justify-between border-t border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
+          <div className="text-sm text-gray-600">
             Showing {(page - 1) * pageSize + 1} to {Math.min(page * pageSize, totalCount)} of {totalCount} products
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-1">
             <button
               onClick={() => handlePageChange(page - 1)}
               disabled={page === 1}
-              className="p-2 rounded-md border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-2 rounded-md border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-all duration-300"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -212,8 +227,10 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
                   <button
                     key={pageNum}
                     onClick={() => handlePageChange(pageNum)}
-                    className={`w-8 h-8 rounded-md ${
-                      pageNum === page ? 'bg-black text-white' : 'border border-gray-300 hover:bg-gray-50'
+                    className={`w-8 h-8 rounded-md text-sm font-medium transition-all duration-300 ${
+                      pageNum === page 
+                        ? 'bg-gradient-to-r from-gray-900 to-black text-white shadow-md' 
+                        : 'border border-gray-300 hover:bg-gray-100 hover:scale-105'
                     }`}
                   >
                     {pageNum}
@@ -224,7 +241,7 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
             <button
               onClick={() => handlePageChange(page + 1)}
               disabled={page === totalPages}
-              className="p-2 rounded-md border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-2 rounded-md border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-all duration-300"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
