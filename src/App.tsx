@@ -12,7 +12,6 @@ import { StorePage } from './pages/StorePage';
 import { CollectionPage } from './pages/CollectionPage';
 import { AuthProvider } from './context/AuthContext';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-import { PayPalTest } from './components/PayPalTest';
 import './index.css';
 
 export default function App() {
