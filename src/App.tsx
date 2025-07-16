@@ -50,7 +50,6 @@ export default function App() {
             <Route path="/products/:id" element={<ProductDetailsPage />} />
             <Route path="/store/:storeName" element={<StorePage />} />
             <Route path="/collection/:category" element={<CollectionPage />} />
-            <Route path="/paypal-test" element={<PayPalTest />} />
             <Route path="/" element={<Store />} />
           </Routes>
         </Router>
