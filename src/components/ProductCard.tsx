@@ -1,6 +1,7 @@
 import React from 'react';
 import { Product } from '../data/products';
 import { useNavigate } from 'react-router-dom';
+import { ShoppingCart, Eye, Star } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -50,27 +51,35 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           </div>
         </div>
+
+        {/* Rating */}
+        <div className="absolute top-3 left-3">
+          <div className="flex items-center gap-1 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1">
+            <Star size={12} className="text-yellow-400 fill-current" />
+            <span className="text-white text-xs font-medium">4.8</span>
+          </div>
+        </div>
       </div>
 
       {/* Product Info */}
-      <div className="p-4 z-10">
-        <h3 className="text-sm font-bold text-gray-900 mb-2 line-clamp-2 hover:text-gray-700 transition-colors duration-300">
+      <div className="p-6 z-10">
+        <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 hover:text-gray-200 transition-colors duration-300">
           {product.name}
         </h3>
-        <p className="text-xs text-gray-600 mb-3 bg-clip-text text-transparent bg-gradient-to-r from-gray-600 to-gray-500">
+        <p className="text-sm text-gray-400 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-400 to-gray-500">
           {product.category}
         </p>
         
-        <div className="mb-3">
+        <div className="mb-4">
           {product.discount ? (
             <div className="space-y-1">
-              <p className="text-xs line-through text-gray-400">${product.price.toFixed(2)}</p>
-              <p className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-emerald-500">
+              <p className="text-sm line-through text-gray-500">${product.price.toFixed(2)}</p>
+              <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-400">
                 ${discountedPrice.toFixed(2)}
               </p>
             </div>
           ) : (
-            <p className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700">
+            <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
               ${product.price.toFixed(2)}
             </p>
           )}
@@ -79,7 +88,8 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Store Name Button */}
         <button
           onClick={handleNavigateToStore}
-          className="w-full py-2.5 px-4 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 text-white rounded-xl text-xs font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-600 hover:border-gray-500">
+          className="w-full py-3 px-4 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 text-white rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl border border-white/10 hover:border-white/20 flex items-center justify-center gap-2">
+          <ShoppingCart size={16} />
           Visit {product.storeName}
         </button>
       </div>

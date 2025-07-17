@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { DollarSign, Package, Store, ShoppingBag } from 'lucide-react';
+import { DollarSign, Package, Store, ShoppingBag, TrendingUp, Users, Eye, Edit2, Check, X } from 'lucide-react';
 import { getAdminProducts } from '../data/products';
 import { getAdminOrders } from '../data/orders';
 import { useNavigate } from 'react-router-dom';
@@ -153,60 +153,64 @@ export function AdminDashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <p>Loading...</p>
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p className="text-white">Loading dashboard...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="p-4 sm:p-8">
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
-          <p className="text-gray-600">Welcome back, Admin</p>
-        </div>
+    <div className="space-y-8">
+      {/* Welcome Section */}
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-white mb-2">Dashboard Overview</h1>
+        <p className="text-gray-400">Welcome back, Admin</p>
       </div>
 
       {/* Store Name Section */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
+      <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Store className="h-5 w-5 text-gray-700" />
-            <h2 className="text-lg font-medium text-gray-900">Your Store</h2>
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-gradient-to-r from-white to-gray-200 rounded-xl">
+              <Store className="h-5 w-5 text-white" />
+            </div>
+            <h2 className="text-xl font-semibold text-white">Your Store</h2>
           </div>
           {isEditing ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <input
                 type="text"
                 value={newStoreName}
                 onChange={(e) => setNewStoreName(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+                className="px-4 bg-gray-800 border border-white/20 rounded-xl text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 placeholder-gray-400"
               />
               <button
                 onClick={handleStoreNameUpdate}
-                className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-900"
+                className="p-2 bg-green-500 hover:bg-green-600 text-white rounded-xl transition-colors"
               >
-                Save
+                <Check size={16} />
               </button>
               <button
                 onClick={() => setIsEditing(false)}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+                className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-xl transition-colors"
               >
-                Cancel
+                <X size={16} />
               </button>
             </div>
           ) : (
-            <div className="flex items-center justify-between">
-              <p className="text-gray-600 pr-2">{storeName || 'No store name set'}</p>
+            <div className="flex items-center gap-3">
+              <p className="text-gray-300">{storeName || 'No store name set'}</p>
               <button
                 onClick={() => {
                   setIsEditing(true);
                   setNewStoreName(storeName);
                 }}
-                className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-900"
+                className="p-2 bg-gray-800 hover:bg-gray-700 text-white rounded-xl transition-colors"
               >
-                Edit
+                <Edit2 size={16} />
               </button>
             </div>
           )}
@@ -214,68 +218,95 @@ export function AdminDashboard() {
       </div>
 
       {/* Key Metrics Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <div className="bg-green-100 p-2 rounded-lg">
-              <DollarSign className="h-6 w-6 text-green-600" />
+            <div className="p-3 bg-gradient-to-r from-green-400 to-green-600 rounded-xl">
+              <DollarSign className="h-6 w-6 text-green-400" />
             </div>
-            <span className="text-sm font-medium text-green-600">
-              ${stats.totalSales.toFixed(2)}
-            </span>
+            <TrendingUp className="h-5 w-5 text-green-400" />
           </div>
-          <h3 className="text-gray-600 text-sm">Total Sales</h3>
+          <h3 className="text-2xl font-semibold text-white mb-1">${stats.totalSales.toFixed(2)}</h3>
+          <p className="text-gray-400">Total Sales</p>
         </div>
 
-        <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <div className="bg-purple-100 p-2 rounded-lg">
-              <Package className="h-6 w-6 text-purple-600" />
+            <div className="p-3 bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl">
+              <Package className="h-6 w-6 text-blue-400" />
             </div>
-            <span className="text-sm font-medium text-purple-600">
-              {stats.totalProducts}
-            </span>
+            <TrendingUp className="h-5 w-5 text-blue-400" />
           </div>
-          <h3 className="text-gray-600 text-sm">Total Products</h3>
+          <h3 className="text-2xl font-semibold text-white mb-1">{stats.totalProducts}</h3>
+          <p className="text-gray-400">Total Products</p>
         </div>
 
-        <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <div className="bg-amber-100 p-2 rounded-lg">
-              <ShoppingBag className="h-6 w-6 text-amber-600" />
+            <div className="p-3 bg-gradient-to-r from-purple-400 to-purple-600 rounded-xl">
+              <ShoppingBag className="h-6 w-6 text-purple-400" />
             </div>
-            <span className="text-sm font-medium text-amber-600">
-              {stats.totalOrders}
-            </span>
+            <TrendingUp className="h-5 w-5 text-purple-400" />
           </div>
-          <h3 className="text-gray-600 text-sm">Total Orders</h3>
+          <h3 className="text-2xl font-semibold text-white mb-1">{stats.totalOrders}</h3>
+          <p className="text-gray-400">Total Orders</p>
+        </div>
+
+        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-3 bg-gradient-to-r from-amber-400 to-amber-600 rounded-xl">
+              <Users className="h-6 w-6 text-amber-400" />
+            </div>
+            <TrendingUp className="h-5 w-5 text-amber-400" />
+          </div>
+          <h3 className="text-2xl font-semibold text-white mb-1">${stats.averageOrderValue.toFixed(2)}</h3>
+          <p className="text-gray-400">Avg Order Value</p>
         </div>
       </div>
 
-      {/* Top Selling Products Section */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Top Selling Products</h3>
-        <ul className="space-y-2">
-          {stats.topProducts.map((product, index) => (
-            <li key={index} className="flex justify-between">
-              <span>{product.name}</span>
-              <span>${product.sales.toFixed(2)}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* Charts and Analytics */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Top Products */}
+        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10">
+          <h3 className="text-xl font-semibold text-white mb-6">Top Products</h3>
+          <div className="space-y-4">
+            {stats.topProducts.map((product, index) => (
+              <div key={product.name} className="flex items-center justify-between p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-white/5">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm rounded-full">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">{product.name}</p>
+                    <p className="text-gray-400 text-sm">${product.sales.toFixed(2)}</p>
+                  </div>
+                </div>
+                <Eye className="h-5 w-5 text-gray-400" />
+              </div>
+            ))}
+          </div>
+        </div>
 
-      {/* Orders by Status Section */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Orders by Status</h3>
-        <ul className="space-y-2">
-          {Object.entries(stats.ordersByStatus).map(([status, count]) => (
-            <li key={status} className="flex justify-between">
-              <span className="capitalize">{status}</span>
-              <span>{count}</span>
-            </li>
-          ))}
-        </ul>
+        {/* Order Status */}
+        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10">
+          <h3 className="text-xl font-semibold text-white mb-6">Order Status</h3>
+          <div className="space-y-4">
+            {Object.entries(stats.ordersByStatus).map(([status, count]) => (
+              <div key={status} className="flex items-center justify-between p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-white/5">
+                <div className="flex items-center gap-3">
+                  <div className={`w-3 h-3 rounded-full ${
+                    status === 'completed' ? 'bg-green-400' :
+                    status === 'pending' ? 'bg-yellow-400' :
+                    status === 'cancelled' ? 'bg-red-400' :
+                    'bg-blue-400'
+                  }`}></div>
+                  <p className="text-white font-medium capitalize">{status}</p>
+                </div>
+                <span className="text-gray-400 font-semibold">{count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
