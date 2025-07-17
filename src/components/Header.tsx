@@ -64,10 +64,10 @@ export function Header() {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-white to-gray-300 group-hover:w-full transition-all duration-300"></span>
             </button>
             <button 
-              onClick={() => navigate('/why-us')} 
+              onClick={() => navigate('/AboutUs')} 
               className="text-white hover:text-gray-300 font-medium relative group transition-all duration-300"
             >
-              Why Us
+              About Us
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-white to-gray-300 group-hover:w-full transition-all duration-300"></span>
             </button>
           </div>
@@ -120,10 +120,10 @@ export function Header() {
               Products
             </button>
             <button 
-              onClick={() => navigate('/why-us')} 
+              onClick={() => navigate('/AboutUs')} 
               className="block text-white hover:text-gray-300 py-3 text-lg font-medium transition-all duration-300 hover:translate-x-2"
             >
-              Why Us
+              About Us
             </button>
           </div>
         </div>

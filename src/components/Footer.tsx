@@ -1,8 +1,8 @@
-import { Mail, Phone, Twitter, Instagram, Github, Linkedin } from 'lucide-react';
+import { Mail, Phone, Instagram, Github } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden text-white">
+    <footer className="bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden text-white pb-8">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-r from-blue-500/20 to-purple-500/50 rounded-full blur-3xl animate-float" />
@@ -65,11 +65,11 @@ export function Footer() {
             <div className="space-y-4">
               <div className="flex items-center gap-3 p-3 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-white/10">
                 <Mail className="h-5 w-5 text-blue-400" />
-                <span className="text-gray-300">contact@brandhub.com</span>
+                <span className="text-gray-300">In progress...</span>
               </div>
               <div className="flex items-center gap-3 p-3 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-white/10">
                 <Phone className="h-5 w-5 text-green-400" />
-                <span className="text-gray-300">+1 (555) 123-4567</span>
+                <span className="text-gray-300">In progress...</span>
               </div>
             </div>
           </div>
@@ -78,15 +78,6 @@ export function Footer() {
           <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Follow Us</h3>
             <div className="grid grid-cols-2 gap-3">
-              <a
-                href="https://twitter.com/0xanubiis"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-xl text-white transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2"
-              >
-                <Twitter size={16} />
-                Twitter
-              </a>
               <a
                 href="https://instagram.com/blnk.dev"
                 target="_blank"
@@ -97,7 +88,7 @@ export function Footer() {
                 Instagram
               </a>
               <a
-                href="https://github.com/0xanubiis"
+                href="https://github.com/0xanubiis/brandhub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 rounded-xl text-white transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2"
@@ -105,23 +96,14 @@ export function Footer() {
                 <Github size={16} />
                 GitHub
               </a>
-              <a
-                href="https://linkedin.com/in/0xanubiis"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-xl text-white transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2"
-              >
-                <Linkedin size={16} />
-                LinkedIn
-              </a>
             </div>
           </div>
         </div>
 
         {/* Copyright Section */}
-        <div className="mt-12 pt-8 border-t border-white/10 text-center">
+        <div className="mt-12 pt-8 border-t border-white/10 text-center pb-4">
           <p className="text-gray-400 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-            &copy; {new Date().getFullYear()} Brand Hub. All rights reserved. Crafted with ❤️ by 0xanubiis
+            &copy; {new Date().getFullYear()} Brand Hub. All rights reserved. Made with ❤️ by BLNK
           </p>
         </div>
       </div>

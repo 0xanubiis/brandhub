@@ -207,9 +207,9 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-black/60 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/10 text-white">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">Upload New Product</h2>
+        <h2 className="text-xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Upload New Product</h2>
         {onCancel && (
           <button onClick={onCancel} className="text-gray-500 hover:text-gray-700">
             <X className="h-6 w-6" />
@@ -220,32 +220,32 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Product Name */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Product Name*</label>
+          <label className="block text-sm font-medium text-gray-200 mb-1">Product Name*</label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+            className="w-full px-3 py-2 border border-white/10 bg-black/40 text-white rounded-md focus:ring-2 focus:ring-white/50 focus:border-white/50 placeholder-gray-400"
             required
           />
         </div>
 
         {/* Description */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <label className="block text-sm font-medium text-gray-200 mb-1">Description</label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleInputChange}
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+            className="w-full px-3 py-2 border border-white/10 bg-black/40 text-white rounded-md focus:ring-2 focus:ring-white/50 focus:border-white/50 placeholder-gray-400"
           />
         </div>
 
         {/* Price */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Price*</label>
+          <label className="block text-sm font-medium text-gray-200 mb-1">Price*</label>
           <input
             type="number"
             name="price"
@@ -254,19 +254,19 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
             min="0"
             step="0.01"
             placeholder="Enter price"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+            className="w-full px-3 py-2 border border-white/10 bg-black/40 text-white rounded-md focus:ring-2 focus:ring-white/50 focus:border-white/50 placeholder-gray-400"
             required
           />
         </div>
 
         {/* Category */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Category*</label>
+          <label className="block text-sm font-medium text-gray-200 mb-1">Category*</label>
           <select
             name="category"
             value={formData.category}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+            className="w-full px-3 py-2 border border-white/10 bg-black/40 text-white rounded-md focus:ring-2 focus:ring-white/50 focus:border-white/50 placeholder-gray-400"
             required
           >
             <option value="">Select a category</option>
@@ -280,7 +280,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
 
         {/* Sizes */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Available Sizes</label>
+          <label className="block text-sm font-medium text-gray-200 mb-2">Available Sizes</label>
           <div className="flex flex-wrap gap-2">
             {sizes.map((size) => (
               <button
@@ -289,8 +289,8 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
                 onClick={() => handleSizeToggle(size)}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   formData.sizes.includes(size)
-                    ? 'bg-black text-white'
-                    : 'border border-gray-300 text-gray-700 hover:border-gray-400'
+                    ? 'bg-gradient-to-r from-gray-900 to-black text-white border border-white/20'
+                    : 'border border-white/10 text-gray-200 bg-black/30 hover:border-white/30'
                 }`}
               >
                 {size}
@@ -301,7 +301,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
 
         {/* Discount */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Discount</label>
+          <label className="block text-sm font-medium text-gray-200 mb-1">Discount</label>
           <div className="relative">
             <select
               name="discount"
@@ -312,7 +312,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
                   discount: e.target.value ? parseInt(e.target.value) : null,
                 }))
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black appearance-none pr-10"
+              className="w-full px-3 py-2 border border-white/10 bg-black/40 text-white rounded-md focus:ring-2 focus:ring-white/50 focus:border-white/50 placeholder-gray-400 appearance-none pr-10"
             >
               <option value="">No discount</option>
               {discounts.map((discount) => (
@@ -324,7 +324,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
             <Percent className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           </div>
           {formData.discount && (
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-gray-400">
               Original price: ${formData.price.toFixed(2)} → Discounted price: $
               {(formData.price * (1 - formData.discount / 100)).toFixed(2)}
             </p>
@@ -333,10 +333,10 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
 
         {/* Images */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Product Images*</label>
+          <label className="block text-sm font-medium text-gray-200 mb-1">Product Images*</label>
           <div
             className={`mt-1 flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 transition-colors cursor-pointer ${
-              isDragging ? 'border-black bg-gray-50' : 'border-gray-300 hover:border-black'
+              isDragging ? 'border-white/30 bg-black/30' : 'border-white/10 hover:border-white/30 bg-black/20'
             }`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -344,10 +344,10 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
             onClick={() => fileInputRef.current?.click()}
           >
             <Upload className="h-12 w-12 text-gray-400" />
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-gray-300">
               Drag and drop your images here, or click to select
             </p>
-            <p className="text-xs text-gray-500 mt-1">Max file size: 5MB. Formats: JPEG, PNG, WebP</p>
+            <p className="text-xs text-gray-400 mt-1">Max file size: 5MB. Formats: JPEG, PNG, WebP</p>
             <input
               ref={fileInputRef}
               type="file"
@@ -364,7 +364,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
                   <img
                     src={image instanceof File ? URL.createObjectURL(image) : image}
                     alt={`Preview ${index + 1}`}
-                    className="h-24 w-24 object-cover rounded-md"
+                    className="h-24 w-24 object-cover rounded-md border border-white/10 bg-black/40"
                   />
                   <button
                     type="button"
@@ -385,7 +385,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+              className="flex-1 px-4 py-2 text-gray-200 bg-black/30 rounded-md hover:bg-black/50 border border-white/10"
             >
               Cancel
             </button>
@@ -393,7 +393,7 @@ export function ProductUploadForm({ onSuccess, onCancel }: ProductUploadFormProp
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex-1 px-4 py-2 text-white bg-black rounded-md hover:bg-gray-900 disabled:opacity-50 flex items-center justify-center"
+            className="flex-1 px-4 py-2 text-white bg-gradient-to-r from-gray-900 to-black rounded-md hover:bg-black/80 border border-white/10 disabled:opacity-50 flex items-center justify-center"
           >
             {isSubmitting ? (
               <>

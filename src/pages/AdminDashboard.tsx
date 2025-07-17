@@ -15,10 +15,7 @@ interface DashboardStats {
   topProducts: { name: string; sales: number }[];
   ordersByStatus: {
     pending: number;
-    processing: number;
-    shipped: number;
     delivered: number;
-    completed: number;
     cancelled: number;
     refunded: number;
   };
@@ -36,10 +33,7 @@ export function AdminDashboard() {
     topProducts: [],
     ordersByStatus: {
       pending: 0,
-      processing: 0,
-      shipped: 0,
       delivered: 0,
-      completed: 0,
       cancelled: 0,
       refunded: 0,
     },
@@ -69,15 +63,13 @@ export function AdminDashboard() {
 
         const ordersByStatus = orders.reduce(
           (acc, order) => {
-            acc[order.status.toLowerCase() as keyof typeof acc] += 1;
+            const key = order.status.toLowerCase();
+            if (key in acc) acc[key as keyof typeof acc] += 1;
             return acc;
           },
           {
             pending: 0,
-            processing: 0,
-            shipped: 0,
             delivered: 0,
-            completed: 0,
             cancelled: 0,
             refunded: 0,
           }
@@ -153,28 +145,28 @@ export function AdminDashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-white">Loading dashboard...</p>
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center animate-fade-in">
+          <div className="w-16 h-16 border-4 border-t-transparent border-b-transparent border-l-white border-r-gray-400 rounded-full animate-spin mb-6" style={{ boxShadow: '0 0 40px 0 rgba(0,0,0,0.2)' }}></div>
+          <p className="text-white text-lg font-medium tracking-wide">Loading dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black space-y-8 py-10 px-2">
       {/* Welcome Section */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-white mb-2">Dashboard Overview</h1>
-        <p className="text-gray-400">Welcome back, Admin</p>
+        <h1 className="text-4xl font-bold text-white mb-2 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Dashboard Overview</h1>
+        <p className="text-gray-300">Welcome back, Admin</p>
       </div>
 
       {/* Store Name Section */}
-      <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10">
+      <div className="bg-black/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-r from-white to-gray-200 rounded-xl">
+            <div className="p-2 bg-gradient-to-r from-white to-gray-200 rounded-xl shadow">
               <Store className="h-5 w-5 text-white" />
             </div>
             <h2 className="text-xl font-semibold text-white">Your Store</h2>
@@ -219,7 +211,7 @@ export function AdminDashboard() {
 
       {/* Key Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
+        <div className="bg-black/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-white/20 shadow transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-gradient-to-r from-green-400 to-green-600 rounded-xl">
               <DollarSign className="h-6 w-6 text-green-400" />
@@ -230,7 +222,7 @@ export function AdminDashboard() {
           <p className="text-gray-400">Total Sales</p>
         </div>
 
-        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
+        <div className="bg-black/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-white/20 shadow transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl">
               <Package className="h-6 w-6 text-blue-400" />
@@ -241,7 +233,7 @@ export function AdminDashboard() {
           <p className="text-gray-400">Total Products</p>
         </div>
 
-        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
+        <div className="bg-black/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-white/20 shadow transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-gradient-to-r from-purple-400 to-purple-600 rounded-xl">
               <ShoppingBag className="h-6 w-6 text-purple-400" />
@@ -252,7 +244,7 @@ export function AdminDashboard() {
           <p className="text-gray-400">Total Orders</p>
         </div>
 
-        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
+        <div className="bg-black/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-white/20 shadow transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-gradient-to-r from-amber-400 to-amber-600 rounded-xl">
               <Users className="h-6 w-6 text-amber-400" />
@@ -267,7 +259,7 @@ export function AdminDashboard() {
       {/* Charts and Analytics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Top Products */}
-        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10">
+        <div className="bg-black/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow">
           <h3 className="text-xl font-semibold text-white mb-6">Top Products</h3>
           <div className="space-y-4">
             {stats.topProducts.map((product, index) => (
@@ -288,12 +280,13 @@ export function AdminDashboard() {
         </div>
 
         {/* Order Status */}
-        <div className="bg-gray-900/10 p-6 rounded-2xl border border-white/10">
+        <div className="bg-black/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow">
           <h3 className="text-xl font-semibold text-white mb-6">Order Status</h3>
           <div className="space-y-4">
-            {Object.entries(stats.ordersByStatus).map(([status, count]) => (
-              <div key={status} className="flex items-center justify-between p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-white/5">
-                <div className="flex items-center gap-3">
+            {Object.entries(stats.ordersByStatus).map(([status]) => (
+              // Only show allowed statuses
+              ['pending','delivered','cancelled','refunded'].includes(status) && (
+                <div key={status} className="flex items-center justify-between p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-white/5">
                   <div className={`w-3 h-3 rounded-full ${
                     status === 'completed' ? 'bg-green-400' :
                     status === 'pending' ? 'bg-yellow-400' :
@@ -302,8 +295,7 @@ export function AdminDashboard() {
                   }`}></div>
                   <p className="text-white font-medium capitalize">{status}</p>
                 </div>
-                <span className="text-gray-400 font-semibold">{count}</span>
-              </div>
+              )
             ))}
           </div>
         </div>

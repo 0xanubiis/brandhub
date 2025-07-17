@@ -5,10 +5,7 @@ import { toast } from 'react-hot-toast';
 
 const ORDER_STATUSES = [
   'Pending',
-  'Processing',
-  'Shipped',
   'Delivered',
-  'Completed',
   'Cancelled',
   'Refunded',
 ] as const;
@@ -126,22 +123,22 @@ export function AdminOrders() {
   };
 
   return (
-    <div className="p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 sm:p-6">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent">Orders Management</h1>
-          <p className="text-gray-600 text-sm mt-1">View and manage your store orders</p>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Orders Management</h1>
+          <p className="text-gray-300 text-sm mt-1">View and manage your store orders</p>
         </div>
       </div>
 
-      <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-md border border-gray-200 overflow-hidden">
-        <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-gray-900 to-black text-white">
+      <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-lg border border-white/10 overflow-hidden">
+        <div className="px-4 py-3 border-b border-white/10 bg-black/80 text-white">
           <h2 className="text-lg font-semibold">Your Orders</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="text-left bg-gradient-to-r from-gray-800 to-gray-900 text-white">
+              <tr className="text-left bg-black/80 text-white">
                 <th className="px-4 py-3 font-medium text-sm">Order ID</th>
                 <th className="px-4 py-3 font-medium text-sm">Date</th>
                 <th className="px-4 py-3 font-medium text-sm">Customer</th>
@@ -153,17 +150,17 @@ export function AdminOrders() {
                 <th className="px-4 py-3 font-medium text-sm">Actions</th>
               </tr>
             </thead>
-            <tbody className="text-sm">
+            <tbody className="text-sm text-white bg-black/40">
               {orders.map((order) => (
-                <tr key={order.id} className="border-b border-gray-200 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 transition-all duration-300">
-                  <td className="px-4 py-3 font-mono text-xs text-gray-700">{order.id.slice(0, 8)}...</td>
+                <tr key={order.id} className="border-b border-white/10 hover:bg-black/60 transition-all duration-300">
+                  <td className="px-4 py-3 font-mono text-xs text-gray-400">{order.id.slice(0, 8)}...</td>
                   <td className="px-4 py-3">
-                    <p className="font-medium text-gray-900 text-xs">{new Date(order.date).toLocaleDateString('en-US', {
+                    <p className="font-medium text-white text-xs">{new Date(order.date).toLocaleDateString('en-US', {
                       day: '2-digit',
                       month: 'long',
                       year: 'numeric',
                     })}</p>
-                    <p className="text-gray-500 text-xs">
+                    <p className="text-gray-400 text-xs">
                       {new Date(order.date).toLocaleTimeString('en-US', {
                         hour: '2-digit',
                         minute: '2-digit',
@@ -171,21 +168,21 @@ export function AdminOrders() {
                     </p>
                   </td>
                   <td className="px-4 py-3">
-                    <p className="font-medium text-gray-900 text-xs">{order.customerDetails.firstName} {order.customerDetails.lastName}</p>
+                    <p className="font-medium text-white text-xs">{order.customerDetails.firstName} {order.customerDetails.lastName}</p>
                   </td>
                   <td className="px-4 py-3">
-                    <p className="text-gray-700 text-xs">{order.customerDetails.email}</p>
-                    <p className="text-gray-600 text-xs">{order.customerDetails.phoneNumber}</p>
+                    <p className="text-gray-300 text-xs">{order.customerDetails.email}</p>
+                    <p className="text-gray-400 text-xs">{order.customerDetails.phoneNumber}</p>
                   </td>
                   <td className="px-4 py-3">
-                    <p className="text-gray-700 text-xs">{order.customerDetails.address}</p>
-                    <p className="text-gray-600 text-xs">{order.customerDetails.city}, {order.customerDetails.state}</p>
+                    <p className="text-gray-300 text-xs">{order.customerDetails.address}</p>
+                    <p className="text-gray-400 text-xs">{order.customerDetails.city}, {order.customerDetails.state}</p>
                   </td>
                   <td className="px-4 py-3">
                     {order.items.map((item, index) => (
                       <p key={index} className="mb-0.5 text-xs">
-                        <span className="font-medium text-gray-900">{item.name}</span>
-                        <span className="text-gray-600"> x {item.quantity}</span>
+                        <span className="font-medium text-white">{item.name}</span>
+                        <span className="text-gray-400"> x {item.quantity}</span>
                         {item.size && <span className="text-gray-500 ml-1">• Size: {item.size}</span>}
                       </p>
                     ))}
@@ -204,7 +201,7 @@ export function AdminOrders() {
                     <select
                       value={order.status}
                       onChange={(e) => handleStatusChange(order.id, e.target.value as OrderStatus)}
-                      className="px-2 py-1 border border-gray-300 rounded-md focus:ring-1 focus:ring-gray-900 focus:border-gray-900 text-xs bg-white shadow-sm transition-all duration-300"
+                      className="px-2 py-1 border border-white/10 rounded-md focus:ring-1 focus:ring-white focus:border-white text-xs bg-black/40 text-white shadow-sm transition-all duration-300"
                     >
                       {ORDER_STATUSES.map((status) => (
                         <option key={status} value={status}>
@@ -217,7 +214,7 @@ export function AdminOrders() {
               ))}
               {orders.length === 0 && (
                 <tr>
-                  <td colSpan={9} className="px-6 py-4 text-center text-gray-500">
+                  <td colSpan={9} className="px-6 py-4 text-center text-gray-400">
                     No orders found
                   </td>
                 </tr>

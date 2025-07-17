@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product } from '../data/products';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCart, Eye, Star } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -21,12 +21,12 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div
-      className="group cursor-pointer relative overflow-hidden rounded-2xl glass-card transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl border-white/20 animate-fade-up"
+      className="group cursor-pointer relative overflow-hidden rounded-2xl bg-black/60 border border-white/30 shadow-xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl animate-fade-up"
       onClick={() => navigate(`/products/${product.id}`)}
       style={{ animationDelay: `${Math.random() * 0.5}s` }}
     >
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-black/10 opacity-80 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       
       <div className="relative aspect-[4/5] overflow-hidden">
         <img
@@ -49,14 +49,6 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="p-4 w-full">
             <div className="bg-white/20 backdrop-blur-md rounded-lg p-2 text-center">             <span className="text-white text-sm font-medium">Quick View</span>
             </div>
-          </div>
-        </div>
-
-        {/* Rating */}
-        <div className="absolute top-3 left-3">
-          <div className="flex items-center gap-1 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1">
-            <Star size={12} className="text-yellow-400 fill-current" />
-            <span className="text-white text-xs font-medium">4.8</span>
           </div>
         </div>
       </div>

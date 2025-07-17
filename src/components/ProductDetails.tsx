@@ -55,7 +55,7 @@ interface Product {
    if (!product) {
      return (
        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center">
-         <div className="glass-card p-8 rounded-2xl animate-pulse">
+         <div className="glass-dark p-8 rounded-2xl animate-pulse">
            <div className="w-16 h-16 gradient-to-r from-gray-300 to-gray-400 rounded-full mx-auto mb-4"></div>
            <p className="text-gray-600 text-center">Loading...</p>
          </div>
@@ -69,7 +69,7 @@ interface Product {
          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-fade-up">
            {/* Product Images */}
            <div className="space-y-6">
-             <div className="aspect-w-1 aspect-h-1 rounded-2xl overflow-hidden glass-card shadow-xl">
+             <div className="aspect-w-1 aspect-h-1 rounded-2xl overflow-hidden glass-dark shadow-xl">
                <img
                  src={mainImage || ''}
                  alt={product.name}

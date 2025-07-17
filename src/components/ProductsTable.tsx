@@ -83,12 +83,12 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-md border border-gray-200 overflow-hidden">
+    <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-lg border border-white/10 overflow-hidden">
       {/* Products Table */}
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="text-left bg-gradient-to-r from-gray-900 to-black text-white">
+            <tr className="text-left bg-black/80 text-white">
               <th className="px-4 py-3 font-medium text-sm">Image</th>
               <th className="px-4 py-3 font-medium text-sm">Name</th>
               <th className="px-4 py-3 font-medium text-sm">Category</th>
@@ -98,10 +98,10 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
               <th className="px-4 py-3 font-medium text-sm">Actions</th>
             </tr>
           </thead>
-          <tbody className="text-sm">
+          <tbody className="text-sm text-white bg-black/40">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, index) => (
-                <tr key={index} className="border-b border-gray-100">
+                <tr key={index} className="border-b border-white/10">
                   <td className="px-6 py-4">
                     <div className="w-12 h-12 bg-gray-200 rounded animate-pulse"></div>
                   </td>
@@ -136,7 +136,7 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
               </tr>
             ) : (
               products.map((product) => (
-                <tr key={product.id} className="border-b border-gray-200 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 transition-all duration-300">
+                <tr key={product.id} className="border-b border-white/10 hover:bg-black/60 transition-all duration-300">
                   <td className="px-4 py-3">
                     {product.images && product.images[0] ? (
                       <img
@@ -145,17 +145,17 @@ export function ProductsTable({ onEdit, adminView = false }: ProductsTableProps)
                         className="w-10 h-10 object-cover rounded-md shadow-sm"
                       />
                     ) : (
-                      <div className="w-10 h-10 bg-gradient-to-br from-gray-200 to-gray-300 rounded-md flex items-center justify-center text-gray-500 text-xs">
+                      <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-gray-900 rounded-md flex items-center justify-center text-gray-400 text-xs">
                         No image
                       </div>
                     )}
                   </td>
-                  <td className="px-4 py-3 font-medium text-gray-900">{product.name}</td>
-                  <td className="px-4 py-3 text-gray-700">{product.category}</td>
-                  <td className="px-4 py-3 font-bold text-gray-900">${product.price.toFixed(2)}</td>
+                  <td className="px-4 py-3 font-medium text-white">{product.name}</td>
+                  <td className="px-4 py-3 text-gray-300">{product.category}</td>
+                  <td className="px-4 py-3 font-bold text-white">${product.price.toFixed(2)}</td>
                   <td className="px-4 py-3">
                     {product.discount ? (
-                      <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                      <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-2 py-1 rounded-full text-xs font-medium shadow">
                         {product.discount}%
                       </span>
                     ) : (
