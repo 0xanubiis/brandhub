@@ -18,17 +18,14 @@ export function ProductDetailsPage() {
   const { id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const navigate = useNavigate();
-  // Duplicate declaration removed
   const dispatch = useDispatch();
   const [mainImage, setMainImage] = useState<string | null>(null);
 
   useEffect(() => {
     const loadProduct = async () => {
-      // Import or define fetchProducts function
-            const products: Product[] = await fetchProducts();
+      const products: Product[] = await fetchProducts();
       
       async function fetchProducts(): Promise<Product[]> {
-        // Mock implementation for fetching products
         return [
           {
             id: '1',
@@ -45,7 +42,7 @@ export function ProductDetailsPage() {
       const foundProduct = products.find((p) => p.id === id);
       if (foundProduct) {
         setProduct(foundProduct);
-        setMainImage(foundProduct.images[0]); // Set the first image as the main image
+        setMainImage(foundProduct.images[0]);
       } else {
         navigate('/products');
         toast.error('Product not found');
@@ -57,23 +54,26 @@ export function ProductDetailsPage() {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <p>Loading...</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center">
+        <div className="glass-card p-8 rounded-2xl animate-pulse">
+          <div className="w-16 h-16 gradient-to-r from-gray-300 to-gray-400 rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600 text-center">Loading...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       <div className="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-fade-up">
           {/* Product Images */}
-          <div className="space-y-4">
-            <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100">
+          <div className="space-y-6">
+            <div className="aspect-w-1 aspect-h-1 rounded-2xl overflow-hidden glass-card shadow-xl">
               <img
                 src={mainImage || ''}
                 alt={product.name}
-                className="w-full h-[500px] object-cover object-center"
+                className="w-full h-[500px] object-cover object-center transform hover:scale-105 transition-transform duration-700"
               />
             </div>
             <div className="grid grid-cols-4 gap-4">
@@ -82,42 +82,57 @@ export function ProductDetailsPage() {
                   key={index}
                   src={image}
                   alt={`Thumbnail ${index + 1}`}
-                  className="h-24 w-24 object-cover rounded-lg cursor-pointer hover:opacity-80"
-                  onClick={() => setMainImage(image)} // Swap the clicked image with the main image
+                  className="h-24 w-24 object-cover rounded-xl cursor-pointer hover:opacity-80 transition-all duration-300 ease-in-out scale-100 hover:scale-110 border-transparent hover:border-gray-300"
+                  onClick={() => setMainImage(image)}
                 />
               ))}
             </div>
           </div>
 
           {/* Product Info */}
-          <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
-            <p className="text-lg text-gray-500">{product.category}</p>
-            <p className="text-gray-600">{product.description}</p>
-            <div className="flex items-center">
+          <div className="space-y-8 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+            <div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-4">
+                {product.name}
+              </h1>
+              <p className="text-lg text-gray-600 bg-clip-text text-transparent gradient-to-r from-gray-600 to-gray-500">
+                {product.category}
+              </p>
+            </div>
+            
+            <p className="text-gray-600 leading-relaxed text-lg">
+              {product.description}
+            </p>
+            
+            <div className="space-y-4">
               {product.discount ? (
-                <div className="mr-4">
-                  <p className="text-lg sm:text-3xl font-bold text-gray-900 line-through mb-1">
+                <div className="space-y-2">
+                  <p className="text-2xl font-bold text-gray-400 line-through mb-1">
                     ${product.price.toFixed(2)}
                   </p>
-                  <p className="text-lg sm:text-3xl font-bold text-red-600">
-                    ${(product.price * (1 - product.discount / 100)).toFixed(2)}
-                    <span className="ml-2 text-sm sm:text-lg bg-red-100 text-red-600 px-2 py-1 rounded-full">
+                  <div className="flex items-center space-x-4">
+                    <p className="text-4xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
+                      ${(product.price * (1 - product.discount / 100)).toFixed(2)}
+                    </p>
+                    <span className="bg-gradient-to-r from-red-500 to-pink-50 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       {product.discount}% OFF
                     </span>
-                  </p>
+                  </div>
                 </div>
               ) : (
-                <p className="text-lg sm:text-3xl font-bold text-gray-900">
+                <p className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
                   ${product.price.toFixed(2)}
                 </p>
               )}
+              
               {product.freeShipping && (
-                <p className="text-xs sm:text-sm text-gray-500 mt-2">
-                  Free shipping
-                </p>
+                <div className="flex items-center space-x-2">
+                  <span className="w-3 h-3 gradient-to-r from-green-400 to-green-600 rounded-full"></span>
+                  <p className="text-green-600 font-semibold">Free shipping</p>
+                </div>
               )}
             </div>
+            
             <button
               onClick={() => {
                 dispatch({
@@ -126,7 +141,7 @@ export function ProductDetailsPage() {
                 });
                 toast.success(`${product.name} added to cart!`);
               }}
-              className="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-900"
+              className="w-full bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 ease-in-out scale-100 hover:scale-150 shadow-xl transform"
             >
               Add to Cart
             </button>

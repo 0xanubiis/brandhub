@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Search, ShoppingCart, Menu, X, ShoppingBag, User, Settings, ArrowRight } from 'lucide-react';
+import { Search, ShoppingCart, Menu, X, ShoppingBag, User, Settings, ArrowRight, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ProductCard } from '../components/ProductCard';
 import { CartDropdown } from '../components/CartDropdown';
@@ -82,52 +82,56 @@ export function Store() {
   const totalItems = state.items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white text-black">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       {/* Navigation Bar */}
-      <nav className="fixed top-0 w-full bg-white shadow-sm z-50">
+      <nav className="fixed top-0 w-full glass-nav z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
               <button
-                className="sm:hidden"
+                className="sm:hidden text-gray-700 hover:text-gray-900 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
               <div 
-                className="flex items-center ml-4 cursor-pointer"
+                className="flex items-center ml-4 cursor-pointer group"
                 onClick={() => navigate('/')}
               >
-                <ShoppingBag className="h-6 w-6 mr-2" />
-                <span className="text-xl font-bold text-[#29292B]">Brand Hub</span>
+                <div className="p-2 gradient-to-r from-gray-800 to-gray-700 rounded-xl mr-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <ShoppingBag className="h-6 w-6"/>
+                </div>
+                <span className="text-2xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent group-hover:from-gray-600 group-hover:to-gray-800 transition-all duration-300">
+                  Brand Hub
+                </span>
               </div>
             </div>
             
             <div className="hidden sm:flex items-center justify-center space-x-8">
               <button 
                 onClick={() => scrollToSection('hero')} 
-                className="text-[#29292B] hover:text-gray-600 font-medium"
-              >
+                className="text-gray-700 hover:text-gray-900 font-medium relative group transition-all duration-300">
                 Home
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 gradient-to-r from-gray-800 to-gray-600 group-hover:w-full transition-all duration-300"></span>
               </button>
               <button 
                 onClick={() => navigate('/products')} 
-                className="text-[#29292B] hover:text-gray-600 font-medium"
-              >
+                className="text-gray-700 hover:text-gray-900 font-medium relative group transition-all duration-300">
                 Products
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 gradient-to-r from-gray-800 to-gray-600 group-hover:w-full transition-all duration-300"></span>
               </button>
               <button 
                 onClick={() => navigate('/why-us')} 
-                className="text-[#29292B] hover:text-gray-600 font-medium"
-              >
+                className="text-gray-700 hover:text-gray-900 font-medium relative group transition-all duration-300">
                 Why Us
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 gradient-to-r from-gray-800 to-gray-600 group-hover:w-full transition-all duration-300"></span>
               </button>
             </div>
 
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => navigate('/admin/login')}
-                className="p-2 hover:bg-gray-100 rounded-full text-black"
+                className="p-3 gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 rounded-xl text-white transition-all duration-300 scale-105 shadow-lg"
                 title={currentUser ? 'Admin Dashboard' : 'Admin Login'}
               >
                 {currentUser ? (
@@ -139,11 +143,10 @@ export function Store() {
               <div className="relative">
                 <button 
                   onClick={() => setIsCartOpen(!isCartOpen)}
-                  className="p-2 hover:bg-gray-100 rounded-full relative text-black"
-                >
+                  className="p-3 gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 rounded-xl relative text-white transition-all duration-300 scale-105 shadow-lg">
                   <ShoppingCart size={20} />
                   {totalItems > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    <span className="absolute -top-2 -right-2 gradient-to-r from-red-500 to-red-600 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold animate-pulse">
                       {totalItems}
                     </span>
                   )}
@@ -156,52 +159,75 @@ export function Store() {
       </nav>
 
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white sm:hidden pt-16">
-          <div className="p-4 space-y-4">
-            <button onClick={() => scrollToSection('hero')} className="block text-[#29292B] hover:text-gray-600 py-2">Home</button>
-            <button onClick={() => navigate('/products')} className="block text-[#29292B] hover:text-gray-600 py-2">Products</button>
-            <button onClick={() => navigate('/AboutUs')} className="block text-[#29292B] hover:text-gray-600 py-2">About Us</button>
+        <div className="fixed inset-0 z-40 glass-nav sm:hidden pt-20">
+          <div className="p-6 space-y-6">
+            <button onClick={() => scrollToSection('hero')} className="block text-gray-700 hover:text-gray-900 py-3 text-lg font-medium transition-all duration-300 hover:translate-x-2">Home</button>
+            <button onClick={() => navigate('/products')} className="block text-gray-700 hover:text-gray-900 py-3 text-lg font-medium transition-all duration-300 hover:translate-x-2">Products</button>
+            <button onClick={() => navigate('/AboutUs')} className="block text-gray-700 hover:text-gray-900 py-3 text-lg font-medium transition-all duration-300 hover:translate-x-2">About Us</button>
           </div>
         </div>
       )}
 
       {/* Hero Section */}
-      <div id="hero" className="pt-16 relative">
+      <div id="hero" className="pt-20 relative">
         <div 
-          className="min-h-[600px] relative"
+          className="min-h-[600px] relative hero-gradient"
           style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop")',
+            backgroundImage: 'url("https://images.unsplash.com/photo-1441986300917-64674bd6008?q=80&w=2070&auto=format&fit=crop")',
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50"></div>
+          
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0 low-hidden pointer-events-none">
+            <div 
+              className="absolute -top-40 -right-40 w-80 h-80 rounded-full backdrop-blur-xl animate-float border border-white/20"
+              style={{ animationDelay: '0s' }}
+            />
+            <div 
+              className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full backdrop-blur-xl animate-float border border-white/20"
+              style={{ animationDelay: '2s' }}
+            />
+            <div 
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full backdrop-blur-xl animate-float border border-white/20"
+              style={{ animationDelay: '4s' }}
+            />
+          </div>
           
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold text-white sm:text-5xl md:text-6xl">
-                Your Brands In One Place
-              </h1>
-              <p className="mt-3 max-w-md mx-auto text-base text-gray-300 sm:text-lg md:mt-5 md:text-xl">
-                Discover our latest arrivals featuring breathable fabrics and modern designs.
+            <div className="text-center animate-fade-up">
+              <div className="flex items-center justify-center mb-6">
+                <Sparkles className="h-8 w-8 text-white mr-3 animate-pulse" />
+                <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-300 sm:text-6xl">
+                  Your Brands In One Place
+                </h1>
+                <Sparkles className="h-8 w-8 text-white ml-3 animate-pulse" style={{ animationDelay: '0.5s' }} />
+              </div>
+              <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-300 sm:text-2xl leading-relaxed">
+                Discover our latest arrivals featuring breathable fabrics and modern designs with premium quality.
               </p>
-              <div className="mt-8 max-w-md mx-auto">
+              
+              {/* Search Bar */}
+              <div className="mt-10 max-w-md mx-auto">
                 <div className="relative">
                   <input
                     type="text"
                     placeholder="Search products..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 text-black bg-white/90 backdrop-blur-sm rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+                    className="w-full px-6 py-4 text-white bg-white/10 backdrop-blur-xl rounded-full border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all placeholder-gray-400 shadow-0_4px_12px_rgba(0,0,0,0.1) hover:shadow-0_4px_16px_rgba(0,0,0,0.2)"
                   />
-                  <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
+                  <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"/>
                 </div>
               </div>
-              <div className="mt-8 max-w-md mx-auto sm:flex sm:justify-center">
+
+              {/* CTA Button */}
+              <div className="mt-10 max-w-md mx-auto sm:flex sm:justify-center">
                 <button
                   onClick={() => scrollToSection('products')}
-                  className="w-full sm:w-auto px-8 py-4 text-white bg-black rounded-full hover:bg-gray-900 transition-all duration-300 shadow-lg font-medium"
-                >
+                  className="w-full sm:w-auto px-8 py-4 text-white font-semibold bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg border border-white/20">
                   Shop Now
                 </button>
               </div>
@@ -211,26 +237,33 @@ export function Store() {
       </div>
 
       {/* Products Section */}
-      <div id="products" className="bg-[#29292B] py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Latest Products</h2>
+      <div id="products" className="bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 low-hidden pointer-events-none">
+          <div className="absolute top-20 right-20 w-32 h-32 rounded-full blur-2 animate-float" />
+          <div className="absolute bottom-20 left-20 w-32 h-32 rounded-full blur-2 animate-float" style={{ animationDelay: '2s' }} />
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+          <div className="text-center mb-16 animate-fade-up">
+            <h2 className="text-4xl font-bold text-white mb-6 gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Latest Products
+            </h2>
             <button
               onClick={() => navigate('/products')}
-              className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
-            >
+              className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-all duration-300 group">
               See All Products
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-5 w-5 up-hover:translate-x-1 transition-transform duration-300"/>
             </button>
           </div>
 
           {isLoading ? (
-            <div className="flex gap-6 overflow-x-auto pb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {[...Array(8)].map((_, i) => (
-                <div key={i} className="animate-pulse flex-none w-72">
-                  <div className="bg-gray-200 h-96 rounded-lg mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div key={i} className="animate-pulse">
+                  <div className="glass-card h-96 rounded-2xl mb-4"></div>
+                  <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-700 rounded w-1/2"></div>
                 </div>
               ))}
             </div>
@@ -239,25 +272,19 @@ export function Store() {
               <p className="text-white mb-4">{error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-white text-[#29292B] rounded-md hover:bg-gray-100"
-              >
+                className="px-6 py-3 gradient-to-r from-white to-gray-100 text-gray-800 rounded-xl hover:from-gray-100 hover:to-white transition-all duration-300 shadow-lg">
                 Try Again
               </button>
             </div>
           ) : displayedProducts.length === 0 ? (
             <p className="text-center text-white py-8">No products found.</p>
           ) : (
-            <div className="relative">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-6">
-                {displayedProducts.map((product) => (
-                  <div
-                    key={product.id}
-                    className="flex-none w-72 transform transition-transform duration-300 hover:scale-105"
-                  >
-                    <ProductCard product={product} />
-                  </div>
-                ))}
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {displayedProducts.map((product, index) => (
+                <div key={product.id} style={{ animationDelay: `${index * 0.1}s` }}>
+                  <ProductCard product={product} />
+                </div>
+              ))}
             </div>
           )}
         </div>

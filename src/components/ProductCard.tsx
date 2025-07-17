@@ -20,49 +20,73 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div
-      className="group cursor-pointer relative overflow-hidden rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-lg border border-gray-200"
+      className="group cursor-pointer relative overflow-hidden rounded-2xl glass-card transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl border-white/20 animate-fade-up"
       onClick={() => navigate(`/products/${product.id}`)}
+      style={{ animationDelay: `${Math.random() * 0.5}s` }}
     >
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
       <div className="relative aspect-[4/5] overflow-hidden">
         <img
           src={product.images[0]}
           alt={product.name}
-          className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-700 ease-out"
         />
 
         {/* Discount Badge */}
         {product.discount && (
-          <div className="absolute top-2 right-2">
-            <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs px-2 py-1 rounded-full font-medium shadow-md">
+          <div className="absolute top-3 right-3">
+            <span className="bg-gradient-to-r from-red-500 to-pink-50 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg backdrop-blur-sm border border-white/20">
               {product.discount}% OFF
             </span>
           </div>
         )}
+
+        {/* Quick View Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end">
+          <div className="p-4 w-full">
+            <div className="bg-white/20 backdrop-blur-md rounded-lg p-2 text-center">             <span className="text-white text-sm font-medium">Quick View</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Product Info */}
-      <div className="p-3">
-        <h3 className="text-sm font-bold text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
-        <p className="text-xs text-gray-600 mb-2">{product.category}</p>
-        <div className="mb-2">
+      <div className="p-4 z-10">
+        <h3 className="text-sm font-bold text-gray-900 mb-2 line-clamp-2 hover:text-gray-700 transition-colors duration-300">
+          {product.name}
+        </h3>
+        <p className="text-xs text-gray-600 mb-3 bg-clip-text text-transparent bg-gradient-to-r from-gray-600 to-gray-500">
+          {product.category}
+        </p>
+        
+        <div className="mb-3">
           {product.discount ? (
             <div className="space-y-1">
               <p className="text-xs line-through text-gray-400">${product.price.toFixed(2)}</p>
-              <p className="text-lg font-bold text-gray-900">${discountedPrice.toFixed(2)}</p>
+              <p className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-emerald-500">
+                ${discountedPrice.toFixed(2)}
+              </p>
             </div>
           ) : (
-            <p className="text-lg font-bold text-gray-900">${product.price.toFixed(2)}</p>
+            <p className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700">
+              ${product.price.toFixed(2)}
+            </p>
           )}
         </div>
 
-        {/* Store Name */}
+        {/* Store Name Button */}
         <button
           onClick={handleNavigateToStore}
-          className="w-full py-2 px-3 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 text-white rounded-md text-xs font-medium transition-all duration-300 hover:scale-105 shadow-md"
-        >
+          className="w-full py-2.5 px-4 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 text-white rounded-xl text-xs font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-600 hover:border-gray-500">
           Visit {product.storeName}
         </button>
       </div>
+
+      {/* Floating Elements */}
+      <div className="absolute top-2 left-2 w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 animate-pulse" />
+      <div className="absolute bottom-2 right-2 w-1 h-1 bg-gradient-to-r from-pink-400 to-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 animate-pulse" style={{ animationDelay: '0.5s' }} />
     </div>
   );
 }

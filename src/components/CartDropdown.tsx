@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { X, ShoppingBag } from 'lucide-react';
+import { X, ShoppingBag, Trash2, Sparkles } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { CheckoutForm } from './CheckoutForm';
 import { toast } from 'react-hot-toast';
-import { Trash2 } from 'lucide-react';
 
 export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { state, dispatch } = useCart();
@@ -46,89 +45,116 @@ export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: ()
       />
 
       {/* Cart Panel */}
-      <div className={`fixed top-0 right-0 h-full w-full sm:w-80 bg-gradient-to-br from-white to-gray-50 backdrop-blur-xl shadow-lg transform transition-all duration-300 ease-in-out z-50 ${
+      <div className={`fixed top-0 right-0 h-full w-full sm:w-96 glass-card transform transition-all duration-300 ease-in-out z-50 ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <div className="h-full flex flex-col">
           {/* Header */}
-          <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-gray-900 to-black text-white">
+          <div className="p-6 border-b border-white/20 bg-gradient-to-r from-gray-900 to-black text-white">
             <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <div className="p-1.5 bg-white/10 rounded-lg">
-                  <ShoppingBag className="h-4 w-4" />
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white/10 to-white/5 rounded-xl backdrop-blur-sm">
+                  <ShoppingBag className="h-5 w-5" />
                 </div>
-                <h3 className="text-base font-semibold">Shopping Cart</h3>
+                <div>
+                  <h3 className="text-lg font-bold">Shopping Cart</h3>
+                  <p className="text-sm text-gray-300">You have {state.items.length} items</p>
+                </div>
               </div>
-              <button onClick={onClose} className="p-1.5 hover:bg-white/10 rounded-lg transition-colors duration-300">
-                <X size={18} />
+              <button
+                onClick={onClose}
+                className="p-2 hover:bg-white/10 rounded-xl transition-all duration-300 hover:scale-110"
+              >
+                <X size={20} />
               </button>
             </div>
           </div>
 
           {/* Cart Items */}
-          <div className="flex-1 overflow-y-auto p-4">
+          <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {state.items.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-gray-500">
-                <div className="p-3 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-4">
-                  <ShoppingBag className="h-12 w-12" />
+              <div className="text-center py-12">
+                <div className="w-16 h-16 gradient-to-r from-gray-300 to-gray-400 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <ShoppingBag className="h-8 w-8 text-gray-600" />
                 </div>
-                <p className="text-sm text-center font-medium">Your cart is empty</p>
-                <p className="text-xs text-gray-400 mt-1">Add some products to get started!</p>
+                <p className="text-gray-500 text-lg font-medium mb-2">Your cart is empty</p>
+                <p className="text-gray-400 text-sm">Add some products to get started!</p>
               </div>
             ) : (
-              <div className="space-y-4">
-                {state.items.map((item) => (
-                  <div key={item.id} className="flex items-center space-x-3 border-b border-gray-200 pb-4">
-                    <img
-                      src={item.images[0]}
-                      alt={item.name}
-                      className="h-12 w-12 object-cover rounded-lg shadow-md"
-                    />
-                    <div className="flex-1">
-                      <h4 className="text-sm font-medium text-gray-900 mb-1">
-                        {item.name} <span className="text-gray-500">(x{item.quantity})</span>
-                        {item.size && <span className="text-gray-500 ml-1">• Size: {item.size}</span>}
-                      </h4>
-                      {item.discount ? (
-                        <div className="space-y-1">
-                          <p className="text-xs text-gray-500 line-through">${item.price.toFixed(2)}</p>
-                          <p className="text-sm font-bold text-gray-900">
-                            ${(item.price * (1 - item.discount / 100)).toFixed(2)}
-                            <span className="ml-1 text-xs bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-1.5 py-0.5 rounded-full font-medium">
-                              {item.discount}% OFF
+              state.items.map((item) => {
+                const discountedPrice = item.discount
+                  ? item.price * (1 - item.discount / 100)
+                  : item.price;
+                return (
+                  <div key={item.id} className="glass-card p-4 rounded-xl border border-white/10 animate-fade-up">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-16 h-16 rounded-lg overflow-hidden bg-gradient-to-br from-gray-200">
+                        {item.images && item.images[0] ? (
+                          <img
+                            src={item.images[0]}
+                            alt={item.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <ShoppingBag className="h-6 w-6 text-gray-500" />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm font-semibold text-gray-900 truncate">{item.name}</h4>
+                        <p className="text-xs text-gray-600 mb-1">{item.category}</p>
+
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm font-bold text-gray-900">
+                              ${discountedPrice.toFixed(2)}
                             </span>
-                          </p>
+                            {item.discount && (
+                              <span className="text-xs line-through text-gray-400">
+                                ${item.price.toFixed(2)}
+                              </span>
+                            )}
+                          </div>
+
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm text-gray-600">Qty: {item.quantity}</span>
+                            <button
+                              onClick={() => handleRemoveItem(item.id)}
+                              className="p-1 bg-red-100 rounded-full transition-colors duration-200 group"
+                            >
+                              <Trash2 className="h-4 text-red-500 hover:text-red-600" />
+                            </button>
+                          </div>
                         </div>
-                      ) : (
-                        <p className="text-sm font-bold text-gray-900">${item.price.toFixed(2)}</p>
-                      )}
+                      </div>
                     </div>
-                    {/* Trash Icon */}
-                    <button
-                      onClick={() => handleRemoveItem(item.id)}
-                      className="p-1.5 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-all duration-300 hover:scale-105 shadow-md"
-                      title="Remove Item"
-                    >
-                      <Trash2 className="h-3 w-3" />
-                    </button>
                   </div>
-                ))}
-              </div>
+                );
+              })
             )}
           </div>
 
-          {/* Cart Summary */}
+          {/* Footer */}
           {state.items.length > 0 && (
-            <div className="border-t border-gray-200 p-4 bg-gradient-to-r from-gray-900 to-black text-white">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-sm font-medium">Total:</span>
-                <span className="text-lg font-bold">USD {total.toFixed(2)}</span>
+            <div className="border-t border-white/20 p-6 bg-gradient-to-r from-gray-900 to-black text-white">
+              <div className="flex justify-between items-center mb-6">
+                <span className="text-lg font-medium">Total:</span>
+                <div className="text-right">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    ${total.toFixed(2)}
+                  </span>
+                  <p className="text-sm text-gray-400">Free shipping</p>
+                </div>
               </div>
+
               <button
                 onClick={handleCheckout}
-                className="w-full bg-gradient-to-r from-white to-gray-100 text-black py-3 px-4 rounded-lg hover:from-gray-100 hover:to-white transition-all duration-300 font-semibold text-sm shadow-md hover:scale-105"
+                className="w-full bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-white text-gray-900 py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-xl transform flex items-center justify-center space-x-2"
               >
-                Proceed to Checkout
+                <Sparkles className="h-5 w-5" />
+                <span>Proceed to Checkout</span>
               </button>
             </div>
           )}
