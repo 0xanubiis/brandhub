@@ -171,7 +171,7 @@ export function Store() {
       {/* Hero Section */}
       <div id="hero" className="min-h-[400px] flex items-center justify-center overflow-hidden py-8">
         {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+        <div className="absolute inset-0 bg-black">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
         </div>
         
@@ -231,7 +231,7 @@ export function Store() {
       </div>
 
       {/* Products Section */}
-      <div id="products" className="bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden py-8">
+      <div id="products" className="bg-black relative overflow-hidden py-8">
         {/* Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 right-20 w-16 h-16 rounded-full bg-white/5 animate-float blur-xl"></div>
@@ -284,7 +284,7 @@ export function Store() {
       </div>
 
       {/* Category Section */}
-      <div className="pt-8 pb-6 bg-gradient-to-br from-black via-gray-900 to-black">
+      <div className="pt-8 pb-6 bg-black">
         <div className="max-w-6xl mx-auto px-2 sm:px-4 lg:px-6">
           <h2 className="text-xl font-bold mb-4 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Shop by Category</h2>
           {isLoading ? (
@@ -301,7 +301,7 @@ export function Store() {
                 <button
                   key={category}
                   className="glass-dark p-3 rounded-lg w-full text-left text-white font-semibold shadow-md border border-white/10 hover:border-white/20 transition-all duration-200 mb-2 text-sm"
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => selectedCategory(category)}
                 >
                   {category}
                 </button>

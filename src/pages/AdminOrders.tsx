@@ -123,7 +123,7 @@ export function AdminOrders() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 sm:p-6">
+    <div className="min-h-screen bg-black p-4 sm:p-6">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
         <div>
           <h1 className="text-2xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Orders Management</h1>

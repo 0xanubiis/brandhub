@@ -145,7 +145,7 @@ export function AdminDashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="flex flex-col items-center justify-center animate-fade-in">
           <div className="w-16 h-16 border-4 border-t-transparent border-b-transparent border-l-white border-r-gray-400 rounded-full animate-spin mb-6" style={{ boxShadow: '0 0 40px 0 rgba(0,0,0,0.2)' }}></div>
           <p className="text-white text-lg font-medium tracking-wide">Loading dashboard...</p>
@@ -155,7 +155,7 @@ export function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black space-y-8 py-10 px-2">
+    <div className="min-h-screen bg-black space-y-8 py-10 px-2">
       {/* Welcome Section */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-white mb-2 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Dashboard Overview</h1>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Upload } from 'lucide-react';
-import { getAdminProducts, Product, getStoreName } from '../data/products';
+import { getAdminProducts, getStoreName } from '../data/products';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';

@@ -81,7 +81,7 @@ export function ProductDetailsPage() {
 
   if (isLoading || !product) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="flex flex-col items-center animate-fade-in">
           <div className="w-12 h-12 border-4 border-t-transparent border-b-transparent border-l-white border-r-gray-400 rounded-full animate-spin mb-4" style={{ boxShadow: '0 0 24px 0 rgba(0,0,0,0.2)' }}></div>
           <p className="text-white text-lg font-medium tracking-wide">Loading product...</p>
@@ -95,7 +95,7 @@ export function ProductDetailsPage() {
     : product.price;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+    <div className="min-h-screen bg-black">
       {/* Header */}
       <Header />
 

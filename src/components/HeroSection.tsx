@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ searchQuery, onSearchChange, onShopNowClick }: HeroSectionProps) {
   return (
-    <div className="relative min-h-[600px] overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <div className="relative min-h-[600px] overflow-hidden bg-black">
       {/* Glass Overlay */}
       <div className="absolute inset-0 backdrop-blur-sm bg-black/30" />
 

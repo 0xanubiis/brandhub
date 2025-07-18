@@ -2,7 +2,7 @@ import { Mail, Phone, Instagram, Github } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden text-white pb-8">
+    <footer className="bg-black relative overflow-hidden text-white pb-8">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-r from-blue-500/20 to-purple-500/50 rounded-full blur-3xl animate-float" />
@@ -51,7 +51,7 @@ export function Footer() {
               <li>
                 <a href="/admin/login" className="text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2 inline-block group">
                   <span className="relative">
-                    Admin
+                    Admin Login
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-white to-gray-300 group-hover:w-full transition-all duration-300"></span>
                   </span>
                 </a>
