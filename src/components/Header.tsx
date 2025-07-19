@@ -25,7 +25,7 @@ export function Header() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
             <button
@@ -41,7 +41,7 @@ export function Header() {
               <div className="p-2 bg-gradient-to-r from-white to-gray-200 rounded-xl mr-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <ShoppingBag className="h-6 w-6" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent group-hover:from-gray-200 group-hover:to-white transition-all duration-300">
+              <span className="text-2xl font-bold text-white group-hover:text-gray-200 transition-all duration-300">
                 Brand Hub
               </span>
             </div>

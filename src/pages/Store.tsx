@@ -14,7 +14,7 @@ export function Store() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory] = useState<string>('All');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [products, setProducts] = useState<Product[]>([]);
   const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
@@ -101,7 +101,7 @@ export function Store() {
                 <div className="p-2 gradient-to-r from-white to-gray-200 rounded-xl mr-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <ShoppingBag className="h-6 w-6"/>
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent group-hover:from-gray-200 group-hover:to-white transition-all duration-300">
+                <span className="text-2xl font-bold text-white group-hover:text-gray-200 transition-all duration-300">
                   Brand Hub
                 </span>
               </div>
@@ -187,12 +187,12 @@ export function Store() {
           <div className="animate-fade-in-up">          {/* Main Heading */}
             <div className="flex items-center justify-center mb-4">
               <Sparkles className="h-6 w-6 text-white mr-2 animate-pulse" />
-              <h1 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
+              <h1 className="text-3xl md:text-5xl font-bold text-white">
                 Your Brands
               </h1>
               <Sparkles className="h-6 w-6 text-white ml-2 animate-pulse" style={{ animationDelay: '0.5s' }} />
             </div>
-            <h2 className="text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 via-white to-gray-200 mb-4">
+            <h2 className="text-xl md:text-3xl font-bold text-white mb-4">
               In One Place
             </h2>
             <p className="mt-2 max-w-2xl mx-auto text-base text-gray-300 leading-snug mb-4">
@@ -240,7 +240,7 @@ export function Store() {
         
         <div className="max-w-6xl mx-auto px-2 sm:px-4 lg:px-6 z-10">
           <div className="text-center mb-8 animate-fade-in-up">
-            <h2 className="text-2xl font-bold text-white mb-2 gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold text-white mb-2">
               Featured Products
             </h2>
             <p className="text-base text-gray-300 max-w-xl mx-auto">
@@ -286,7 +286,7 @@ export function Store() {
       {/* Category Section */}
       <div className="pt-8 pb-6 bg-black">
         <div className="max-w-6xl mx-auto px-2 sm:px-4 lg:px-6">
-          <h2 className="text-xl font-bold mb-4 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Shop by Category</h2>
+          <h2 className="text-xl font-bold mb-4 text-white">Shop by Category</h2>
           {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {[...Array(8)].map((_, i) => (
@@ -300,8 +300,8 @@ export function Store() {
               {categories.map((category) => (
                 <button
                   key={category}
-                  className="glass-dark p-3 rounded-lg w-full text-left text-white font-semibold shadow-md border border-white/10 hover:border-white/20 transition-all duration-200 mb-2 text-sm"
-                  onClick={() => selectedCategory(category)}
+                  className="glass-dark p-1 rounded w-full text-left text-white font-semibold shadow border border-white/10 hover:border-white/20 transition-all duration-200 mb-1 text-xs"
+                  onClick={() => setSelectedCategory(category)}
                 >
                   {category}
                 </button>

@@ -54,11 +54,11 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Product Info */}
-      <div className="p-6 z-10">
+      <div className="p-4 z-10">
         <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 hover:text-gray-200 transition-colors duration-300">
           {product.name}
         </h3>
-        <p className="text-sm text-gray-400 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-400 to-gray-500">
+        <p className="text-sm text-gray-400 mb-4">
           {product.category}
         </p>
         
@@ -66,12 +66,12 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.discount ? (
             <div className="space-y-1">
               <p className="text-sm line-through text-gray-500">${product.price.toFixed(2)}</p>
-              <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-400">
+              <p className="text-2xl font-bold text-green-400">
                 ${discountedPrice.toFixed(2)}
               </p>
             </div>
           ) : (
-            <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
+            <p className="text-2xl font-bold text-white">
               ${product.price.toFixed(2)}
             </p>
           )}
@@ -80,7 +80,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Store Name Button */}
         <button
           onClick={handleNavigateToStore}
-          className="w-full py-3 px-4 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 text-white rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl border border-white/10 hover:border-white/20 flex items-center justify-center gap-2">
+          className="w-full py-3 px-4 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl border border-white/10 hover:border-white/20 flex items-center justify-center gap-2">
           <ShoppingCart size={16} />
           Visit {product.storeName}
         </button>

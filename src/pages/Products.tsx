@@ -67,20 +67,20 @@ export function Products() {
   return (
     <div className="min-h-screen bg-black">
       {/* Navigation */}
-      <div className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+      <div className="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-b border-white/10 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="h-16 flex items-center justify-between">
             <button
               onClick={() => navigate('/')}
-              className="flex items-center text-gray-600 hover:text-gray-900"
+              className="flex items-center text-white hover:text-gray-300"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
               Back to Home
             </button>
-            <h1 className="text-xl font-bold text-gray-900">All Products</h1>
+            <h1 className="text-xl font-bold text-white">All Products</h1>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="p-2 hover:bg-gray-100 rounded-full"
+              className="p-2 hover:bg-white/10 rounded-full text-white"
               title="Toggle filters"
             >
               <Filter className="h-5 w-5" />
@@ -99,16 +99,16 @@ export function Products() {
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-black focus:border-black"
+                className="w-full px-4 py-3 pl-10 bg-white/10 border border-white/20 rounded-lg focus:ring-white/50 focus:border-white/50 text-white placeholder-gray-400"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             </div>
 
             {showFilters && (
-              <div className="bg-gray-50 p-6 rounded-lg space-y-6">
+              <div className="bg-black/40 backdrop-blur-xl p-6 rounded-lg space-y-6 border border-white/10">
                 {/* Categories */}
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">Categories</h3>
+                  <h3 className="text-sm font-medium text-white mb-2">Categories</h3>
                   <div className="flex flex-wrap gap-2">
                     {categories.map((category) => (
                       <button
@@ -116,8 +116,8 @@ export function Products() {
                         onClick={() => setSelectedCategory(category)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
                           ${selectedCategory === category
-                            ? 'bg-black text-white'
-                            : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                            ? 'bg-white text-black'
+                            : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
                           }`}
                       >
                         {category}
@@ -128,7 +128,7 @@ export function Products() {
 
                 {/* Stores */}
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">Stores</h3>
+                  <h3 className="text-sm font-medium text-white mb-2">Stores</h3>
                   <div className="flex flex-wrap gap-2">
                     {stores.map((store) => (
                       <button
@@ -136,8 +136,8 @@ export function Products() {
                         onClick={() => setSelectedStore(store)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
                           ${selectedStore === store
-                            ? 'bg-black text-white'
-                            : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                            ? 'bg-white text-black'
+                            : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
                           }`}
                       >
                         {store}
@@ -148,7 +148,7 @@ export function Products() {
 
                 {/* Price Range */}
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">
+                  <h3 className="text-sm font-medium text-white mb-2">
                     Price Range: ${priceRange[0]} - ${priceRange[1]}
                   </h3>
                   <div className="flex items-center gap-4">
@@ -160,7 +160,7 @@ export function Products() {
                       onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
                       className="flex-1"
                     />
-                    <span className="text-sm text-gray-600">to</span>
+                    <span className="text-sm text-gray-300">to</span>
                     <input
                       type="range"
                       min="0"
@@ -180,18 +180,18 @@ export function Products() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="bg-gray-200 h-[300px] rounded-lg mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                  <div className="bg-gray-700 h-[300px] rounded-lg mb-4"></div>
+                  <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-700 rounded w-1/2"></div>
                 </div>
               ))}
             </div>
           ) : error ? (
             <div className="text-center py-12">
-              <p className="text-red-600 mb-4">{error}</p>
+              <p className="text-red-400 mb-4">{error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-900"
+                className="px-4 py-2 bg-white text-black rounded-md hover:bg-gray-200"
               >
                 Try Again
               </button>

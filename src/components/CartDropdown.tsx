@@ -50,7 +50,7 @@ export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: ()
       }`}>
         <div className="h-full flex flex-col">
           {/* Header */}
-          <div className="p-6 border-b border-white/20 bg-gradient-to-r from-gray-900 to-black text-white">
+          <div className="p-6 border-b border-white/20 bg-black/40 backdrop-blur-xl text-white">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-white/10 to-white/5 rounded-xl backdrop-blur-sm">
@@ -138,20 +138,20 @@ export function CartDropdown({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
           {/* Footer */}
           {state.items.length > 0 && (
-            <div className="border-t border-white/20 p-6 bg-gradient-to-r from-gray-900 to-black text-white">
+            <div className="border-t border-white/20 p-6 bg-black/40 backdrop-blur-xl text-white">
               <div className="flex justify-between items-center mb-6">
                 <span className="text-lg font-medium">Total:</span>
                 <div className="text-right">
-                  <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    ${total.toFixed(2)}
-                  </span>
+                              <span className="text-2xl font-bold text-white">
+              ${total.toFixed(2)}
+            </span>
                   <p className="text-sm text-gray-400">Free shipping</p>
                 </div>
               </div>
 
               <button
                 onClick={handleCheckout}
-                className="w-full bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-white text-gray-900 py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-xl transform flex items-center justify-center space-x-2"
+                className="w-full bg-white hover:bg-gray-200 text-black py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-xl transform flex items-center justify-center space-x-2"
               >
                 <Sparkles className="h-5 w-5" />
                 <span>Proceed to Checkout</span>

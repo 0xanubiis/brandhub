@@ -130,20 +130,20 @@ export function ProductDetailsPage() {
 
           {/* Product Info */}
           <div className="space-y-4 bg-black/60 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/10 shadow-lg">
-            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent mb-1">{product.name}</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">{product.name}</h1>
             <p className="text-base md:text-lg text-gray-300 mb-1">{product.category}</p>
             <p className="text-gray-400 text-sm md:text-base mb-2 line-clamp-4">{product.description}</p>
             <div className="flex items-center space-x-3 md:space-x-4">
               {product.discount ? (
                 <div className="space-y-1">
                   <p className="text-base md:text-lg line-through text-gray-500">${product.price.toFixed(2)}</p>
-                  <p className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">${discountedPrice.toFixed(2)}</p>
-                  <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs px-2 py-1 rounded-full font-medium shadow">
+                  <p className="text-2xl md:text-3xl font-bold text-yellow-400">${discountedPrice.toFixed(2)}</p>
+                  <span className="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full font-medium shadow">
                     {product.discount}% OFF
                   </span>
                 </div>
               ) : (
-                <p className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">${product.price.toFixed(2)}</p>
+                <p className="text-2xl md:text-3xl font-bold text-white">${product.price.toFixed(2)}</p>
               )}
             </div>
 
@@ -159,7 +159,7 @@ export function ProductDetailsPage() {
                       onClick={() => setSelectedSize(size)}
                       className={`px-3 py-1 border rounded-md text-xs md:text-sm font-medium transition-colors ${
                         selectedSize === size
-                          ? 'bg-gradient-to-r from-gray-900 to-black text-white border border-white/20'
+                          ? 'bg-white text-black border border-white/20'
                           : 'border border-white/10 text-gray-200 bg-black/30 hover:border-white/30'
                       }`}
                     >
@@ -190,7 +190,7 @@ export function ProductDetailsPage() {
 
             <button
               onClick={handleAddToCart}
-              className="w-full mt-2 px-4 py-2 text-white bg-gradient-to-r from-gray-900 to-black rounded-md hover:bg-black/80 border border-white/10 transition-all font-semibold text-sm md:text-base"
+              className="w-full mt-2 px-4 py-2 text-black bg-white rounded-md hover:bg-gray-200 border border-white/10 transition-all font-semibold text-sm md:text-base"
             >
               Add to Cart
             </button>
@@ -199,7 +199,7 @@ export function ProductDetailsPage() {
 
         {/* More Products Section */}
         <div className="mt-10 md:mt-16">
-          <h2 className="text-xl md:text-2xl font-bold mb-4 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">More Products</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-4 text-white">More Products</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10 md:mb-16">
             {relatedProducts.map((relatedProduct) => (
               <ProductCard key={relatedProduct.id} product={relatedProduct} />

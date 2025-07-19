@@ -183,7 +183,7 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
             </div>
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-white to-gray-200 text-black font-bold py-2 px-4 rounded-md hover:from-gray-100 hover:to-white transition-all duration-200 shadow-md"
+              className="w-full bg-white text-black font-bold py-2 px-4 rounded-md hover:bg-gray-200 transition-all duration-200 shadow-md"
             >
               Continue
             </button>

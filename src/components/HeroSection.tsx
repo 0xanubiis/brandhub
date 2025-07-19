@@ -9,12 +9,12 @@ interface HeroSectionProps {
 
 export function HeroSection({ searchQuery, onSearchChange, onShopNowClick }: HeroSectionProps) {
   return (
-    <div className="relative min-h-[600px] overflow-hidden bg-black">
+    <div className="relative min-h-[500px] overflow-hidden bg-black">
       {/* Glass Overlay */}
       <div className="absolute inset-0 backdrop-blur-sm bg-black/30" />
 
       {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center animate-fadeUp">
           <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-300 mb-6">
             Your Brands In One Place

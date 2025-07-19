@@ -14,7 +14,7 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-16">
           {/* About Section */}
           <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">About Us</h3>
+            <h3 className="text-xl font-bold mb-6 text-white">About Us</h3>
             <p className="text-gray-300 leading-relaxed">
               Brand Hub is your one-stop destination for premium products. We curate exceptional collections with modern designs and unparalleled quality, delivering excellence in every experience.
             </p>
@@ -22,7 +22,7 @@ export function Footer() {
 
           {/* Links Section */}
           <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Quick Links</h3>
+            <h3 className="text-xl font-bold mb-6 text-white">Quick Links</h3>
             <ul className="space-y-3">
               <li>
                 <a href="/" className="text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2 inline-block group">
@@ -61,7 +61,7 @@ export function Footer() {
 
           {/* Contact Section */}
           <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-            <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Contact Us</h3>
+            <h3 className="text-xl font-bold mb-6 text-white">Contact Us</h3>
             <div className="space-y-4">
               <div className="flex items-center gap-3 p-3 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-white/10">
                 <Mail className="h-5 w-5 text-blue-400" />
@@ -76,7 +76,7 @@ export function Footer() {
 
           {/* Social Media Section */}
           <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Follow Us</h3>
+            <h3 className="text-xl font-bold mb-6 text-white">Follow Us</h3>
             <div className="grid grid-cols-2 gap-3">
               <a
                 href="https://instagram.com/blnk.dev"
