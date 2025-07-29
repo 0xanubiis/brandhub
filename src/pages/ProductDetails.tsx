@@ -99,15 +99,15 @@ export function ProductDetailsPage() {
       {/* Header */}
       <Header />
 
-      <div className="pt-20 max-w-5xl mx-auto px-2 sm:px-4 lg:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div className="pt-16 max-w-5xl mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {/* Product Images */}
           <div className="space-y-3 md:space-y-4">
-            <div className="aspect-w-1 aspect-h-1 rounded-2xl overflow-hidden bg-black/40 border border-white/10 shadow-lg">
+            <div className="aspect-w-1 aspect-h-1 rounded-lg sm:rounded-2xl overflow-hidden bg-black/40 border border-white/10 shadow-lg">
               <img
                 src={mainImage || product.images[0]}
                 alt={product.name}
-                className="w-full h-[350px] md:h-[450px] object-cover object-center"
+                className="w-full h-[250px] sm:h-[350px] md:h-[450px] object-cover object-center"
               />
             </div>
             {/* Image Thumbnails */}
@@ -118,7 +118,7 @@ export function ProductDetailsPage() {
                     key={index}
                     src={image}
                     alt={`${product.name} - Image ${index + 1}`}
-                    className={`h-16 w-16 md:h-20 md:w-20 object-cover rounded-xl border border-white/10 cursor-pointer transition-all duration-200 hover:opacity-80 ${
+                    className={`h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 object-cover rounded-lg sm:rounded-xl border border-white/10 cursor-pointer transition-all duration-200 hover:opacity-80 ${
                       mainImage === image ? 'ring-2 ring-white' : ''
                     }`}
                     onClick={() => setMainImage(image)}
@@ -129,21 +129,21 @@ export function ProductDetailsPage() {
           </div>
 
           {/* Product Info */}
-          <div className="space-y-4 bg-black/60 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/10 shadow-lg">
-            <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">{product.name}</h1>
-            <p className="text-base md:text-lg text-gray-300 mb-1">{product.category}</p>
-            <p className="text-gray-400 text-sm md:text-base mb-2 line-clamp-4">{product.description}</p>
-            <div className="flex items-center space-x-3 md:space-x-4">
+          <div className="space-y-3 sm:space-y-4 bg-black/60 backdrop-blur-md rounded-lg sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-white/10 shadow-lg">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1">{product.name}</h1>
+            <p className="text-sm sm:text-base md:text-lg text-gray-300 mb-1">{product.category}</p>
+            <p className="text-gray-400 text-xs sm:text-sm md:text-base mb-2 line-clamp-4">{product.description}</p>
+            <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
               {product.discount ? (
                 <div className="space-y-1">
-                  <p className="text-base md:text-lg line-through text-gray-500">${product.price.toFixed(2)}</p>
-                  <p className="text-2xl md:text-3xl font-bold text-yellow-400">${discountedPrice.toFixed(2)}</p>
+                  <p className="text-sm sm:text-base md:text-lg line-through text-gray-500">${product.price.toFixed(2)}</p>
+                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-400">${discountedPrice.toFixed(2)}</p>
                   <span className="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full font-medium shadow">
                     {product.discount}% OFF
                   </span>
                 </div>
               ) : (
-                <p className="text-2xl md:text-3xl font-bold text-white">${product.price.toFixed(2)}</p>
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">${product.price.toFixed(2)}</p>
               )}
             </div>
 
@@ -151,13 +151,13 @@ export function ProductDetailsPage() {
             {product.sizes && product.sizes.length > 0 && (
               <div className="space-y-1">
                 <label className="block text-xs font-medium text-gray-300">Size</label>
-                <div className="flex flex-wrap gap-1 md:gap-2">
+                <div className="flex flex-wrap gap-1 sm:gap-2">
                   {product.sizes.map((size) => (
                     <button
                       key={size}
                       type="button"
                       onClick={() => setSelectedSize(size)}
-                      className={`px-3 py-1 border rounded-md text-xs md:text-sm font-medium transition-colors ${
+                      className={`px-2 sm:px-3 py-1 border rounded-md text-xs sm:text-sm font-medium transition-colors ${
                         selectedSize === size
                           ? 'bg-white text-black border border-white/20'
                           : 'border border-white/10 text-gray-200 bg-black/30 hover:border-white/30'
@@ -171,18 +171,18 @@ export function ProductDetailsPage() {
             )}
 
             {/* Quantity Selector */}
-            <div className="flex items-center space-x-2 md:space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <label className="text-xs font-medium text-gray-300">Quantity:</label>
               <button
                 onClick={() => handleQuantityChange(-1)}
-                className="px-3 py-1 bg-black/40 text-white rounded-md border border-white/10 hover:bg-black/60 transition"
+                className="px-2 sm:px-3 py-1 bg-black/40 text-white rounded-md border border-white/10 hover:bg-black/60 transition text-sm"
               >
                 -
               </button>
-              <span className="text-base font-medium text-white">{quantity}</span>
+              <span className="text-sm sm:text-base font-medium text-white">{quantity}</span>
               <button
                 onClick={() => handleQuantityChange(1)}
-                className="px-3 py-1 bg-black/40 text-white rounded-md border border-white/10 hover:bg-black/60 transition"
+                className="px-2 sm:px-3 py-1 bg-black/40 text-white rounded-md border border-white/10 hover:bg-black/60 transition text-sm"
               >
                 +
               </button>
@@ -190,7 +190,7 @@ export function ProductDetailsPage() {
 
             <button
               onClick={handleAddToCart}
-              className="w-full mt-2 px-4 py-2 text-black bg-white rounded-md hover:bg-gray-200 border border-white/10 transition-all font-semibold text-sm md:text-base"
+              className="w-full mt-2 px-3 sm:px-4 py-2 text-black bg-white rounded-md hover:bg-gray-200 border border-white/10 transition-all font-semibold text-sm"
             >
               Add to Cart
             </button>
@@ -198,9 +198,9 @@ export function ProductDetailsPage() {
         </div>
 
         {/* More Products Section */}
-        <div className="mt-10 md:mt-16">
-          <h2 className="text-xl md:text-2xl font-bold mb-4 text-white">More Products</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10 md:mb-16">
+        <div className="mt-8 sm:mt-10 md:mt-16">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 text-white">More Products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-10 md:mb-16">
             {relatedProducts.map((relatedProduct) => (
               <ProductCard key={relatedProduct.id} product={relatedProduct} />
             ))}
