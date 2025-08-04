@@ -82,7 +82,7 @@ export function Store() {
   const totalItems = state.items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       {/* Navigation Bar */}
       <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">

@@ -24,48 +24,46 @@ export function Header() {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between h-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
             <button
-              className="sm:hidden text-white hover:text-gray-300 transition-colors duration-300"
+              className="sm:hidden p-2 text-white hover:text-gray-300 transition-colors duration-300"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
             <div 
-              className="flex items-center ml-3 cursor-pointer group"
+              className="ml-4 flex items-center cursor-pointer"
               onClick={() => navigate('/')}
             >
-              <div className="p-1.5 bg-gradient-to-r from-white to-gray-200 rounded-lg mr-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <ShoppingBag className="h-4 w-4" />
-              </div>
-              <span className="text-lg font-bold text-white group-hover:text-gray-200 transition-all duration-300">
+              <ShoppingBag className="h-5 w-5 text-white" />
+              <span className="text-lg font-bold text-white ml-2">
                 Brand Hub
               </span>
             </div>
           </div>
           
           {/* Desktop Navigation */}
-          <div className="hidden sm:flex items-center justify-center space-x-6">
+          <div className="hidden sm:flex items-center space-x-6">
             <button 
               onClick={() => scrollToSection('hero')} 
-              className="text-white hover:text-gray-300 font-medium relative group transition-all duration-300 text-sm"
+              className="text-white text-sm hover:text-gray-300 font-semibold relative group transition-all duration-300"
             >
               Home
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-white to-gray-300 group-hover:w-full transition-all duration-300"></span>
             </button>
             <button 
               onClick={() => navigate('/products')} 
-              className="text-white hover:text-gray-300 font-medium relative group transition-all duration-300 text-sm"
+              className="text-white text-sm hover:text-gray-300 font-semibold relative group transition-all duration-300"
             >
               Products
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-white to-gray-300 group-hover:w-full transition-all duration-300"></span>
             </button>
             <button 
               onClick={() => navigate('/AboutUs')} 
-              className="text-white hover:text-gray-300 font-medium relative group transition-all duration-300 text-sm"
+              className="text-white text-sm hover:text-gray-300 font-semibold relative group transition-all duration-300"
             >
               About Us
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-white to-gray-300 group-hover:w-full transition-all duration-300"></span>
@@ -73,22 +71,22 @@ export function Header() {
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-4">
             <button
               onClick={() => navigate('/admin/login')}
-              className="p-2 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 rounded-lg text-white transition-all duration-300 hover:scale-105 shadow-lg border border-white/10"
+              className="p-2 rounded-full text-white transition-all duration-300 hover:scale-105 shadow-lg border border-white/10"
               title={currentUser ? 'Admin Dashboard' : 'Admin Login'}
             >
               {currentUser ? (
-                <Settings size={16} />
+                <Settings size={18} />
               ) : (
-                <User size={16} />
+                <User size={18} />
               )}
             </button>
             <div className="relative">
               <button 
                 onClick={() => setIsCartOpen(!isCartOpen)}
-                className="p-2 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 rounded-lg relative text-white transition-all duration-300 hover:scale-105 shadow-lg border border-white/10"
+                className="p-2 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 rounded-full relative text-white transition-all duration-300 hover:scale-105 shadow-lg border border-white/10"
               >
                 <ShoppingCart size={16} />
                 {totalItems > 0 && (

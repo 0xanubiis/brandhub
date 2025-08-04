@@ -96,13 +96,13 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-2 z-50">
-      <div className="glass-dark rounded-2xl max-w-2xl w-full p-4 sm:p-6 max-h-[90vh] overflow-y-auto shadow-2xl border border-white/10">
-        <div className="flex justify-between items-center mb-4 sm:mb-6">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg max-w-lg w-full p-6">
+        <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold gradient-text">
             {isShippingInfoComplete ? 'Pay with PayPal' : 'Shipping Information'}
           </h2>
-          <button onClick={onClose} className="text-white hover:bg-white/10 p-2 rounded-xl transition-all duration-200">
+          <button onClick={onClose} className="text-black hover:bg-gray-200 p-2 rounded-xl transition-all duration-200">
             <X size={20} />
           </button>
         </div>
@@ -110,7 +110,7 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
         {!isShippingInfoComplete ? (
           <form onSubmit={handleShippingInfoSubmit} className="space-y-3">
             <div>
-              <label htmlFor="name" className="block text-xs font-semibold text-gray-200 mb-1">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                 Full Name
               </label>
               <input
@@ -119,12 +119,12 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                 type="text"
                 value={shippingInfo.name}
                 onChange={handleShippingInfoChange}
-                className="w-full bg-black/40 text-white border border-white/10 rounded-md px-3 py-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
+                className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
                 required
               />
             </div>
             <div>
-              <label htmlFor="address" className="block text-xs font-semibold text-gray-200 mb-1">
+              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
                 Address
               </label>
               <input
@@ -133,13 +133,13 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                 type="text"
                 value={shippingInfo.address}
                 onChange={handleShippingInfoChange}
-                className="w-full bg-black/40 text-white border border-white/10 rounded-md px-3 py-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
+                className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
                 required
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label htmlFor="city" className="block text-xs font-semibold text-gray-200 mb-1">
+                <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
                   City
                 </label>
                 <input
@@ -148,12 +148,12 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                   type="text"
                   value={shippingInfo.city}
                   onChange={handleShippingInfoChange}
-                  className="w-full bg-black/40 text-white border border-white/10 rounded-md px-3 py-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="postalCode" className="block text-xs font-semibold text-gray-200 mb-1">
+                <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700 mb-1">
                   Postal Code
                 </label>
                 <input
@@ -162,13 +162,13 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                   type="text"
                   value={shippingInfo.postalCode}
                   onChange={handleShippingInfoChange}
-                  className="w-full bg-black/40 text-white border border-white/10 rounded-md px-3 py-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
                   required
                 />
               </div>
             </div>
             <div>
-              <label htmlFor="country" className="block text-xs font-semibold text-gray-200 mb-1">
+              <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
                 Country
               </label>
               <input
@@ -177,13 +177,13 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                 type="text"
                 value={shippingInfo.country}
                 onChange={handleShippingInfoChange}
-                className="w-full bg-black/40 text-white border border-white/10 rounded-md px-3 py-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
+                className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-accent focus:border-transparent placeholder-gray-400"
                 required
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-white text-black font-bold py-2 px-4 rounded-md hover:bg-gray-200 transition-all duration-200 shadow-md"
+              className="w-full bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-all duration-200"
             >
               Continue
             </button>
@@ -194,7 +194,7 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
               <h3 className="text-lg font-semibold gradient-text mb-2">Order Summary</h3>
               <ul className="space-y-2">
                 {cartItems.map((item) => (
-                  <li key={item.id} className="flex justify-between text-sm text-gray-200">
+                  <li key={item.id} className="flex justify-between text-sm text-gray-700">
                     <span>
                       {item.name} x {item.quantity}
                       {item.size && <span className="text-gray-400 ml-2">• Size: {item.size}</span>}
@@ -203,7 +203,7 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                       {item.discount ? (
                         <div className="text-right">
                           <p className="text-xs line-through text-gray-400">${(item.price * item.quantity).toFixed(2)}</p>
-                          <p className="text-sm font-bold text-white">
+                          <p className="text-sm font-bold text-black">
                             ${(
                               item.quantity *
                               (item.price * (1 - item.discount / 100))
@@ -211,7 +211,7 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                           </p>
                         </div>
                       ) : (
-                        <span className="text-white">${(
+                        <span className="text-black">${(
                           item.quantity *
                           (item.discount
                             ? item.price * (1 - item.discount / 100)
@@ -222,7 +222,7 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
                   </li>
                 ))}
               </ul>
-              <div className="flex justify-between mt-4 font-bold text-lg text-white">
+              <div className="flex justify-between mt-4 font-bold text-lg text-black">
                 <span>Total:</span>
                 <span>${total.toFixed(2)}</span>
               </div>
@@ -231,8 +231,8 @@ export function CheckoutForm({ onClose, onSuccess, cartItems, total }: CheckoutF
             <div className="mt-6">
               {isPayPalProcessing && (
                 <div className="flex items-center justify-center py-4">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-                  <span className="ml-2 text-gray-300">Processing payment...</span>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+                  <span className="ml-2 text-gray-700">Processing payment...</span>
                 </div>
               )}
               <PayPalButtons
