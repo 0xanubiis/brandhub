@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import * as React from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -134,12 +135,6 @@ const Admin = () => {
                 {isLoading ? "Signing In..." : "Sign In"}
               </Button>
             </form>
-
-            <div className="mt-6 text-center text-sm text-muted-foreground">
-              <p>Demo Admin Accounts:</p>
-              <p>email: admin@store1.com | password: password123</p>
-              <p>email: admin@store2.com | password: password123</p>
-            </div>
           </CardContent>
         </Card>
       </div>

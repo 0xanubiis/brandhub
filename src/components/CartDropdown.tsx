@@ -69,7 +69,7 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
       {/* Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-foreground/20 backdrop-blur-sm transition-opacity z-40"
+          className="fixed inset-0 backdrop-blur-sm transition-opacity z-40"
           onClick={onClose}
         />
       )}
@@ -77,7 +77,7 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
       {/* Cart Panel */}
       {isOpen && (
         <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-background-accent backdrop-blur-xl shadow-card transform transition-transform duration-300 ease-in-out z-50 translate-x-0">
-          <div className="h-full flex flex-col min-h-[440px]">
+          <div className="h-full flex flex-col min-h-96">
             {/* Header */}
             <div className="p-4 border-b border-border bg-background text-foreground">
               <div className="flex justify-between items-center">
