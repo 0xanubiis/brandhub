@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root.light {
+    /* Modern marketplace color palette */
+    --primary: 225 85% 65%;
+    --primary-glow: 225 85% 75%;
+    --primary-dark: 225 85% 55%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 280 65% 60%;
+    --secondary-light: 280 65% 70%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --accent: 45 85% 60%;
+    --accent-light: 45 85% 70%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    
+    --background: 0 0% 100%;
+    --background-muted: 210 40% 98%;
+    --background-accent: 210 40% 96%;
+    --foreground: 222.2 84% 4.9%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    
+    --border: 214.3 31.8% 91.4%;
+    --border-light: 210 40% 95%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 225 85% 65%;
+    
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --radius: 0.75rem;
+    
+    /* Success colors */
+    --success: 142 76% 36%;
+    --success-light: 142 69% 58%;
+    
+    /* Warning colors */
+    --warning: 38 92% 50%;
+    --warning-light: 45 93% 47%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--background-muted)) 100%);
+    
+    /* Shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -1px hsl(var(--foreground) / 0.06);
+    --shadow-hover: 0 20px 25px -5px hsl(var(--primary) / 0.15), 0 10px 10px -5px hsl(var(--primary) / 0.04);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  :root {
+    --background: 222.2 84% 4.9%;
+    --background-muted: 217.2 32.6% 17.5%;
+    --background-accent: 234 60% 7%;
+    --foreground: 210 40% 98%;
+    
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 225 85% 70%;
+    --primary-glow: 225 85% 80%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    
+    --secondary: 280 65% 65%;
+    --secondary-light: 280 65% 75%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    
+    --accent: 45 85% 65%;
+    --accent-light: 45 85% 75%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 217.2 32.6% 17.5%;
+    --border-light: 217.2 32.6% 20.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 225 85% 70%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+  
+  h1 {
+    @apply text-4xl lg:text-5xl;
+  }
+  
+  h2 {
+    @apply text-3xl lg:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl lg:text-3xl;
+  }
+}
+
+@layer components {
+  /* Marketplace specific components */
+  .marketplace-card {
+    @apply bg-card rounded-xl shadow-card hover:shadow-hover transition-all duration-300 border border-border;
+  }
+  
+  .marketplace-button-primary {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-white font-medium px-6 py-3 rounded-xl shadow-elegant hover:shadow-hover transition-all duration-300 hover:scale-105;
+  }
+  
+  .marketplace-button-secondary {
+    @apply bg-background border-2 border-primary text-primary font-medium px-6 py-3 rounded-xl hover:bg-primary hover:text-white transition-all duration-300;
+  }
+  
+  .marketplace-input {
+    @apply bg-background border border-border rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+  }
+  
+  .marketplace-hero {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent;
+  }
+  
+  .marketplace-section {
+    @apply py-16 lg:py-24;
+  }
+  
+  .marketplace-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .fade-in {
+    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
+  }
+  
+  .fade-in.visible {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .slide-in-left {
+    @apply opacity-0 -translate-x-8 transition-all duration-700 ease-out;
+  }
+  
+  .slide-in-left.visible {
+    @apply opacity-100 translate-x-0;
+  }
+  
+  .slide-in-right {
+    @apply opacity-0 translate-x-8 transition-all duration-700 ease-out;
+  }
+  
+  .slide-in-right.visible {
+    @apply opacity-100 translate-x-0;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+  
+  .bg-marketplace-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .shadow-marketplace {
+    box-shadow: var(--shadow-elegant);
+  }
+  
+  .transition-marketplace {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+}
