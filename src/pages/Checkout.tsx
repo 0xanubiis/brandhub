@@ -138,7 +138,7 @@ const Checkout = () => {
           <div className="text-center">
             <h1 className="text-3xl font-bold mb-4">Cart is Empty</h1>
             <p className="text-muted-foreground mb-8">Add some items to checkout</p>
-            <Link to="/products">
+            <Link to="/products" className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors">
               <Button>Browse Products</Button>
             </Link>
           </div>
@@ -153,7 +153,7 @@ const Checkout = () => {
       
       <div className="marketplace-container py-8">
         <div className="flex items-center mb-8">
-          <Link to="/cart" className="inline-flex items-center text-muted-foreground hover:text-foreground">
+          <Link to="/cart" className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Cart
           </Link>

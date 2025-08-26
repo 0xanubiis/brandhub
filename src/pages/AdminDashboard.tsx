@@ -8,6 +8,7 @@ import { OrdersManagement } from "@/components/OrdersManagement";
 import { StoreSetup } from "@/components/StoreSetup";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { Navbar } from "@/components/Navbar";
 
 type AdminView = "dashboard" | "products" | "orders" | "setup";
 
@@ -98,28 +99,34 @@ const AdminDashboard = () => {
   };
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen flex">
-        <AdminSidebar
-          currentView={currentView}
-          setCurrentView={setCurrentView}
-          adminData={adminData}
-          onSignOut={handleSignOut}
-        />
-        
-        <main className="flex-1 p-6 bg-background">
-          <div className="mb-6 flex items-center justify-between">
-            <SidebarTrigger />
-            <div className="text-right">
-              <p className="text-sm text-muted-foreground">Welcome back,</p>
-              <p className="font-semibold">{adminData?.store_name || 'Admin'}</p>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <section className="py-16">
+        <div className="container mx-auto">
+          <h1 className="text-4xl font-bold mb-6">Admin Dashboard</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="marketplace-card p-6">
+              <h2 className="text-xl font-semibold">Manage Products</h2>
+              <p className="text-sm text-foreground-muted">
+                Add, edit, or remove products from your store.
+              </p>
+            </div>
+            <div className="marketplace-card p-6">
+              <h2 className="text-xl font-semibold">View Orders</h2>
+              <p className="text-sm text-foreground-muted">
+                Track and manage customer orders.
+              </p>
+            </div>
+            <div className="marketplace-card p-6">
+              <h2 className="text-xl font-semibold">Analytics</h2>
+              <p className="text-sm text-foreground-muted">
+                View sales and performance metrics.
+              </p>
             </div>
           </div>
-          
-          {renderContent()}
-        </main>
-      </div>
-    </SidebarProvider>
+        </div>
+      </section>
+    </div>
   );
 };
 

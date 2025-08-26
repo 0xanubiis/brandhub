@@ -153,15 +153,15 @@
 @layer components {
   /* Marketplace specific components */
   .marketplace-card {
-    @apply bg-card rounded-xl shadow-card hover:shadow-hover transition-all duration-300 border border-border;
+    @apply bg-card rounded-lg shadow-card hover:shadow-hover transition-all duration-300 border border-border;
   }
   
   .marketplace-button-primary {
-    @apply bg-gradient-to-r from-primary to-primary-glow text-white font-medium px-6 py-3 rounded-xl shadow-elegant hover:shadow-hover transition-all duration-300 hover:scale-105;
+    @apply bg-primary text-white font-medium px-6 py-3 rounded-lg shadow hover:shadow-hover transition-all duration-300 hover:scale-105;
   }
   
   .marketplace-button-secondary {
-    @apply bg-background border-2 border-primary text-primary font-medium px-6 py-3 rounded-xl hover:bg-primary hover:text-white transition-all duration-300;
+    @apply bg-background border border-primary text-primary font-medium px-6 py-3 rounded-lg hover:bg-primary hover:text-white transition-all duration-300;
   }
   
   .marketplace-input {

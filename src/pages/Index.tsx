@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Star, Truck, Shield, CreditCard } from "lucide-react";
+import { ArrowRight, Star, Truck, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Navbar } from "@/components/Navbar";
 import { ProductCard } from "@/components/ProductCard";
 
@@ -55,47 +54,29 @@ const Index = () => {
   }, []);
 
   const categories = [
-    { name: "T-shirts", count: "120+ items" },
-    { name: "Hoodies", count: "80+ items" },
-    { name: "Pants", count: "150+ items" },
-    { name: "Shoes", count: "200+ items" },
-    { name: "Accessories", count: "90+ items" },
-    { name: "Bags", count: "60+ items" },
+    { name: "T-shirts" },
+    { name: "Hoodies" },
+    { name: "Pants" },
+    { name: "Shoes" },
+    { name: "Accessories" },
+    { name: "Bags" },
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
-      {/* Hero Section */}
       <section className="marketplace-hero text-white">
-        <div className="marketplace-container">
-          <div className="py-24 lg:py-32">
-            <div className="max-w-4xl mx-auto text-center">
-              <Badge variant="secondary" className="mb-6 bg-white/20 text-white border-white/30">
-                Multi-Brand Fashion Marketplace
-              </Badge>
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                Discover Fashion
-                <br />
-                <span className="text-accent-light">From Every Brand</span>
-              </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-white/90 max-w-2xl mx-auto">
-                Shop from hundreds of premium brands in one place. Find your perfect style with our curated collection.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/products">
-                  <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                    Shop Now
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-                  Explore Brands
-                </Button>
-              </div>
-            </div>
-          </div>
+        <div className="marketplace-container text-center py-24">
+          <h1 className="text-5xl font-bold mb-6">
+            Discover Fashion <br />
+            <span className="text-accent-light">From Every Brand</span>
+          </h1>
+          <p className="text-xl mb-8">
+            Shop from hundreds of premium brands in one place.
+          </p>
+          <Link to="/products">
+            <Button className="marketplace-button-primary">Shop Now</Button>
+          </Link>
         </div>
       </section>
 
@@ -108,7 +89,7 @@ const Index = () => {
                 <Truck className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Free Shipping</h3>
-              <p className="text-muted-foreground">Free shipping on orders over $50</p>
+              <p className="text-muted-foreground">Free shipping on orders over $100</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
@@ -154,9 +135,6 @@ const Index = () => {
                   <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors">
                     {category.name}
                   </h3>
-                  <p className="text-xs text-muted-foreground">
-                    {category.count}
-                  </p>
                 </div>
               </Link>
             ))}

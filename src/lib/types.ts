@@ -1,17 +1,18 @@
 export interface Product {
   id: string;
   name: string;
-  description?: string;
+  description: string;
   price: number;
+  images: string[];
   category: string;
   sizes: string[];
-  images: string[];
-  admin_id: string;
-  store_name: string;
-  free_shipping?: boolean;
   created_at: string;
   updated_at: string;
-  slug?: string;
+  store_name: string;
+  admin_id: string;
+  discount: number;
+  free_shipping: boolean;
+  rating: number;
 }
 
 export interface Admin {

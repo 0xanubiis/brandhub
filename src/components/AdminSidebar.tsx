@@ -1,4 +1,3 @@
-import React from "react";
 import { BarChart3, Package, ShoppingCart, LogOut, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";

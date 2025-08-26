@@ -32,57 +32,7 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-white transition-colors">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link to="/careers" className="hover:text-white transition-colors">
-                  Careers
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Support</h3>
-            <ul className="space-y-2 text-white/80">
-              <li>
-                <Link to="/help" className="hover:text-white transition-colors">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link to="/shipping" className="hover:text-white transition-colors">
-                  Shipping Info
-                </Link>
-              </li>
-              <li>
-                <Link to="/returns" className="hover:text-white transition-colors">
-                  Returns
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2 text-white/80">
-              <li>
-                <Link to="/privacy" className="hover:text-white transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="hover:text-white transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/admin" 
-                  className="hover:text-white transition-colors bg-white/10 px-3 py-1 rounded-lg inline-block"
-                >
+                <Link to="/admin" className="hover:text-white transition-colors bg-white/10 px-3 py-1 rounded-xl inline-block">
                   Admin
                 </Link>
               </li>

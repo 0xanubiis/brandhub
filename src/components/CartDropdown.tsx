@@ -76,8 +76,8 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
 
       {/* Cart Panel */}
       {isOpen && (
-        <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-background-accent backdrop-blur-xl shadow-card transform transition-transform duration-300 ease-in-out z-50 translate-x-0">
-          <div className="h-full flex flex-col min-h-96">
+        <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-background backdrop-blur-xl shadow-card transform transition-transform duration-300 ease-in-out z-50 translate-x-0">
+          <div className="h-full flex flex-col min-h-[440px]">
             {/* Header */}
             <div className="p-4 border-b border-border bg-background text-foreground">
               <div className="flex justify-between items-center">
@@ -92,7 +92,7 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
             </div>
 
             {/* Cart Items */}
-            <div className="flex-1 min-h-0 overflow-y-auto p-4">
+            <div className="flex-1 min-h-0 overflow-y-auto p-4 bg-background">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
                   <ShoppingBag className="h-12 w-12 mb-4" />
@@ -170,7 +170,7 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Shipping</span>
-                    <span className="font-medium">Free</span>
+                    <span className="font-medium">IN Progress</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Tax</span>
@@ -180,11 +180,8 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
                     <span className="text-base font-semibold">Total</span>
                     <span className="text-base font-bold">USD {finalTotal.toFixed(2)}</span>
                   </div>
-                  <Button onClick={handleCheckout} className="w-full" size="lg">
-                    Checkout
-                  </Button>
                   <Button variant="outline" asChild className="w-full">
-                    <Link to="/checkout">View Full Cart</Link>
+                    <Link to="/checkout">Checkout</Link>
                   </Button>
                 </div>
               </div>

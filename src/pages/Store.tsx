@@ -108,14 +108,6 @@ const Store = () => {
                 <div>
                   <h1 className="text-4xl font-bold mb-4">{storeInfo.name}</h1>
                   <div className="flex items-center space-x-6 text-muted-foreground">
-                    <div className="flex items-center">
-                      <MapPin className="h-4 w-4 mr-1" />
-                      <span>Online Store</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Star className="h-4 w-4 mr-1 fill-current text-warning" />
-                      <span>{storeInfo.avgRating} Rating</span>
-                    </div>
                     <span>{storeInfo.totalProducts} Products</span>
                   </div>
                 </div>
