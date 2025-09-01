@@ -18,6 +18,7 @@ export default {
     },
     extend: {
       colors: {
+        border: "hsl(var(--border))", // Added border color definition
         primary: {
           DEFAULT: "hsl(225, 85%, 65%)",
           light: "hsl(225, 85%, 75%)",
@@ -42,6 +43,9 @@ export default {
           DEFAULT: "hsl(222.2, 47.4%, 11.2%)",
           muted: "hsl(215, 20.2%, 65.1%)",
         },
+      },
+      borderColor: {
+        DEFAULT: "hsl(var(--border))", // Added default border color
       },
       borderRadius: {
         lg: "1rem",
