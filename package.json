@@ -89,11 +89,3 @@
     "vite": "^5.4.1"
   }
 }
-
-{
-  "scripts": {
-    "prebuild": "npx update-browserslist-db@latest",
-    "build": "vite build", // or your build command
-    // other scripts...
-  }
-}
