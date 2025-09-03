@@ -132,7 +132,7 @@ const Products = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-slate-950">
       <Navbar />
       
       <div className="marketplace-container py-8">
@@ -150,7 +150,7 @@ const Products = () => {
             <div className="marketplace-card p-6 sticky top-24 animate-fade-in">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-semibold">Filters</h3>
-                <Button variant="ghost" size="sm" onClick={clearFilters} className="rounded-xl">
+                <Button variant="ghost" size="sm" onClick={clearFilters} className="rounded-xl hover:bg-white">
                   Clear All
                 </Button>
               </div>

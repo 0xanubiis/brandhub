@@ -81,7 +81,7 @@ export const StoreSetup = ({ onComplete }: StoreSetupProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-marketplace-gradient flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">

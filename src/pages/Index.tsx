@@ -85,12 +85,12 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/products">
-                  <Button size="lg" className="bg-white text-black hover:bg-black/90 rounded-xl">
+                  <Button size="lg" className="bg-white text-black hover:bg-white/90 rounded-xl">
                     Shop Now
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="bg-white text-black hover:bg-black/90 roudned-xl">
+                <Button size="lg" variant="outline" className="bg-white text-black hover:bg-white/90 roudned-xl">
                   Explore Brands
                 </Button>
               </div>
@@ -118,7 +118,7 @@ const Index = () => {
               <p className="text-muted-foreground">Your payment information is safe with us</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-sky-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Star className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Premium Quality</h3>
@@ -145,9 +145,9 @@ const Index = () => {
                 to={`/products?category=${encodeURIComponent(category.name)}`}
                 className="group">
                 <div className="marketplace-card text-center p-4 h-full hover:scale-105 transition-transform">
-                  <div className="w-12 h-12 bg-white rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 bg-white rounded-sm mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <span className="text-black font-bold text-lg">
-                      {category.name}
+                      {category.name.charAt(0)}
                     </span>
                   </div>
                   <h3 className="font-semibold text-sm mb-1 group-hover:text-slate-500 transition-colors">
@@ -161,7 +161,7 @@ const Index = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="marketplace-section bg-slate-950">
+      <section className="marketplace-section bg-slate-950 mb-16">
         <div className="marketplace-container">
           <div className="flex items-center justify-between mb-12">
             <div>
@@ -171,7 +171,7 @@ const Index = () => {
               </p>
             </div>
             <Link to="/products">
-              <Button variant="outline" size="lg">
+              <Button className="bg-white text-black hover:bg-slate-300" size="lg">
                 View All
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>

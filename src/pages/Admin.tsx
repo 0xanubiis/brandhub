@@ -62,7 +62,7 @@ const Admin = () => {
   // Show loading state while auth is initializing
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-white text-xl">Loading...</div>
       </div>
     );
@@ -85,7 +85,7 @@ const Admin = () => {
               <div>
                 <Label htmlFor="email">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-black" />
                   <Input
                     id="email"
                     type="email"
@@ -101,7 +101,7 @@ const Admin = () => {
               <div>
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-black" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -119,9 +119,9 @@ const Admin = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
+                      <EyeOff className="h-4 w-4 text-black" />
                     ) : (
-                      <Eye className="h-4 w-4" />
+                      <Eye className="h-4 w-4 text-black" />
                     )}
                   </Button>
                 </div>

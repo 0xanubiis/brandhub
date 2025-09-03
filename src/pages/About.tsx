@@ -8,7 +8,7 @@ import { Footer } from "@/components/Footer";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-slate-950">
       <Navbar />
       
       <div className="marketplace-container py-8">
@@ -65,7 +65,7 @@ const About = () => {
         </section>
 
         {/* Values Section */}
-        <section className="marketplace-section bg-background-muted rounded-2xl p-8">
+        <section className="marketplace-section bg-slate-950 rounded-2xl p-8">
           <h2 className="text-3xl font-bold text-center mb-12">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="text-center">
@@ -203,12 +203,12 @@ const About = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/products">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+                <Button size="lg" className="bg-white text-black hover:bg-white/90">
                   Start Shopping
                 </Button>
               </Link>
               <Link to="/admin">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+                <Button size="lg" variant="outline" className="bg-white border-white text-black hover:bg-white/90">
                   Become a Seller
                 </Button>
               </Link>

@@ -70,7 +70,7 @@ const Store = () => {
 
   if (!storeInfo || products.length === 0) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-slate-950">
         <Navbar />
         <div className="marketplace-container py-16">
           <div className="text-center">
@@ -88,7 +88,7 @@ const Store = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-slate-950">
       <Navbar />
       
       <div className="marketplace-container py-8">
@@ -113,7 +113,7 @@ const Store = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-sm text-muted-foreground mb-2">Store by</div>
-                  <div className="text-2xl font-bold text-primary">{storeInfo.name}</div>
+                  <div className="text-2xl font-bold text-white">{storeInfo.name}</div>
                 </div>
               </div>
             </CardContent>

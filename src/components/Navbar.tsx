@@ -8,12 +8,12 @@ import { CartTrigger } from "@/components/CartDropdown";
 export const Navbar = () => {
 
   return (
-    <nav className="sticky top-0 z-50 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+    <nav className="sticky top-0 z-50 bg-slate-950 backdrop-blur border-b border-border">
       <div className="marketplace-container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-white rounded-sm flex items-center justify-center">
               <span className="text-black font-bold text-lg">B</span>
             </div>
             <span className="text-xl font-bold text-white">
@@ -25,20 +25,20 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             <Link 
               to="/" 
-              className="text-white hover:text-slate-200 transition-colors font-medium flex items-center"
+              className="text-white hover:text-slate-300 transition-colors font-medium flex items-center"
             >
               <Home className="h-4 w-4 mr-1" />
               Home
             </Link>
             <Link 
               to="/products" 
-              className="text-white hover:text-slate-200 transition-colors font-medium"
+              className="text-white hover:text-slate-300 transition-colors font-medium"
             >
               Products
             </Link>
             <Link 
               to="/about" 
-              className="text-white hover:text-slate-200 transition-colors font-medium"
+              className="text-white hover:text-slate-300 transition-colors font-medium"
             >
               About
             </Link>
@@ -47,13 +47,13 @@ export const Navbar = () => {
           {/* Search & Cart & Mobile Menu */}
           <div className="flex items-center space-x-4">
             <div className="relative hidden md:block">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black h-4 w-4" />
               <Input 
                 placeholder="Search products..." 
                 className="pl-10 w-64"
               />
             </div>
-            <CartTrigger />
+            <CartTrigger/>
 
             {/* Mobile Menu */}
             <Sheet>

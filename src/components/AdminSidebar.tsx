@@ -36,13 +36,13 @@ export const AdminSidebar = ({ currentView, setCurrentView, adminData, onSignOut
             <Store className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="font-bold text-lg">BrandHub</h2>
+            <h2 className="font-bold text-lg text-white">BrandHub</h2>
             <p className="text-sm text-muted-foreground">{adminData?.store_name}</p>
           </div>
         </div>
       </SidebarHeader>
       
-      <SidebarContent className="px-4">
+      <SidebarContent className="px-4 bg-black">
         <SidebarMenu>
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.id}>

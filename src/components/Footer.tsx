@@ -3,7 +3,7 @@ import { CreditCard } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="bg-marketplace-gradient text-black mt-16">
+    <footer className="bg-slate-950 text-white">
       <div className="marketplace-container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -27,7 +27,7 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/admin" className="hover:text-white transition-colors bg-white/10 px-3 py-1 rounded-xl inline-block">
+                <Link to="/admin" className="hover:text-white transition-colors bg-white/10 px-3 py-1 rounded-sm inline-block">
                   Admin
                 </Link>
               </li>
