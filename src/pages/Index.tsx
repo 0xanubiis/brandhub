@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Star, Truck, Shield } from "lucide-react";
+import { ArrowRight, Star, Truck, Shield, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Navbar } from "@/components/Navbar";
 import { ProductCard } from "@/components/ProductCard";
 
@@ -63,43 +64,61 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-slate-950">
       <Navbar />
+      
+      {/* Hero Section */}
       <section className="marketplace-hero text-white">
-        <div className="marketplace-container text-center py-24">
-          <h1 className="text-5xl font-bold mb-6">
-            Discover Fashion <br />
-            <span className="text-accent-light">From Every Brand</span>
-          </h1>
-          <p className="text-xl mb-8">
-            Shop from hundreds of premium brands in one place.
-          </p>
-          <Link to="/products">
-            <Button className="marketplace-button-primary">Shop Now</Button>
-          </Link>
+        <div className="marketplace-container">
+          <div className="py-24 lg:py-32">
+            <div className="max-w-4xl mx-auto text-center">
+              <Badge variant="secondary" className="mb-6 bg-black text-white border-white">
+                Multi-Brand Fashion Marketplace
+              </Badge>
+              <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+                Discover Fashion
+                <br />
+                <span className="text-slate-500">From Every Brand</span>
+              </h1>
+              <p className="text-xl lg:text-2xl mb-8 text-white max-w-2xl mx-auto">
+                Shop from hundreds of premium brands in one place. Find your perfect style with our curated collection.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/products">
+                  <Button size="lg" className="bg-white text-black hover:bg-black/90 rounded-xl">
+                    Shop Now
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Button size="lg" variant="outline" className="bg-white text-black hover:bg-black/90 roudned-xl">
+                  Explore Brands
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="marketplace-section bg-background-muted">
+      <section className="marketplace-section bg-slate-950">
         <div className="marketplace-container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Truck className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Free Shipping</h3>
               <p className="text-muted-foreground">Free shipping on orders over $100</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Shield className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Secure Payment</h3>
               <p className="text-muted-foreground">Your payment information is safe with us</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-sky-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Star className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Premium Quality</h3>
@@ -124,15 +143,14 @@ const Index = () => {
               <Link
                 key={category.name}
                 to={`/products?category=${encodeURIComponent(category.name)}`}
-                className="group"
-              >
+                className="group">
                 <div className="marketplace-card text-center p-4 h-full hover:scale-105 transition-transform">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span className="text-white font-bold text-lg">
-                      {category.name.charAt(0)}
+                  <div className="w-12 h-12 bg-white rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span className="text-black font-bold text-lg">
+                      {category.name}
                     </span>
                   </div>
-                  <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors">
+                  <h3 className="font-semibold text-sm mb-1 group-hover:text-slate-500 transition-colors">
                     {category.name}
                   </h3>
                 </div>
@@ -143,7 +161,7 @@ const Index = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="marketplace-section bg-background-muted">
+      <section className="marketplace-section bg-slate-950">
         <div className="marketplace-container">
           <div className="flex items-center justify-between mb-12">
             <div>
