@@ -62,14 +62,14 @@ const Admin = () => {
   // Show loading state while auth is initializing
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-marketplace-gradient flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-white text-xl">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-marketplace-gradient flex items-center justify-center p-4">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">BrandHub Admin</h1>

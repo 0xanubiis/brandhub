@@ -6,7 +6,7 @@ import { Navbar } from "@/components/Navbar";
 
 const Success = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
       
       <div className="marketplace-container py-16">

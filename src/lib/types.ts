@@ -12,7 +12,6 @@ export interface Product {
   admin_id: string;
   discount: number;
   free_shipping: boolean;
-  rating: number;
 }
 
 export interface Admin {

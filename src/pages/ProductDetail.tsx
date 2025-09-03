@@ -254,6 +254,10 @@ const ProductDetail = () => {
             {/* Features */}
             <div className="space-y-3 pt-6 border-t">
               <div className="flex items-center space-x-3 text-sm">
+                <Truck className="h-5 w-5 text-muted-foreground" />
+                <span>Free shipping on orders over $100</span>
+              </div>
+              <div className="flex items-center space-x-3 text-sm">
                 <RotateCcw className="h-5 w-5 text-muted-foreground" />
                 <span>30-day return policy</span>
               </div>

@@ -84,7 +84,7 @@ export const StoreSetup = ({ onComplete }: StoreSetupProps) => {
     <div className="min-h-screen bg-marketplace-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
             <Store className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">Welcome to BrandHub!</h1>

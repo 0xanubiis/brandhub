@@ -41,11 +41,11 @@ const About = () => {
               </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">100+</div>
+                  <div className="text-2xl font-bold text-primary">0</div>
                   <div className="text-sm text-muted-foreground">Brands</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">10K+</div>
+                  <div className="text-2xl font-bold text-primary">1</div>
                   <div className="text-sm text-muted-foreground">Products</div>
                 </div>
               </div>

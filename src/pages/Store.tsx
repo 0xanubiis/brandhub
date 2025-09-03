@@ -54,7 +54,7 @@ const Store = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-slate-950">
         <Navbar />
         <div className="marketplace-container py-16">
           <div className="text-center">
