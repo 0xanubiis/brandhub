@@ -87,7 +87,7 @@ export const StoreSetup = ({ onComplete }: StoreSetupProps) => {
           <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
             <Store className="h-8 w-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">Welcome to BrandHub!</h1>
+          <h1 className="text-3xl font-bold text-white mb-2">Welcome to Brand.ed!</h1>
           <p className="text-white/80">Let's set up your store to get started</p>
         </div>
 

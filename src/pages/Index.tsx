@@ -128,38 +128,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="marketplace-section">
-        <div className="marketplace-container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Shop by Category</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Explore our diverse collection of fashion categories from top brands worldwide
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {categories.map((category, index) => (
-              <Link
-                key={category.name}
-                to={`/products?category=${encodeURIComponent(category.name)}`}
-                className="group">
-                <div className="marketplace-card text-center p-4 h-full hover:scale-105 transition-transform">
-                  <div className="w-12 h-12 bg-white rounded-sm mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span className="text-black font-bold text-lg">
-                      {category.name.charAt(0)}
-                    </span>
-                  </div>
-                  <h3 className="font-semibold text-sm mb-1 group-hover:text-slate-500 transition-colors">
-                    {category.name}
-                  </h3>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Featured Products Section */}
       <section className="marketplace-section bg-slate-950 mb-16">
         <div className="marketplace-container">
@@ -201,7 +169,37 @@ const Index = () => {
         </div>
       </section>
 
-
+      {/* Categories Section */}
+      <section className="marketplace-section">
+        <div className="marketplace-container">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Shop by Category</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Explore our diverse collection of fashion categories from top brands worldwide
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {categories.map((category, index) => (
+              <Link
+                key={category.name}
+                to={`/products?category=${encodeURIComponent(category.name)}`}
+                className="group">
+                <div className="marketplace-card text-center p-4 h-full hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 bg-white rounded-sm mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span className="text-black font-bold text-lg">
+                      {category.name.charAt(0)}
+                    </span>
+                  </div>
+                  <h3 className="font-semibold text-sm mb-1 group-hover:text-slate-500 transition-colors">
+                    {category.name}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

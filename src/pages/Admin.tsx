@@ -72,7 +72,7 @@ const Admin = () => {
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">BrandHub Admin</h1>
+          <h1 className="text-4xl font-bold text-white mb-2">Brand.ed Admin</h1>
           <p className="text-white/80">Sign in to manage your store</p>
         </div>
 

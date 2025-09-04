@@ -11,7 +11,7 @@ export const Footer = () => {
               <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
                 <span className="text-black font-bold text-lg">B</span>
               </div>
-              <span className="text-xl font-bold text-white">BrandHub</span>
+              <span className="text-xl font-bold text-white">Brand.ed</span>
             </div>
             <p className="text-white/80 mb-4">
               Your premier destination for multi-brand fashion shopping. Discover, shop, and express your style.

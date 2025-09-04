@@ -36,7 +36,7 @@ export const AdminSidebar = ({ currentView, setCurrentView, adminData, onSignOut
             <Store className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="font-bold text-lg text-white">BrandHub</h2>
+            <h2 className="font-bold text-lg text-white">Brand.ed</h2>
             <p className="text-sm text-muted-foreground">{adminData?.store_name}</p>
           </div>
         </div>

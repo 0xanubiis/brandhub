@@ -17,7 +17,7 @@ export const Navbar = () => {
               <span className="text-black font-bold text-lg">B</span>
             </div>
             <span className="text-xl font-bold text-white">
-              BrandHub
+              Brand.ed
             </span>
           </Link>
 
@@ -34,7 +34,7 @@ export const Navbar = () => {
               to="/products" 
               className="text-white hover:text-slate-300 transition-colors font-medium"
             >
-              Products
+              Marketplace
             </Link>
             <Link 
               to="/about" 
@@ -75,7 +75,7 @@ export const Navbar = () => {
                     to="/products" 
                     className="text-lg font-medium hover:text-slate-200 transition-colors"
                   >
-                    Products
+                    Marketplace
                   </Link>
                   <Link 
                     to="/about" 
