@@ -50,10 +50,10 @@ export const Navbar = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black h-4 w-4" />
               <Input 
                 placeholder="Search products..." 
-                className="pl-10 w-64"
+                className="pl-10 w-64 text-black"
               />
             </div>
-            <CartTrigger/>
+            <CartTrigger />
 
             {/* Mobile Menu */}
             <Sheet>
@@ -84,10 +84,10 @@ export const Navbar = () => {
                     About
                   </Link>
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black h-4 w-4" />
                     <Input 
                       placeholder="Search products..." 
-                      className="pl-10"
+                      className="pl-10 text-black"
                     />
                   </div>
                 </div>

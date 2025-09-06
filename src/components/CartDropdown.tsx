@@ -76,7 +76,7 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
 
       {/* Cart Panel */}
       {isOpen && (
-        <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-background backdrop-blur-xl shadow-card transform transition-transform duration-300 ease-in-out z-50 translate-x-0">
+        <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-black backdrop-blur-xl shadow-card transform transition-transform duration-300 ease-in-out z-50 translate-x-0">
           <div className="h-full flex flex-col min-h-[440px]">
             {/* Header */}
             <div className="p-4 border-b border-border bg-background text-foreground">

@@ -14,7 +14,7 @@ const About = () => {
       <div className="marketplace-container py-8">
         {/* Header */}
         <div className="mb-8">
-          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-4">
+          <Link to="/" className="inline-flex items-center text-white hover:text-slate-300 mb-4">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Link>
@@ -194,7 +194,7 @@ const About = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="marketplace-section text-center">
+        <section className="marketplace-section text-center mb-16">
           <div className="bg-marketplace-gradient rounded-2xl p-12 text-white">
             <h2 className="text-3xl font-bold mb-4">Ready to Join Brand.ed?</h2>
             <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
@@ -203,12 +203,12 @@ const About = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/products">
-                <Button size="lg" className="bg-white text-black hover:bg-white/90">
+                <Button size="lg" className="bg-white text-black hover:bg-slate-300">
                   Start Shopping
                 </Button>
               </Link>
               <Link to="/admin">
-                <Button size="lg" variant="outline" className="bg-white border-white text-black hover:bg-white/90">
+                <Button size="lg" variant="outline" className="bg-white border-white text-black hover:bg-slate-300">
                   Become a Seller
                 </Button>
               </Link>

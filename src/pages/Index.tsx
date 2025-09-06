@@ -85,12 +85,12 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/products">
-                  <Button size="lg" className="bg-white text-black hover:bg-white/90 rounded-xl">
+                  <Button size="lg" className="bg-white text-black hover:bg-slate-300 rounded-xl">
                     Shop Now
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="bg-white text-black hover:bg-white/90 roudned-xl">
+                <Button size="lg" variant="outline" className="bg-white text-black hover:bg-slate-300 roudned-xl">
                   Explore Brands
                 </Button>
               </div>
@@ -170,7 +170,7 @@ const Index = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="marketplace-section">
+      <section className="marketplace-section mb-16">
         <div className="marketplace-container">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Shop by Category</h2>

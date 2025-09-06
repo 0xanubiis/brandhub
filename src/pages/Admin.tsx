@@ -69,7 +69,7 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">Brand.ed Admin</h1>
@@ -92,7 +92,7 @@ const Admin = () => {
                     placeholder="admin@store.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10 marketplace-input"
+                    className="pl-10 marketplace-input text-black"
                     required
                   />
                 </div>
@@ -108,12 +108,11 @@ const Admin = () => {
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10 marketplace-input"
+                    className="pl-10 pr-10 marketplace-input text-black"
                     required
                   />
                   <Button
                     type="button"
-                    variant="ghost"
                     size="sm"
                     className="absolute right-0 top-0 h-full px-3"
                     onClick={() => setShowPassword(!showPassword)}

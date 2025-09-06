@@ -209,13 +209,7 @@
   
   .marketplace-input:focus {
     outline: none;
-    ring: 2px solid hsl(var(--primary));
-    ring-offset: 2px;
     border-color: transparent;
-  }
-  
-  .marketplace-hero {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
   }
   
   .marketplace-section {
@@ -269,7 +263,6 @@
   }
   
   .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

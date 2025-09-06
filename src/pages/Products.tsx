@@ -159,13 +159,13 @@ const Products = () => {
               <div className="mb-6">
                 <Label htmlFor="search" className="text-sm font-medium">Search</Label>
                 <div className="relative mt-2">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black h-4 w-4" />
                   <Input
                     id="search"
                     placeholder="Search products..."
                     value={filters.search}
                     onChange={(e) => handleFilterChange('search', e.target.value)}
-                    className="pl-10"
+                    className="pl-10 text-black"
                   />
                 </div>
               </div>
@@ -174,10 +174,10 @@ const Products = () => {
               <div className="mb-6">
                 <Label className="text-sm font-medium">Category</Label>
                 <Select value={filters.category || "all"} onValueChange={(value) => handleFilterChange('category', value)}>
-                  <SelectTrigger className="mt-2">
+                  <SelectTrigger className="mt-2 text-black">
                     <SelectValue placeholder="All Categories" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-slate-950">
                     <SelectItem value="all">All Categories</SelectItem>
                     {categories.map((category) => (
                       <SelectItem key={category} value={category}>
@@ -211,7 +211,7 @@ const Products = () => {
               <div className="mb-6">
                 <Label className="text-sm font-medium">Size</Label>
                 <Select value={filters.size || "all"} onValueChange={(value) => handleFilterChange('size', value)}>
-                  <SelectTrigger className="mt-2">
+                  <SelectTrigger className="mt-2 text-black">
                     <SelectValue placeholder="All Sizes" />
                   </SelectTrigger>
                   <SelectContent>
