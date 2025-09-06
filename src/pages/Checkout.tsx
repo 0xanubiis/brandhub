@@ -153,9 +153,9 @@ const Checkout = () => {
       
       <div className="marketplace-container py-8">
         <div className="flex items-center mb-8">
-          <Link to="/cart" className="inline-flex items-center text-muted-foreground hover:text-foreground">
+          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Cart
+            Back to Home
           </Link>
         </div>
 
@@ -177,7 +177,7 @@ const Checkout = () => {
                       id="firstName"
                       value={shippingInfo.firstName}
                       onChange={(e) => handleInputChange("firstName", e.target.value)}
-                      className="marketplace-input"
+                      className="marketplace-input text-black"
                     />
                   </div>
                   <div>
@@ -186,7 +186,7 @@ const Checkout = () => {
                       id="lastName"
                       value={shippingInfo.lastName}
                       onChange={(e) => handleInputChange("lastName", e.target.value)}
-                      className="marketplace-input"
+                      className="marketplace-input text-black"
                     />
                   </div>
                 </div>
@@ -198,7 +198,7 @@ const Checkout = () => {
                     type="email"
                     value={shippingInfo.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    className="marketplace-input"
+                    className="marketplace-input text-black"
                   />
                 </div>
 
@@ -208,7 +208,7 @@ const Checkout = () => {
                     id="phone"
                     value={shippingInfo.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
-                    className="marketplace-input"
+                    className="marketplace-input text-black"
                   />
                 </div>
 
@@ -218,7 +218,7 @@ const Checkout = () => {
                     id="address"
                     value={shippingInfo.address}
                     onChange={(e) => handleInputChange("address", e.target.value)}
-                    className="marketplace-input"
+                    className="marketplace-input text-black"
                   />
                 </div>
 
@@ -229,7 +229,7 @@ const Checkout = () => {
                       id="city"
                       value={shippingInfo.city}
                       onChange={(e) => handleInputChange("city", e.target.value)}
-                      className="marketplace-input"
+                      className="marketplace-input text-black"
                     />
                   </div>
                   <div>
@@ -238,7 +238,7 @@ const Checkout = () => {
                       id="state"
                       value={shippingInfo.state}
                       onChange={(e) => handleInputChange("state", e.target.value)}
-                      className="marketplace-input"
+                      className="marketplace-input text-black"
                     />
                   </div>
                 </div>
@@ -250,7 +250,7 @@ const Checkout = () => {
                       id="zipCode"
                       value={shippingInfo.zipCode}
                       onChange={(e) => handleInputChange("zipCode", e.target.value)}
-                      className="marketplace-input"
+                      className="marketplace-input text-black"
                     />
                   </div>
                   <div>
@@ -259,7 +259,7 @@ const Checkout = () => {
                       id="country"
                       value={shippingInfo.country}
                       onChange={(e) => handleInputChange("country", e.target.value)}
-                      className="marketplace-input"
+                      className="marketplace-input text-black"
                     />
                   </div>
                 </div>

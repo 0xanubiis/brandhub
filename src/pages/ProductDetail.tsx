@@ -108,7 +108,7 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-slate-950">
         <Navbar />
         <div className="marketplace-container py-8">
           <div className="text-center py-16">
@@ -123,12 +123,12 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-slate-950">
       <Navbar />
       
       <div className="marketplace-container py-8">
         {/* Breadcrumb */}
-        <Link to="/products" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8">
+        <Link to="/products" className="inline-flex items-center text-white hover:text-slate-300 mb-8">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Products
         </Link>
@@ -189,12 +189,12 @@ const ProductDetail = () => {
             {product.description && (
               <div>
                 <h3 className="font-semibold mb-2">Description</h3>
-                <p className="text-muted-foreground">{product.description}</p>
+                <p className="text-white">{product.description}</p>
               </div>
             )}
 
             <div>
-              <Badge variant="outline">{product.category}</Badge>
+              <Badge variant="outline" className="text-white">{product.category}</Badge>
             </div>
 
             {/* Size Selection */}
@@ -202,10 +202,10 @@ const ProductDetail = () => {
               <div>
                 <Label className="text-sm font-medium mb-2 block">Size</Label>
                 <Select value={selectedSize} onValueChange={setSelectedSize}>
-                  <SelectTrigger className="w-48">
+                  <SelectTrigger className="w-48 text-black">
                     <SelectValue placeholder="Select a size" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-slate-950">
                     {product.sizes.map((size) => (
                       <SelectItem key={size} value={size}>
                         {size}
@@ -220,10 +220,10 @@ const ProductDetail = () => {
             <div>
               <Label className="text-sm font-medium mb-2 block">Quantity</Label>
               <Select value={quantity.toString()} onValueChange={(value) => setQuantity(parseInt(value))}>
-                <SelectTrigger className="w-24">
+                <SelectTrigger className="w-24 text-black">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-slate-950">
                   {[...Array(10)].map((_, i) => (
                     <SelectItem key={i + 1} value={(i + 1).toString()}>
                       {i + 1}
@@ -242,12 +242,6 @@ const ProductDetail = () => {
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
                 Add to Cart
-              </Button>
-              <Button variant="outline" size="lg">
-                <Heart className="h-5 w-5" />
-              </Button>
-              <Button variant="outline" size="lg">
-                <Share2 className="h-5 w-5" />
               </Button>
             </div>
 

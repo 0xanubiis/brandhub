@@ -214,7 +214,7 @@ const Products = () => {
                   <SelectTrigger className="mt-2 text-black">
                     <SelectValue placeholder="All Sizes" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-slate-950">
                     <SelectItem value="all">All Sizes</SelectItem>
                     {sizes.map((size) => (
                       <SelectItem key={size} value={size}>
